@@ -1,0 +1,1 @@
+Historical 0.3.0-alpha.1 reports retained for provenance only. They are superseded by current docs; their source-relative paths and feature-status statements refer to that older handoff, not the new distribution implementation.

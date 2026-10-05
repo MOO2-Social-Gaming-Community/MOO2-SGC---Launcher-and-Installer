@@ -1,0 +1,213 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "MOO2-SGC Distribution Manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "feed",
+    "channel",
+    "revision",
+    "release",
+    "published",
+    "expires",
+    "packages"
+  ],
+  "properties": {
+    "schema": {
+      "const": 1
+    },
+    "feed": {
+      "type": "string"
+    },
+    "channel": {
+      "type": "string"
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "release": {
+      "type": "string"
+    },
+    "published": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "expires": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "packages": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 256,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "kind",
+          "version",
+          "platform",
+          "filename",
+          "format",
+          "size",
+          "sha256",
+          "signature",
+          "mirrors",
+          "redistribution"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9._-]{0,79}$"
+          },
+          "kind": {
+            "enum": [
+              "launcher",
+              "patch",
+              "mod",
+              "configuration",
+              "resources",
+              "documentation"
+            ]
+          },
+          "version": {
+            "type": "string"
+          },
+          "platform": {
+            "enum": [
+              "windows-amd64",
+              "linux-amd64",
+              "darwin-amd64",
+              "darwin-arm64",
+              "any"
+            ]
+          },
+          "filename": {
+            "type": "string"
+          },
+          "format": {
+            "const": "zip"
+          },
+          "entrypoint": {
+            "type": "string"
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 536870912
+          },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "signature": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "key_id",
+              "signature"
+            ],
+            "properties": {
+              "key_id": {
+                "type": "string"
+              },
+              "signature": {
+                "type": "string"
+              }
+            }
+          },
+          "mirrors": {
+            "type": "array",
+            "maxItems": 8,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "provider",
+                "priority",
+                "url"
+              ],
+              "properties": {
+                "provider": {
+                  "enum": [
+                    "github",
+                    "cloudflare-r2"
+                  ]
+                },
+                "priority": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "pattern": "^https://"
+                }
+              }
+            }
+          },
+          "requires": {
+            "type": "array",
+            "maxItems": 32,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "id",
+                "version"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "version": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "engine_hashes": {
+            "type": "array",
+            "maxItems": 16,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-f0-9]{64}$"
+            }
+          },
+          "files": {
+            "type": "object",
+            "maxProperties": 10000,
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "sha256",
+                "size"
+              ],
+              "properties": {
+                "sha256": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "size": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 1073741824
+                }
+              }
+            }
+          },
+          "redistribution": {
+            "enum": [
+              "project-owned",
+              "permission-recorded"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

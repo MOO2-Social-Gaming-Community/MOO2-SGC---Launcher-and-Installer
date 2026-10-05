@@ -1,0 +1,13 @@
+{
+  "schema": 1,
+  "feed": "moo2-sgc",
+  "channel": "stable",
+  "development": false,
+  "keys": {},
+  "endpoints": [],
+  "allowed_hosts": [
+    "github.com",
+    "release-assets.githubusercontent.com",
+    "objects.githubusercontent.com"
+  ]
+}

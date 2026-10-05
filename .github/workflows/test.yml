@@ -1,0 +1,32 @@
+name: Launcher tests
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-go@v7
+        with:
+          go-version: stable
+          cache: false
+      - run: go test -race -count=1 ./... && go vet ./...
+        working-directory: manager
+      - run: node --check manager/web/app.js
+      - run: python3 -m unittest discover -s tests -p 'test_publish*.py' -v
+      - run: python3 packaging/publish_prebuilt.py
+  native:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Run the prepared setup and launcher on this operating system
+        run: python tests/native_smoke.py

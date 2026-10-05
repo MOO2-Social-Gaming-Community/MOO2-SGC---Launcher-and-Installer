@@ -1,0 +1,70 @@
+# Local outputs and distribution artifacts (attach binaries to Releases instead).
+/dist/
+/build/
+/release-output/
+/release-assets/
+/test-install/
+/userdata/
+/cache/
+/payloads/
+**/binaries/
+*.exe
+*.dll
+*.so
+*.dylib
+*.zip
+*.tar
+*.tar.gz
+*.7z
+# Commercial game files and personal state must never enter this repository.
+*.LBX
+*.lbx
+*.GAM
+*.gam
+*.RAC
+*.rac
+ORION2.EXE
+ORION150.EXE
+# Local credentials/private signing material. Public trust JSON is allowed.
+*.key
+*.pem
+*.p12
+*.pfx
+.env
+.env.*
+.secrets/
+credentials.json
+# Local caches/editor state.
+__pycache__/
+*.pyc
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Explicitly track the reviewed, signed public release inputs for push-to-release.
+!/release/
+!/release/*/
+!/release/*/**
+# Private maintainer material is never a release input.
+**/*PRIVATE*
+**/*private-key*
+**/*signing*.key
+
+# Keep secrets ignored even under the explicit release allowlist.
+**/*.key
+**/*.pem
+**/*.p12
+**/*.pfx
+
+# Keep owned game content out even under the public release allowlist.
+**/*.LBX
+**/*.lbx
+**/*.GAM
+**/*.gam
+**/*.RAC
+**/*.rac
+**/ORION2.EXE
+**/ORION150.EXE
+**/base.zip
+**/Master of Orion 2.zip

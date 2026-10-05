@@ -1,0 +1,8 @@
+{
+  "schema": 1,
+  "name": "MOO2-SGC Launcher and Installer",
+  "repository": "MOO2-Social-Gaming-Community/MOO2-SGC---Launcher-and-Installer",
+  "version_file": "VERSION",
+  "distribution": "github-releases",
+  "cloudflare_r2": "optional; endpoint not provisioned"
+}

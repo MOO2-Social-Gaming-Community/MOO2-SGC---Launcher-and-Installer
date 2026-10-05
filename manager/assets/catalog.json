@@ -1,0 +1,304 @@
+[
+  {
+    "id": "150i",
+    "name": "1.50 improved",
+    "group": "Core",
+    "order": 0,
+    "description": "1.50 standard PLUS rebalanced race picks, improved AI ship designs, new tactical combat rules a.o. ship initiative 2.0 and ICS.",
+    "path": "150/mods/150i/150i.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [
+      "MAP1_150i"
+    ],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "150m",
+    "name": "1.50 multiplayer",
+    "group": "Core",
+    "order": 0,
+    "description": "1.50 standard PLUS rebalanced race picks, improved AI ship designs, new tactical combat rules a.o. ship initiative 2.0 and ICS.",
+    "path": "150/mods/150i/150m.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [
+      "1_NOREP",
+      "MAP1_150m",
+      "MIRROR_HW"
+    ],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "150",
+    "name": "1.50 standard",
+    "group": "Core",
+    "order": 0,
+    "description": "Vanilla 1.50 patch.",
+    "path": "150/mods/150i/150.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "ICE",
+    "name": "ICE 35",
+    "group": "Core",
+    "order": 0,
+    "description": "Cool mod with strong AI.",
+    "path": "150/mods/ice/ICE-M.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [
+      "MAP2_ICE"
+    ],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "ICE-X",
+    "name": "ICE-X 35",
+    "group": "Core",
+    "order": 0,
+    "description": "Supercool mod with superstrong AI.",
+    "path": "150/mods/ice/ICE-X.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [
+      "MAP2_ICE"
+    ],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "Melee",
+    "name": "Melee (beta 0.4)",
+    "group": "Core",
+    "order": 0,
+    "description": "Melee mode for 2 players",
+    "path": "150/mods/melee/MELEE.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [
+      "MAP7_MELEE"
+    ],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "VDC-GM3",
+    "name": "VDC X12-V72-B10-GM3",
+    "group": "Core",
+    "order": 0,
+    "description": "VDCGM3 no random",
+    "path": "150/mods/vdc/VDCGM3.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [
+      "1_NOREP",
+      "MAP5_VDCGM3",
+      "MIRROR_EXHW"
+    ],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "ver120",
+    "name": "Version 1.2 mod",
+    "group": "Core",
+    "order": 0,
+    "description": "Approximates classic version 1.2 as close as possible with current 1.50 config: Creative cost lowered back to 6 picks, Psilon race design restored, original Guardian and Antaran ship designs, Plasma Cannon, Ion Cannon and Gyro Destabilizer weapon stats restored to original values! Enjoy :)",
+    "path": "150/mods/120/SET120.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "MAP1_150i",
+    "name": "1.50 improved",
+    "group": "Map",
+    "order": 100,
+    "description": "Slightly more planets, 3% wormholes.",
+    "path": "150/mods/maps/150i-MAP.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "MAP1_150m",
+    "name": "1.50 multiplayer",
+    "group": "Map",
+    "order": 100,
+    "description": "Slightly more planets, 0% wormholes, no orion system, no unguarded splinter worlds.",
+    "path": "150/mods/maps/150m-MAP.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "MAP5_GM1",
+    "name": "GoodMap1",
+    "group": "Map",
+    "order": 100,
+    "description": "All stars have 1 planet, improved planet quality, less black holes, no orion system, no unguarded splinter worlds, no wormholes.",
+    "path": "150/mods/maps/GOODMAP1.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "MAP5_GM2",
+    "name": "GoodMap2",
+    "group": "Map",
+    "order": 100,
+    "description": "All stars have 2 planets, improved planet quality, less black holes, no orion system, no unguarded splinter worlds, no wormholes.",
+    "path": "150/mods/maps/GOODMAP2.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "MAP5_GM3",
+    "name": "GoodMap3",
+    "group": "Map",
+    "order": 100,
+    "description": "All stars have 3 planets, improved planet quality, less black holes, no orion system, no unguarded splinter worlds, 1% wormholes.",
+    "path": "150/mods/maps/GOODMAP3.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "MAP5_GM4",
+    "name": "GoodMap4",
+    "group": "Map",
+    "order": 100,
+    "description": "All stars have 4 planets (62 stars in Huge galaxy), improved planet quality, less black holes, no orion system, no unguarded splinter worlds, 1% wormholes.",
+    "path": "150/mods/maps/GOODMAP4.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "MAP5_GM5",
+    "name": "GoodMap5",
+    "group": "Map",
+    "order": 100,
+    "description": "All stars have 5 planets (50 stars in Large galaxy, planet trimming in 71 star Huge galaxy), improved planet quality, less black holes, no orion system, no unguarded splinter worlds, 1% wormholes.",
+    "path": "150/mods/maps/GOODMAP5.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "MAP2_ICE",
+    "name": "ICE",
+    "group": "Map",
+    "order": 100,
+    "description": "More planets, relatively more wet worlds, 3% wormholes.",
+    "path": "150/mods/maps/ICEMAP.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "MAP2_ICE_MP",
+    "name": "ICE multiplayer",
+    "group": "Map",
+    "order": 100,
+    "description": "ICE map + 5 planets home system, no splinter colonies, no orion system, no wormholes.",
+    "path": "150/mods/maps/ICEMAP_M.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "MAP7_MELEE",
+    "name": "Melee (2 players)",
+    "group": "Map",
+    "order": 100,
+    "description": "2 player melee map",
+    "path": "150/mods/maps/MELEEMAP.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "MAP5_VDCGM3",
+    "name": "VDCGM3",
+    "group": "Map",
+    "order": 100,
+    "description": "Home systems 5 planets, all others 3 planets, switches.",
+    "path": "150/mods/vdc/VDCGM3_MAP.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "MIRROR",
+    "name": "Full Mirror",
+    "group": "Mirror",
+    "order": 200,
+    "description": "When starting new game, galaxy is split into identical shards mirroring each other, so players get identical start.",
+    "path": "150/mods/mirror/MIRROR.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "MIRROR_EXHW",
+    "name": "Full Mirror except home systems",
+    "group": "Mirror",
+    "order": 200,
+    "description": "When starting new game, galaxy is split into identical shards mirroring each other, so players get identical start. Planets in home systems are not changed.",
+    "path": "150/mods/mirror/MIRRNOHW.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "MIRROR_HW",
+    "name": "Only home systems mirrored",
+    "group": "Mirror",
+    "order": 200,
+    "description": "When starting new game, home system of one player is randomly selected and its unoccupied orbits are copied to all other home systems.",
+    "path": "150/mods/mirror/MIRRORHW.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "TREELESS",
+    "name": "Hidden Tech Tree",
+    "group": "0",
+    "order": 400,
+    "description": "Future techs cannot be browsed in the research window.",
+    "path": "150/mods/randtech/TREELESS.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "RANDOMTECH",
+    "name": "Randomize Tech",
+    "group": "0",
+    "order": 400,
+    "description": "Tech tree is randomized when starting new game.",
+    "path": "150/mods/randtech/RANDTECH.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "1_NOREP",
+    "name": "/noreport",
+    "group": "0",
+    "order": 1000,
+    "description": "Technology reports of opponents are disabled. In diplomacy, the options Exchange Tech, Demand Technology & Offer Technology are disabled.",
+    "path": "150/mods/misc/NOREPORT.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  },
+  {
+    "id": "USER",
+    "name": "user settings",
+    "group": "_user",
+    "order": 2000,
+    "description": "",
+    "path": "150/mods/150i/USER.CFG",
+    "version": "Bundled with 1.50.26",
+    "dependencies": [],
+    "source": "MOO2 community / supplied 1.50.26 distribution"
+  }
+]

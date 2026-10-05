@@ -1,0 +1,200 @@
+package main
+
+import (
+	"crypto/sha256"
+	"embed"
+	"encoding/hex"
+	"encoding/json"
+	"errors"
+	"fmt"
+	"moo2manager/shared/buildconfig"
+	"net"
+	"regexp"
+	"sort"
+	"strings"
+)
+
+const Version = buildconfig.Version
+const BaseHash = "87e657bc2e8b02714856f13c3c63066cd58549f33a9c2e917d1bca6936142d2b"
+const PatchHash = "0ac9151e9cf752ec34b6db998d8b390f48e492d8443e8f1658112b93c7f6a921"
+const EngineHash = "2db296e052419250d21866f7c23ac2978a33b3c05b451a9516f06599b91c3f5c"
+const BaseEngineHash = "4e11be14217b4aafa1839f333bf5eba037f98b0c44e9e4752c96c464c260419f"
+
+//go:embed assets/*.json web/*
+var resources embed.FS
+
+type Mod struct {
+	ID           string   `json:"id"`
+	Name         string   `json:"name"`
+	Group        string   `json:"group"`
+	Order        int      `json:"order"`
+	Description  string   `json:"description"`
+	Path         string   `json:"path"`
+	Version      string   `json:"version"`
+	Dependencies []string `json:"dependencies"`
+	Source       string   `json:"source"`
+}
+type Profile struct {
+	ID         string   `json:"id"`
+	Name       string   `json:"name"`
+	Engine     string   `json:"engine"`
+	Core       string   `json:"core"`
+	Mods       []string `json:"mods"`
+	Fullscreen bool     `json:"fullscreen"`
+	Role       string   `json:"role"`
+	Host       string   `json:"host"`
+	Port       int      `json:"port"`
+}
+type Resolution struct {
+	Requested   Profile  `json:"profile"`
+	Mods        []Mod    `json:"mods"`
+	Automatic   []string `json:"automatic"`
+	Fingerprint string   `json:"fingerprint"`
+	Config      string   `json:"config"`
+	Warnings    []string `json:"warnings"`
+}
+
+var idPattern = regexp.MustCompile(`^[a-z0-9][a-z0-9_-]{0,39}$`)
+
+func catalog() []Mod {
+	b, _ := resources.ReadFile("assets/catalog.json")
+	var all []Mod
+	if err := json.Unmarshal(b, &all); err != nil {
+		panic(err)
+	}
+	out := []Mod{}
+	for _, m := range all {
+		if m.Group == "_user" {
+			continue
+		}
+		if m.Group == "0" {
+			m.Group = ""
+		}
+		out = append(out, m)
+	}
+	return out
+}
+func validateProfile(p Profile) error {
+	if !idPattern.MatchString(p.ID) {
+		return errors.New("profile ID must be 1–40 lowercase letters, digits, underscores or hyphens")
+	}
+	if len(strings.TrimSpace(p.Name)) == 0 || len(p.Name) > 100 {
+		return errors.New("profile name must be 1–100 characters")
+	}
+	if p.Engine != "1.31" && p.Engine != "1.50.26" {
+		return errors.New("unsupported engine: this release recognizes only 1.31 and 1.50.26")
+	}
+	if p.Port < 1024 || p.Port > 65535 {
+		return errors.New("UDP port must be 1024–65535")
+	}
+	if p.Role != "standalone" && p.Role != "host" && p.Role != "join" {
+		return errors.New("choose Play, Host or Join")
+	}
+	if p.Role == "join" && (net.ParseIP(p.Host) == nil || net.ParseIP(p.Host).To4() == nil) {
+		return errors.New("Join requires the host's numeric IPv4 address")
+	}
+	if len(p.Mods) > 100 {
+		return errors.New("too many mods")
+	}
+	return nil
+}
+func resolve(p Profile) (Resolution, error) {
+	r := Resolution{Requested: p, Mods: []Mod{}, Automatic: []string{}, Warnings: []string{}}
+	if err := validateProfile(p); err != nil {
+		return r, err
+	}
+	if p.Engine == "1.31" {
+		if p.Core != "" || len(p.Mods) > 0 {
+			return r, errors.New("the 1.31 profile cannot use 1.50 mods; clear the ruleset and add-ons")
+		}
+	} else {
+		byID := map[string]Mod{}
+		for _, m := range catalog() {
+			byID[m.ID] = m
+		}
+		core, ok := byID[p.Core]
+		if !ok || core.Group != "Core" {
+			return r, errors.New("choose one supported Core ruleset")
+		}
+		explicit := map[string]bool{p.Core: true}
+		for _, id := range p.Mods {
+			explicit[id] = true
+		}
+		selected := map[string]bool{}
+		visiting := map[string]bool{}
+		groups := map[string]string{}
+		var add func(string) error
+		add = func(id string) error {
+			if selected[id] {
+				return nil
+			}
+			if visiting[id] {
+				return fmt.Errorf("dependency cycle at %s", id)
+			}
+			if strings.EqualFold(id, "prsl") || strings.EqualFold(id, "chat") {
+				return errors.New("PRSL and the new Chat extension have no certified live adapters; they cannot be enabled")
+			}
+			m, ok := byID[id]
+			if !ok {
+				return fmt.Errorf("unknown or unsupported mod %q", id)
+			}
+			if m.Group != "" {
+				if prev, ok := groups[m.Group]; ok && prev != id {
+					return fmt.Errorf("%s conflict: %s and %s. A Core ruleset may require its own map/mirror mod; remove the competing choice", m.Group, prev, id)
+				}
+				groups[m.Group] = id
+			}
+			visiting[id] = true
+			for _, d := range m.Dependencies {
+				if err := add(d); err != nil {
+					return err
+				}
+			}
+			delete(visiting, id)
+			selected[id] = true
+			if !explicit[id] {
+				r.Automatic = append(r.Automatic, id)
+			}
+			return nil
+		}
+		if err := add(p.Core); err != nil {
+			return r, err
+		}
+		for _, id := range p.Mods {
+			if err := add(id); err != nil {
+				return r, err
+			}
+		}
+		for id := range selected {
+			r.Mods = append(r.Mods, byID[id])
+		}
+		sort.Slice(r.Mods, func(i, j int) bool {
+			if r.Mods[i].Order != r.Mods[j].Order {
+				return r.Mods[i].Order < r.Mods[j].Order
+			}
+			return r.Mods[i].ID < r.Mods[j].ID
+		})
+		sort.Strings(r.Automatic)
+		r.Config = "# Generated by MOO2 Mod Manager. No PRSL or Chat injection.\r\n"
+		for _, m := range r.Mods {
+			r.Config += "enable " + m.ID + ";\r\n"
+		}
+	}
+	// Local name, network role and display settings intentionally do not affect game compatibility.
+	identity := struct{ Engine, Base, Patch, Config string }{p.Engine, BaseHash, "", r.Config}
+	if p.Engine != "1.31" {
+		identity.Patch = PatchHash
+	}
+	b, _ := json.Marshal(identity)
+	sum := sha256.Sum256(b)
+	r.Fingerprint = hex.EncodeToString(sum[:])
+	r.Warnings = append(r.Warnings, "Structural configuration checks only: no gameplay or cross-platform multiplayer certification.", "Loaded MOO2 saves restore saved gameplay configuration; start a new game to test newly selected rules.")
+	return r, nil
+}
+func defaultProfiles() []Profile {
+	return []Profile{
+		{ID: "community", Name: "Community — standard", Engine: "1.50.26", Core: "150", Mods: []string{}, Role: "standalone", Port: 21300},
+		{ID: "multiplayer", Name: "Community — multiplayer", Engine: "1.50.26", Core: "150m", Mods: []string{}, Role: "host", Port: 21300},
+		{ID: "original", Name: "Original DOS 1.31", Engine: "1.31", Mods: []string{}, Role: "standalone", Port: 21300},
+	}
+}

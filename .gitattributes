@@ -1,2 +1,22 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+# Keep executable shell/workflow sources stable when checked out on Windows.
+*.sh text eol=lf
+*.py text eol=lf
+*.go text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.js text eol=lf
+*.css text eol=lf
+*.html text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+VERSION text eol=lf
+go.mod text eol=lf
+go.sum text eol=lf
+*.cmd text eol=crlf
+*.png binary
+*.zip binary
+*.exe binary
+
+# Prebuilt release inputs are byte-exact; normalize neither metadata nor signatures.
+/release/*/** -text
+/manager/assets/base-files.json text eol=lf
