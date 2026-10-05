@@ -81,8 +81,8 @@ func validateProfile(p Profile) error {
 	if len(strings.TrimSpace(p.Name)) == 0 || len(p.Name) > 100 {
 		return errors.New("profile name must be 1–100 characters")
 	}
-	if p.Engine != "1.31" && p.Engine != "1.50.26" {
-		return errors.New("unsupported engine: this release recognizes only 1.31 and 1.50.26")
+	if engineRank(p.Engine) < 0 {
+		return errors.New("supported engines: 1.2, 1.31 (legacy), 1.40b23 baseline and 1.50.26")
 	}
 	if p.Port < 1024 || p.Port > 65535 {
 		return errors.New("UDP port must be 1024–65535")
@@ -103,9 +103,9 @@ func resolve(p Profile) (Resolution, error) {
 	if err := validateProfile(p); err != nil {
 		return r, err
 	}
-	if p.Engine == "1.31" {
+	if p.Engine != "1.50.26" {
 		if p.Core != "" || len(p.Mods) > 0 {
-			return r, errors.New("the 1.31 profile cannot use 1.50 mods; clear the ruleset and add-ons")
+			return r, errors.New("this historical-engine profile cannot use 1.50 mods; clear the ruleset and add-ons")
 		}
 	} else {
 		byID := map[string]Mod{}
@@ -182,8 +182,14 @@ func resolve(p Profile) (Resolution, error) {
 	}
 	// Local name, network role and display settings intentionally do not affect game compatibility.
 	identity := struct{ Engine, Base, Patch, Config string }{p.Engine, BaseHash, "", r.Config}
-	if p.Engine != "1.31" {
+	if p.Engine == "1.50.26" {
 		identity.Patch = PatchHash
+	}
+	if p.Engine == "1.40b23" {
+		identity.Base = BaselineEngineHash
+	}
+	if p.Engine == "1.2" {
+		identity.Base = CDEngineHash
 	}
 	b, _ := json.Marshal(identity)
 	sum := sha256.Sum256(b)
@@ -195,6 +201,8 @@ func defaultProfiles() []Profile {
 	return []Profile{
 		{ID: "community", Name: "Community — standard", Engine: "1.50.26", Core: "150", Mods: []string{}, Role: "standalone", Port: 21300},
 		{ID: "multiplayer", Name: "Community — multiplayer", Engine: "1.50.26", Core: "150m", Mods: []string{}, Role: "host", Port: 21300},
-		{ID: "original", Name: "Original DOS 1.31", Engine: "1.31", Mods: []string{}, Role: "standalone", Port: 21300},
+		{ID: "original", Name: "Legacy official DOS 1.31", Engine: "1.31", Mods: []string{}, Role: "standalone", Port: 21300},
+		{ID: "baseline", Name: "SGC baseline — 1.40b23", Engine: "1.40b23", Mods: []string{}, Role: "standalone", Port: 21300},
+		{ID: "cd-original", Name: "Original CD — 1.2", Engine: "1.2", Mods: []string{}, Role: "standalone", Port: 21300},
 	}
 }

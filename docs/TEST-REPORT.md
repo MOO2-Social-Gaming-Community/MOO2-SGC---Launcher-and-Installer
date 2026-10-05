@@ -1,82 +1,61 @@
-# Test report — MOO2-SGC 0.4.1
+# Test report — MOO2-SGC 0.4.2
 
-## Executed in this development cycle
+## Result and scope
 
-| Category | Result | What ran |
+The supported Steam import, CD installation lineage, independent environments and signed application update passed the executed tests described below. **No DOSBox/MOO2 game execution, live two-player match, or Windows/macOS acceptance test was performed here.** The local execution platform was Linux x64. Other platform artifacts were cross-compiled.
+
+| Test family | Result | Evidence |
 |---|---:|---|
-| Go tests with race detector | **79 top-level; 152 including subtests, all passed** | Manager/API/configuration, import checks, package signing, download failures, installed-file indexes and transactions. The totals overlap; do not add them. |
-| Publishing safeguards | **7 passed** | Mocked `gh` command runner: draft creation, readback, repeat no-op, partial upload recovery and refusal to overwrite mismatched/published assets. |
-| Native bootstrap/launcher smoke | **11 passed** | Actual final Linux executables: signed offline install, health, repeat setup, installed helper, real local HTTP API and orderly shutdown. |
-| Online bootstrap/update fixture | **15 passed** | Actual final production-configured Linux executables through a local TLS CONNECT proxy; interrupted transfer, resume, approved-host redirect, tampered metadata/package refusal, actual check/stage/apply and launcher restart. |
-| Owned folder / one-action preparation | **23 passed** | Actual final Linux launcher and the user's local owned game/patch archives. Imports 408 fingerprinted files, excludes prior saves, refuses changed data, prepares community rules, generates DOSBox configuration and preserves a synthetic save across rebuild. |
-| Existing manager integration rerun | **39 passed** | Actual final Linux launcher, file repair/deactivation/reactivation, original vs patched environments, source preservation, diagnostics, local API access controls; Chromium interface exercised with offline DOM fixtures. |
-| GitHub Desktop-style round trip | **10 passed** | Disposable local Git repository with `core.autocrlf=true`, all signed source/release bytes preserved, files correctly tracked, game/key sentinels ignored and release signatures verified after checkout. |
-| Native builds | **Four targets compiled** | Windows x64, Linux x64, Intel Mac, Apple Silicon. Only Linux executed in this environment. |
+| Go tests, race detector enabled, real owned fixtures supplied | 89 top-level tests / 191 including subtests passed | `evidence/0.4.2/go-tests.jsonl` |
+| Go static vet | Passed | `evidence/0.4.2/go-vet.log` |
+| Compiled manager with actual Steam/CD/patch files, plus real 0.4.1 migration | 48 checks passed | `evidence/0.4.2/lineage-acceptance.json` |
+| Actual signed 0.4.1 bootstrap installing signed 0.4.2 | 12 checks passed | `evidence/0.4.2/signed-upgrade.json` |
+| Final signed Linux bootstrap/launcher startup | 11 checks passed | `evidence/0.4.2/native-smoke.json` |
+| Browser DOM/interaction with explicit offline transport fixture | 14 checks passed | `evidence/0.4.2/ui-acceptance.json` |
+| GitHub Desktop-style autocrlf Git round trip | 10 checks passed | `evidence/0.4.2/git-desktop-roundtrip.json` |
+| Release-publisher safeguards | 7 tests passed | `evidence/0.4.2/publisher-tests.log` |
 
-`go vet`, JavaScript syntax, Python compilation, signed manifest/package verification and source-to-artifact correspondence also passed. These are checks, not additional gameplay tests.
+These are different layers of evidence, not 295 independent proofs of gameplay. Existing historical reports under earlier version directories were not relabeled as new results.
 
-## Evidence and reproduction
+## Original failure and regression
 
-Current evidence is under `evidence/0.4.1/`. `release/0.4.1/BUILD-RESULTS.json` records compiler and artifact sizes; its `executed_here: false` fields describe the build step only. Later Linux execution is separately recorded by `linux-native-smoke.json`, `online-fixture.json`, `owned-game-acceptance.json` and `manager-integration.json`.
+The 0.4.1 Windows report showed that the launcher loaded and a DOSBox runtime was present, but the known Steam `ANWINFIN.LBX` differed from the single old DOS 1.31 asset fingerprint. The new importer first identifies the actual DOS executable, then validates a complete supported asset set. The supplied Steam `Orion2.exe` is 1.40b23 even though its README and Windows executable refer to 1.31.
 
-From the repository root:
+The new compiled manager imported the actual Steam folder and ZIP, preserved its known ANWINFIN variant, excluded source saves/store wrappers, built baseline and current environments, and left every source file and source archive unchanged. A deliberately modified Steam asset was rejected without replacing the previous imported-source pointer.
 
-```
-cd manager
-# Then return to the repository root for the Python commands below.
-go test -race -count=1 ./...
-go vet ./...
-```
+## CD reconstruction
 
-```
-python -m unittest discover -s tests -p "test_publish*.py" -v
-python packaging/publish_prebuilt.py
-python tests/native_smoke.py --output local-native-smoke.json
-python tests/repository_roundtrip.py --output local-git-roundtrip.json
-```
+| Target from supplied CD 1.2 | Verified installed files | Observed lineage |
+|---|---:|---|
+| 1.2 | 400 | 1.2 |
+| 1.31 | 408 | 1.2 → 1.31 |
+| 1.40b23 | 408 | 1.2 → 1.31 → 1.40b23 |
+| 1.50.26 | 536 | 1.2 → 1.31 → 1.40b23 → 1.50.26 |
 
-The HTTPS fixture additionally needs Python's `cryptography` package and is Linux-only:
+Each target's executable matched its compiled expected SHA-256. The reconstructed baseline is byte-for-byte identical to the clean Steam DOS executable. This is file-transform/output verification, not execution of the historical patcher or the game. The Windows patcher's XP/system-integration code is never run by the manager.
 
-```
-python tests/online_bootstrap_fixture.py --output local-https-fixture.json
-```
+The Steam branch did not download or require the official 1.31 prerequisite. Attempting to reconstruct original CD 1.2 from Steam's later executable was refused.
 
-Owned-game tests require locally supplied archives and an extracted native launcher:
+## Recovery, updates and migration
 
-```
-python tests/owned_game_acceptance.py --base <OWNED-ZIP> --patch <PATCH-ZIP> --launcher <NATIVE-LAUNCHER> --output local-owned-acceptance.json
-```
+Tests modified a managed engine and confirmed launch refusal. Reconstruction restored the exact engine while preserving a synthetic save and user audio settings. The previous generation remained present. Source archives were hashed before and after testing and remained identical.
 
-Never commit the supplied commercial fixture archives. The scripts do not fetch them or upload their contents.
+The actual original 0.4.1 manager built a schema-1 environment; 0.4.2 verified it, rebuilt it with the baseline lineage, preserved the synthetic save and retained the old generation. This is forward migration only: old 0.4.1 cannot interpret new source/profile features and schema-2 receipts after an application downgrade.
 
-## Bugs discovered and corrected during this cycle
+An unmodified 0.4.1 bootstrap authenticated and installed the signed 0.4.2 package using the original key identity. The trusted revision advanced from 41 to 42; user-data sentinel and previous application generation remained. Reusing old metadata was rejected. No private key was needed or present on the test client.
 
-Folder imports initially passed file validation but were rejected by the older workspace verifier, which recognized only the original archive hash. A typed folder-source identity now verifies actual installed files against the compiled 408-file baseline; changing both a file and its local receipt does not satisfy that check. Historical original-archive workspaces remain accepted.
+## Network, browser and process limitations
 
-The signed update helper initially lacked an explicit POSIX executable mode after package extraction; helper execution is now installed and tested. Repository checkout initially changed `go.mod` line endings under `core.autocrlf=true`; explicit source attributes now preserve all signed build-input hashes. Prepared environments now write their launch configuration before activation, normalize the archived host drive to emulated `C:\`, and set DOSBox sound IRQ 5 to match the fingerprinted source configuration.
+Official 1.31 package import was tested with the actual archived update and a repackaged copy served through a local TLS test server. Each required installed member was checked against compiled hashes. The live public patch endpoint and live GitHub Release were not fetched in this acceptance run. Publication happens only when the owner pushes and the GitHub workflow succeeds.
 
-These findings are the reason full-file, actual-binary and Git round-trip tests were run in addition to unit tests.
+Browser navigation to localhost was blocked by the execution environment's browser policy. The UI test therefore used an explicitly labeled offline DOM/transport fixture, with responses supplied by the running manager's real HTTP API through the test harness. Controls, resolutions, version choices and narrow layout passed; this is not an end-to-end native browser-network acceptance test. No browser policy was disabled. The screenshot is of the current interface under that fixture.
 
-## What the network test does and does not prove
+The launch lifecycle test used an executable named `dosbox` that prints **TEST DOUBLE ONLY — NO DOSBOX OR GAME EXECUTION** and exits. Its log was checked explicitly. It proves process/config/log behavior only, not title-screen reachability, sound, input, a loaded save, or multiplayer synchronization.
 
-The final executable contains the user's exact GitHub repository URLs and non-development public signing key. For testing only, its child-process environment points HTTPS through a loopback CONNECT proxy and trusts a temporary local CA. Real HTTPS requests, redirects, range resumes, manifest/package signatures and real compiled application installation occur. No insecure mode or test certificate is embedded in the delivered application.
+## Reproduce
 
-The fixture is **not a request to live GitHub**. Two interrupted transfers exercise failure without activation; a later request resumes and verifies the package. The update test stages the **same 0.4.1 version**, invokes the signed helper, waits for the old lock to be released, restarts a new actual launcher session and preserves a user-data marker. It is not proof of migration to an unreleased future version.
+From `manager/`, run `go test -race -count=1 ./...` and `go vet ./...`. Optional owned-file tests require `MOO2_TEST_ASSETS` to point to the private directory containing the supplied source archives; they skip when the variable is absent and must never require game files in public CI.
 
-The `gh` publication tests are command-level simulations. No release, account, repository setting or cloud object was changed. Repository visibility, default-branch policy and Actions permissions could not be verified remotely here. The workflow still has to run successfully after the owner's push.
+Use `tests/lineage_acceptance.py` with `--assets`, `--launcher`, `--old-launcher` and `--output` to repeat the real-file integration. Use `tests/native_smoke.py` and `tests/repository_roundtrip.py` for the final prepared artifacts. `tests/ui_acceptance.py --offline-dom` repeats the explicitly mediated browser test; omit that flag only where direct local browser navigation is supported.
 
-## Explicitly not tested
-
-No Windows/macOS executable was run here. The repository configures native smoke jobs for Windows/macOS/Linux, but their future results are not counted. No Windows Start-menu link, SmartScreen dialog, macOS notarization, or native GUI acceptance is claimed.
-
-No DOSBox binary was available in this environment; official DOSBox and patch network downloads were not exercised against their live hosts. The owned-file preparation test deliberately selects a labeled process test double instead of downloading an emulator. The process-launch regression test is also a test double. Thus no title screen, save loading, tactical combat, LAN game, Internet match or PRSL turn interception was executed. Save-preservation tests use a synthetic sentinel, not a validated MOO2 campaign.
-
-The screenshot is a Linux browser render with offline API fixtures. Actual server behavior was tested separately over localhost. It is not a Windows screenshot or a claim of browser-to-server end-to-end navigation.
-
-PRSL and the proposed new Chat mod remain disabled and cannot be enabled through this manager. Cloudflare R2 support is optional but no mirror is configured or tested live. The code has not received an independent security audit. The included compiler is the available Go 1.23.2; subsequent broader production builds should use a maintained patched toolchain. Windows Authenticode and macOS notarization are absent.
-
-## Artifact handoff
-
-Prepared files use version 0.4.1 without a prerelease suffix. Current metadata expires on 2027-01-03 UTC; future installs/updates need renewed signed metadata or a newer signed release after expiry. Installed verified applications can still launch offline. The private signer is deliberately outside every public artifact. The owner's first required acceptance test remains a clean Windows download, installation, owned-source preparation, new game, save, exit and reload.
-
-Historic 0.3/0.4 files under `manager/evidence` or `docs/history` are not new 0.4.1 evidence. This report, together with `evidence/0.4.1`, is the current test record.
+The owner's next required evidence is the Windows checklist: update to 0.4.2 → recognize Steam 1.40b23 → prepare current 1.50.26 → title screen → new game → turns → save → exit → reload.

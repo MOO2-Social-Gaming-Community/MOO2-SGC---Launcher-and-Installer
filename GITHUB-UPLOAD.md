@@ -1,15 +1,7 @@
-# GitHub Desktop upload — 0.4.1
+# GitHub Desktop upload — 0.4.2
 
-Extract the complete repository ZIP directly into the cloned repo folder. Keep `.git`. Commit and push the supplied root files, `.github`, `manager`, `packaging`, `tests`, `release`, `manifests`, documentation and public evidence. The ignore rules explicitly permit the reviewed release EXEs/ZIPs, while attributes keep signed metadata byte-identical on Windows.
+Extract the ZIP contents directly into the clone, preserving `.git`. Commit and push to the default branch. The existing Publish prepared release workflow verifies signed artifacts and publishes v0.4.2. No signing key or additional account configuration is required for these prepared files. Keep previous published releases unchanged.
 
-Push to the default branch of `MOO2-Social-Gaming-Community/MOO2-SGC---Launcher-and-Installer`.
+The files under `release/0.4.2/` are already signed. Do not rename/repackage launcher ZIPs or edit the manifest. The root source input fingerprints must remain consistent with the binaries. Existing v0.4.1 source inputs are historical; current publication uses VERSION.
 
-**This push automatically publishes the prepared v0.4.1 software Release after the publishing workflow's checks succeed.** It does not wait for your later manual game test. The release notes disclose the test limitations. Ordinary source commits without a new prepared release do not sign or manufacture a new version.
-
-Then open GitHub → Actions → Publish prepared release. Once successful, open Releases → 0.4.1, download `MOO2-SGC-Setup.exe`, and run it from Downloads without adjacent manifests or launcher ZIPs. The executable uses the configured online endpoints by default.
-
-A repository push is not itself a Release. If there is no Release, inspect the workflow status. Organization policies may require enabling Actions/write permissions. A private repository or draft Release cannot be accessed by this anonymous public installer. No account token is embedded or requested.
-
-Do not upload commercial MOO2 archives, prior PRIVATE_TEST packages, or the separately supplied PRIVATE maintainer signing backup. The prepared release contains no commercial game payloads.
-
-The exact source inputs are fingerprinted inside signed launcher packages. Do not alter application/build/workflow source before initially pushing this prepared release; its verifier will correctly require a rebuilt and newly signed package if code changes. Editing documentation alone does not invalidate binary correspondence.
+After the v0.4.2 release exists, update through the existing launcher or run the new standalone setup. Follow START-HERE.md to test Steam recognition and game preparation. No commercial archives, private keys or local user data belong in the repository.

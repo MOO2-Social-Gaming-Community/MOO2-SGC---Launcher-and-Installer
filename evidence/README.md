@@ -1,0 +1,1 @@
+Current release evidence is in 0.4.2/. Older directories are retained historical records, not rerun results for 0.4.2. Tests requiring owner-supplied data skip when MOO2_TEST_ASSETS is unset. No game data belongs in evidence.

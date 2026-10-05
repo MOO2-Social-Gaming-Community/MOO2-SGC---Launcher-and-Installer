@@ -37,12 +37,18 @@ func (m *Manager) distributionStatus() map[string]any {
 		r["state_error"] = e.Error()
 	}
 	r["self_update"] = "Explicit check/stage, then close launcher and run Setup --command apply-staged. No replacement during game play."
-	r["base_source"] = "Import the recognized owned archive or fingerprint-verified DOS 1.31 folder; other editions may require support."
+	r["base_source"] = "Import a supported English CD 1.2, Steam DOS 1.40b23, or legacy DOS 1.31 folder/ZIP. No source is modified."
 	return r
 }
 func (m *Manager) importPayload(kind, source string) (any, error) {
-	if kind != "base" && kind != "patch" {
-		return nil, errors.New("choose base or patch")
+	if kind == "base" {
+		return m.importKnownZip(source)
+	}
+	if kind == "official131" {
+		return m.importOfficial131(source)
+	}
+	if kind != "patch" {
+		return nil, errors.New("choose base, official131 or patch")
 	}
 	source = strings.Trim(strings.TrimSpace(source), "\"")
 	if !filepath.IsAbs(source) {

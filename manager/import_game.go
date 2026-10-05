@@ -112,13 +112,13 @@ func writeBaseSnapshot(source, archive string, records []BaseFile) (err error) {
 			return e
 		}
 		if i.Size() != r.Size {
-			return fmt.Errorf("%s differs from supported DOS 1.31 baseline (size); source untouched", r.Name)
+			return fmt.Errorf("%s differs from the detected supported edition (size); source untouched", r.Name)
 		}
 		in, e := os.Open(p)
 		if e != nil {
 			return e
 		}
-		h := &zip.FileHeader{Name: "base/" + r.Name, Method: zip.Deflate}
+		h := &zip.FileHeader{Name: "base/" + r.Name, Method: zip.Store}
 		h.SetMode(0600)
 		h.SetModTime(time.Date(2026, 1, 1, 0, 0, 0, 0, time.UTC))
 		w, e := z.CreateHeader(h)
@@ -133,7 +133,7 @@ func writeBaseSnapshot(source, archive string, records []BaseFile) (err error) {
 			return ce
 		}
 		if n != r.Size || hex.EncodeToString(hash.Sum(nil)) != r.SHA256 {
-			return fmt.Errorf("%s differs from supported DOS 1.31 data; mixed/modified editions are not imported", r.Name)
+			return fmt.Errorf("%s differs from the detected supported edition; an unsupported asset variant is not silently altered", r.Name)
 		}
 	}
 	if e = z.Close(); e != nil {
@@ -149,49 +149,33 @@ func (m *Manager) importFolder(source string) (any, error) {
 	if e != nil {
 		return nil, e
 	}
-	info, e := os.Stat(p)
+	s, e := detectFolderEdition(p)
 	if e != nil {
 		return nil, e
 	}
-	if !info.IsDir() {
-		return nil, errors.New("select the folder containing ORION2.EXE and LBX files")
-	}
-	index := baseIndex()
-	cache := filepath.Join(m.Data, "cache")
-	tmp, e := os.MkdirTemp(cache, "import-")
+	tmp, e := os.MkdirTemp(filepath.Join(m.Data, "cache"), "import-")
 	if e != nil {
 		return nil, e
 	}
 	defer os.RemoveAll(tmp)
 	staged := filepath.Join(tmp, "base.zip")
-	m.progress("Verifying and privately copying recognized DOS game files; source, mods and saved games stay untouched…")
-	if e = writeBaseSnapshot(p, staged, index.Files); e != nil {
+	m.progress("Recognized " + s.Label + "; verifying files and preserving the source…")
+	if e = writeBaseSnapshot(p, staged, s.Files); e != nil {
 		return nil, e
 	}
-	hash, e := hashFile(staged)
-	if e != nil {
-		return nil, e
-	}
-	name := "base-import-" + hash + ".zip"
-	dest := filepath.Join(cache, name)
-	if e = requireHash(dest, hash); e != nil {
-		if e = replaceFile(staged, dest); e != nil {
-			return nil, e
-		}
-	}
-	record := ImportedBase{1, name, hash, len(index.Files), index.Edition}
-	if e = atomicJSON(filepath.Join(cache, "base-source.json"), record); e != nil {
-		return nil, e
-	}
-	return map[string]any{"cached": dest, "files": len(index.Files), "source_modified": false, "uploaded": false, "sha256": hash, "edition": index.Edition}, nil
+	return m.commitSourceSnapshot(staged, s)
 }
 func (m *Manager) importedBase() (string, string, string, error) {
 	var r ImportedBase
 	if e := readJSON(filepath.Join(m.Data, "cache", "base-source.json"), &r); e != nil {
 		return "", "", "", e
 	}
-	if r.Schema != 1 || !regexp.MustCompile(`^[a-f0-9]{64}$`).MatchString(r.SHA256) || r.Filename != "base-import-"+r.SHA256+".zip" || r.FileCount != len(baseIndex().Files) {
+	if (r.Schema != 1 && r.Schema != 2) || !regexp.MustCompile(`^[a-f0-9]{64}$`).MatchString(r.SHA256) || r.Filename != "base-import-"+r.SHA256+".zip" {
 		return "", "", "", errors.New("invalid private base source record")
+	}
+	edition, e := editionByID(r.Edition)
+	if e != nil || r.FileCount != len(edition.Files) {
+		return "", "", "", errors.New("invalid source edition receipt")
 	}
 	p := filepath.Join(m.Data, "cache", r.Filename)
 	if e := noSymlinkAncestors(p); e != nil {
@@ -293,6 +277,18 @@ func (m *Manager) prepareForPlay(p Profile, source string) (any, error) {
 			return nil, e
 		}
 	}
+	edition, e := m.currentEdition()
+	if e != nil {
+		return nil, e
+	}
+	if _, e = expectedLineage(edition, p.Engine); e != nil {
+		return nil, e
+	}
+	if edition.Version == "1.2" && engineRank(p.Engine) >= 131 {
+		if e = m.ensureOfficial131(); e != nil {
+			return nil, e
+		}
+	}
 	if p.Engine == "1.50.26" {
 		if _, _, _, e := m.payload("patch"); e != nil {
 			if _, e = m.refreshPatch(); e != nil {
@@ -316,6 +312,12 @@ func (m *Manager) prepareForPlay(p Profile, source string) (any, error) {
 // snapshot has its own container hash, so verify its actual files against the
 // compiled baseline rather than trusting an arbitrary manifest/source hash.
 func verifyBaseIdentity(mf Manifest, game string) error {
+	if mf.Schema == 2 {
+		if !strings.HasPrefix(mf.SourceBaseKind, "known-edition-v2:") {
+			return errors.New("missing source edition")
+		}
+		return verifyEditionManifest(mf, game)
+	}
 	if mf.SourceBaseKind == "" && mf.SourceBase == BaseHash {
 		return nil
 	}
@@ -327,7 +329,7 @@ func verifyBaseIdentity(mf Manifest, game string) error {
 func verifyPinnedBase(game string, installed map[string]FileRecord, expected []BaseFile) error {
 	for _, r := range expected {
 		rec, ok := installed[r.Name]
-		if !ok || rec.SHA256 != r.SHA256 || rec.Size != r.Size {
+		if !ok || !isUserFile(r.Name) && (rec.SHA256 != r.SHA256 || rec.Size != r.Size) {
 			return fmt.Errorf("recognized base file identity missing/changed: %s", r.Name)
 		}
 		p := filepath.Join(game, r.Name)
@@ -336,6 +338,9 @@ func verifyPinnedBase(game string, installed map[string]FileRecord, expected []B
 		}
 		if e := regularFile(p); e != nil {
 			return e
+		}
+		if isUserFile(r.Name) {
+			continue
 		}
 		if e := requireHash(p, r.SHA256); e != nil {
 			return fmt.Errorf("recognized base file changed: %s", r.Name)

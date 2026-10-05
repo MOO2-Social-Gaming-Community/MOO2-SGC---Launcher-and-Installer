@@ -282,7 +282,7 @@ func dosboxConfig(game string, p Profile) (string, error) {
 		return "", errors.New("game path cannot be represented safely")
 	}
 	exe := "ORION150.EXE"
-	if p.Engine == "1.31" {
+	if p.Engine != "1.50.26" {
 		exe = "ORION2.EXE"
 	}
 	lines := []string{"# MOO2 Mod Manager " + Version, "# No PRSL or Chat hooks. Only this game directory is mounted.", "[sdl]", "fullscreen=" + strconv.FormatBool(p.Fullscreen), "[dosbox]", "memsize=32", "[cpu]", "core=auto", "cycles=auto", "[sblaster]", "sbtype=sb16", "sbbase=220", "irq=5", "dma=1", "hdma=5", "[ipx]", "ipx=true", "[autoexec]", "@echo off", `mount c "` + game + `"`, "c:"}
@@ -292,7 +292,11 @@ func dosboxConfig(game string, p Profile) (string, error) {
 	if p.Role == "join" {
 		lines = append(lines, fmt.Sprintf("IPXNET CONNECT %s %d", p.Host, p.Port))
 	}
-	lines = append(lines, exe+" /skipintro", "exit", "")
+	args := " /skipintro"
+	if p.Engine == "1.2" {
+		args = ""
+	} // Never send a later fan-patch flag to the CD executable.
+	lines = append(lines, exe+args, "exit", "")
 	return strings.Join(lines, "\n"), nil
 }
 func (m *Manager) launch(p Profile) (any, error) {

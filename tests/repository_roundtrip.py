@@ -15,7 +15,7 @@ with tempfile.TemporaryDirectory(prefix='sgc-git-roundtrip-') as td:
  shutil.copytree(ROOT,root,ignore=shutil.ignore_patterns('.git','__pycache__','*.pyc'))
  def git(*args):return subprocess.check_output(['git','-C',str(root),*args],stderr=subprocess.STDOUT,text=True)
  git('init','-q');git('config','core.autocrlf','true');git('config','user.email','test@example.invalid');git('config','user.name','Local packaging test')
- dummies={'never-upload.key':b'not a key','original.LBX':b'not a game','release/0.4.1/PRIVATE_BACKUP.zip':b'not a secret archive','release/0.4.1/unexpected.key':b'not a key'}
+ dummies={'never-upload.key':b'not a key','original.LBX':b'not a game','release/'+(ROOT/'VERSION').read_text().strip()+'/PRIVATE_BACKUP.zip':b'not a secret archive','release/'+(ROOT/'VERSION').read_text().strip()+'/unexpected.key':b'not a key'}
  for n,b in dummies.items():(root/n).write_bytes(b)
  git('add','.');tracked=set(git('ls-files').splitlines())
  check('dummy private/game inputs excluded from Git',not set(dummies)&tracked)
@@ -35,4 +35,4 @@ with tempfile.TemporaryDirectory(prefix='sgc-git-roundtrip-') as td:
  check('all public files fit ordinary Git size limit',all((root/n).stat().st_size<100*1024*1024 for n in tracked))
  check('no Git remote configured',git('remote').strip()=='')
  check('release signatures still verify after Git checkout',subprocess.run([sys.executable,str(root/'packaging/publish_prebuilt.py')],capture_output=True,text=True).returncode==0)
-a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps({'version':'0.4.1','count':len(checks),'checks':checks,'remote_access':False,'core_autocrlf':True},indent=2)+'\n')
+a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps({'version':(ROOT/'VERSION').read_text().strip(),'count':len(checks),'checks':checks,'remote_access':False,'core_autocrlf':True},indent=2)+'\n')

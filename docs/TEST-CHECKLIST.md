@@ -1,33 +1,31 @@
-# Windows 11 acceptance — 0.4.1
+# Windows 11 acceptance — 0.4.2
 
-## Publish and download
+## Update
 
-Extract the repository ZIP contents directly into the cloned root, preserve `.git`, commit all supplied files and push the default branch. In GitHub's Actions tab, wait for **Publish prepared release** to succeed. Confirm a published, non-draft `v0.4.1` release exists and has `MOO2-SGC-Setup.exe`, launcher ZIPs, `manifest.json` and `manifest.sig`. The public installer requires a public repository and completed asset publication, not merely a source commit.
+Confirm GitHub published v0.4.2. Close the game. In 0.4.1, check/stage/apply the signed launcher update, or run the standalone 0.4.2 setup normally. Confirm the resulting launcher says 0.4.2, existing profiles remain, and the existing DOSBox runtime is detected. Keep the private signing backup outside the repo; no new signing setup is needed.
 
-Download setup to a fresh folder with **no** launcher ZIP, manifest or private game archive beside it. Run it normally. Do not disable protection or elevate to administrator to force a blocked executable.
+## Steam source (first regression test)
 
-## First installation
+Select Community — standard and the actual Steam folder previously rejected. Prepare game for play. Expected source version: **1.40b23**; expected lineage: **1.40b23 → 1.50.26**. The importer must not reject the known Steam ANWINFIN variant as legacy 1.31 data. Verify the managed files and confirm the Steam source has not been edited. No game should auto-start.
 
-Expected: download/verification progress, installed launcher local browser screen, version 0.4.1, and a Start-menu shortcut when Windows permits it. The default data root is `%APPDATA%\MOO2-SGC\stable\userdata` and application files remain outside that data directory.
+Press Launch MOO2. Observe title screen, version, mouse, keyboard, sound and display. Start a new single-player game, take several turns, save, exit and reload that save. Record an actual title/game screen, not merely a DOSBox process identifier.
 
-Use **Community — standard**. Under **Prepare your owned game**, paste the path to the exact archive previously supplied (`Master of Orion 2.zip`, or the older private bundle's `payloads/base.zip`). A folder matching the fingerprinted DOS 1.31 baseline is also accepted; other Steam/GOG editions are not automatically guaranteed. Click **Prepare game for play**. Required patch and runtime downloads are explicit consequences of this action.
+## Baseline
 
-Expected: verified source import; pinned 1.50.26 patch and DOSBox available; generated configuration; successful workspace verification; no automatic game start. Optional PRSL and new Chat remain unavailable.
+Choose the separate SGC baseline — 1.40b23 profile with Steam as source. Prepare and launch. Confirm no 1.50 Core/mods are enabled. Verify the 1.50 profile remains independently available.
 
-## Actual game acceptance
+## CD lineage
 
-Click **Launch MOO2**. Confirm title screen, sound, input and screen size. Start a **new** single-player game using the chosen ruleset. Take several turns; save normally; exit; reopen the installed launcher from the Start menu and reload the same profile/save.
+Use a separate profile and the original CD 1.2 archive/folder. Choose current 1.50.26 and prepare. Expected progression: 1.2 → 1.31 → 1.40b23 → 1.50.26. Record any official prerequisite download error; do not substitute unverified files. Local official 1.31 ZIP import is the supported offline alternative.
 
-Record actual observations, not only that the DOSBox process started. Do not use the installer diagnostics screen as evidence that gameplay works.
+Test Original CD 1.2 only with its source provided. A request to downgrade a Steam 1.40b23 source to original CD bytes should be refused, not silently fabricated.
 
-After single-player works, test a second machine with matching rules. Host/Join configures the IPX tunnel; still use MOO2's Multiplayer / Network UI. Automatic lobby discovery, a public relay and automatic router setup are not implemented.
+## Preservation and multiplayer
 
-## Recovery and updates
+Rebuild the same-engine profile and verify its save survives. Existing other profiles and original Steam files must remain untouched. Do not deliberately corrupt your real source installation.
 
-Verify the prepared files. Rebuild the same profile and confirm its save survives. Switching to Original DOS creates a separate unpatched environment; keep the patched profile intact. Do not deliberately corrupt a valuable personal installation.
-
-Use **Check signed release → Stage launcher update → Apply staged update and restart**. A same-version stage tests handoff, not a future-version migration. Confirm user data remains. Do not update while a game is running.
+Only after single-player succeeds, test Host/Join with two computers using matching engine/rulesets. Use the in-game Multiplayer/Network interface. LAN discovery, online matchmaking, relay and live PRSL remain out of scope for this test.
 
 ## Report failures
 
-Record exact step, exact message, operating-system build, selected source/ruleset/runtime and whether a title screen actually appeared. Retain `%APPDATA%\MOO2-SGC\stable\logs\bootstrap.log`, use **Export diagnostics**, and retain the relevant game-process log. Do not post commercial game files, signing material, or an active local-dashboard URL/token.
+Capture the first failing action, exact message, selected source version/target/profile and runtime. Export diagnostics and retain the game-process log and `%APPDATA%\MOO2-SGC\stable\logs\bootstrap.log`. Remove local dashboard tokens/private paths as appropriate before publishing an issue. Never include source game archives or signing keys.

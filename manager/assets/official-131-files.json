@@ -1,0 +1,141 @@
+{
+  "schema": 1,
+  "edition": "Official English DOS 1.31 update",
+  "files": [
+    {
+      "name": "ANTARMSG.LBX",
+      "size": 11840,
+      "sha256": "fc5730be0fb09cdac60a9807325dd934965e34926593f4e576f83b7ced9a17de"
+    },
+    {
+      "name": "BEAMS.LBX",
+      "size": 2813200,
+      "sha256": "f60c798995c80375d3a9e70c8ab710c734acab0bbe0e05365dd073a5fb7ff176"
+    },
+    {
+      "name": "BILLTEX2.LBX",
+      "size": 19520,
+      "sha256": "678597f92a65cbd118e6145a31ed9bf3617488ee3e2c3d8ae330048714f260cc"
+    },
+    {
+      "name": "BILLTEXT.LBX",
+      "size": 50720,
+      "sha256": "019202505df60b3721bbbf5340272aa34ca5079212817bc81225e9130f976e7f"
+    },
+    {
+      "name": "COLREFIT.LBX",
+      "size": 342280,
+      "sha256": "4fff346e85b48617389f7b77d7a727ed8b62ec4ba72008e7a3b3331d10d03016"
+    },
+    {
+      "name": "COLSYSDI.LBX",
+      "size": 90548,
+      "sha256": "d20a3799427f6883560818e265032329974069e3856742606bb2127914e043a8"
+    },
+    {
+      "name": "COUNCMSG.LBX",
+      "size": 19184,
+      "sha256": "ceacb67300dcb51af3abb433a0f57578dd11855a2030b928beaae7ef59ca6017"
+    },
+    {
+      "name": "ESTRINGS.LBX",
+      "size": 23052,
+      "sha256": "46add2b2b1c6758b66e780341ed5138ffe4e4f3587b4e1b2bf117b8512a520cd"
+    },
+    {
+      "name": "GAME.LBX",
+      "size": 933668,
+      "sha256": "b48958c89a5375185f29008f48dbefafa31f4224397802cd1263c5c90ef04546"
+    },
+    {
+      "name": "HELP.LBX",
+      "size": 1014281,
+      "sha256": "78f8f0b6b6d05426de5b36116fbc8d1e4863305ad3fb659ae0ad3d3bbe83d7dd"
+    },
+    {
+      "name": "HERODATA.LBX",
+      "size": 6005,
+      "sha256": "38705f160ee493f3bc4d2d5f1b980b0d26dfd784d80bfe072ec88575df938e18"
+    },
+    {
+      "name": "HESTRNGS.LBX",
+      "size": 15573,
+      "sha256": "a3193f56d12ae512ab8a78cc50aba9df44d6d614a4cc23b14ec7b9f1b09cbf30"
+    },
+    {
+      "name": "JIMTEXT.LBX",
+      "size": 53840,
+      "sha256": "b7cd61699897da6cad4f10d9a6de373a69996c35bc930c9039cd69fb90493837"
+    },
+    {
+      "name": "JIMTEXT2.LBX",
+      "size": 51968,
+      "sha256": "5f184295eeaa934f8ee842d2c1881c6748cfe82ec2f9e3a0decd367584cf139f"
+    },
+    {
+      "name": "KENTEXT.LBX",
+      "size": 51968,
+      "sha256": "ba5952ad3bcb2484d5dff376eba564f7d8c2f71f26168922710f7892c1d87914"
+    },
+    {
+      "name": "KENTEXT1.LBX",
+      "size": 20144,
+      "sha256": "d50d860579404aab5d6db442f3d6573cfc677af6a0f97cf7f1a407cff99cfc5c"
+    },
+    {
+      "name": "MAINTEXT.LBX",
+      "size": 10504,
+      "sha256": "c9a50a9105a8118a5a93d1c1c6a7aaf7cfa61632fd26555322a8b7483dcfc9f7"
+    },
+    {
+      "name": "MSGENG.LBX",
+      "size": 410244,
+      "sha256": "ee70bd446054139101b5187861af24590bc2b46a30736a52b9a09eb27b6d3096"
+    },
+    {
+      "name": "ORION2.EXE",
+      "size": 2612010,
+      "sha256": "4e11be14217b4aafa1839f333bf5eba037f98b0c44e9e4752c96c464c260419f"
+    },
+    {
+      "name": "PATCH13.LBX",
+      "size": 30052,
+      "sha256": "79aa4be4825299c7cf2ac4886069979e3979157304ef1769c59b2082be26d913"
+    },
+    {
+      "name": "RACES.LBX",
+      "size": 532412,
+      "sha256": "532dcf7d52637645153f9dc8a08c343696bdf31d288a6c85b04f3ec5c85ca26f"
+    },
+    {
+      "name": "RACESTUF.LBX",
+      "size": 9471,
+      "sha256": "a7942f4f13ca081c6d8d4f53266a3ee79198f92c786402bd41c33abbeecbb5b4"
+    },
+    {
+      "name": "REFITPUP.LBX",
+      "size": 342280,
+      "sha256": "710b7ae970db4784854bb9149c0b7c0211517523a5a73386632dda27cb30228f"
+    },
+    {
+      "name": "RSTRING0.LBX",
+      "size": 8552,
+      "sha256": "3b454601a67252ce8ad7d4dcfad4e1898baf333eb58d680d0dcdf9f42d264f1d"
+    },
+    {
+      "name": "SKILDESC.LBX",
+      "size": 9967,
+      "sha256": "28892c9945ee676e7b1545895e6897261cfb7d0d3a9f4f24cb16336afbcd1ebc"
+    },
+    {
+      "name": "TECHDESC.LBX",
+      "size": 12966,
+      "sha256": "f3bf356df978bc5919d7144f19144c99db44dae79160a65e912cffcbb0dffb85"
+    },
+    {
+      "name": "TECHNAME.LBX",
+      "size": 58451,
+      "sha256": "917653c6d4b767166c2223bb72e3e8608b2eb8415cef0a4436ed9a7391d10a4e"
+    }
+  ]
+}

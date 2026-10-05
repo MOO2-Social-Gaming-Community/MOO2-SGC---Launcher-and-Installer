@@ -1,13 +1,11 @@
-# Third-party notices — MOO2-SGC distribution alpha
+# Third-party notices — MOO2-SGC 0.4.2
 
-These launcher packages and bootstrap test kits contain **no commercial Master of Orion II game data, community patch payload, DOSBox runtime, user saves, fonts, private signing keys, or account credentials**.
+Public packages contain no full commercial Master of Orion II game data/executables, original game archives, saved games, DOSBox runtime, private signing keys or credentials. Sources remain owner-provided local dependencies.
 
-Game and patch imports remain local, user-supplied dependencies. The manager does not claim authorship of Master of Orion II, its fan patch, community mod metadata, or DOSBox. Existing upstream archives and their notices are preserved unmodified in the user's private cache.
+The manager does not claim authorship or ownership of Master of Orion II, its community patches/mod metadata, or DOSBox. The new 1.40b23 transform is based on the historical unofficial patch by **Lord Brazen** (May 22, 2006). A small exact-build patch-edit recipe (including 3,057 literal edit bytes) and provenance fingerprints are included, not the full original/patched game or historical Windows patcher. Original third-party rights remain with their holders; these edits are not relicensed as original SGC game code. Rehosting complete upstream archives requires separate review of their applicable terms.
 
-The explicit upstream patch/runtime download paths retain pinned hashes and official provenance. They are separate from the newly implemented signed SGC launcher distribution. Any future rehosting of upstream material requires its applicable redistribution/source/license obligations to be recorded first.
+The official 1.31 and fan 1.50.26 updates are separate upstream dependencies. Exact installed-file or archive hashes are checked. The original game remains copyrighted and is not made freely redistributable by a successful import check.
 
-The compiled applications include the Go runtime and standard library; its BSD-style license is reproduced in GO-LICENSE.txt (or docs/GO-LICENSE.txt in the source handoff).
+Compiled applications include the Go runtime and standard library under the BSD-style license in `docs/GO-LICENSE.txt` (also included in launcher packages). Project source is provided for Psyche and MOO2-SGC; no new blanket license to third-party materials is granted here.
 
-New project source is supplied as working material for Psyche42 and MOO2-SGC. No public project license, trademark permission, or third-party redistribution permission has been granted or selected by this development run. Review and document those before a public release.
-
-Development update signatures are not Windows Authenticode signatures or macOS notarization. The offline acceptance kits use an explicitly labeled disposable development trust root, not an established community publisher identity.
+The existing owner-controlled release-signing identity from 0.4.1 is retained. These signatures authenticate SGC update packages; they are not Windows Authenticode signatures or macOS notarization. No replacement private key is published or supplied in this public package.

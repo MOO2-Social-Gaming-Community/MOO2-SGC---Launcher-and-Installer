@@ -1,4 +1,4 @@
-# Deployment — 0.4.1
+# Deployment — 0.4.2
 
 The canonical repository is `MOO2-Social-Gaming-Community/MOO2-SGC---Launcher-and-Installer`.
 
@@ -9,7 +9,7 @@ https://github.com/MOO2-Social-Gaming-Community/MOO2-SGC---Launcher-and-Installe
 https://github.com/MOO2-Social-Gaming-Community/MOO2-SGC---Launcher-and-Installer/releases/latest/download/manifest.sig
 ```
 
-A version-pinned v0.4.1 metadata fallback is also embedded. Package URLs are version-specific. All metadata and packages require signatures from the embedded key and byte-size/hash checks. A failed mirror cannot lower an already accepted manifest revision.
+A version-pinned v0.4.2 metadata fallback is also embedded. Package URLs are version-specific. All metadata and packages require signatures from the embedded key and byte-size/hash checks. A failed mirror cannot lower an already accepted manifest revision.
 
 ## GitHub Desktop
 

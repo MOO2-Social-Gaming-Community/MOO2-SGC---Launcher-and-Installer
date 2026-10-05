@@ -22,6 +22,7 @@ type FileRecord struct {
 }
 type Manifest struct {
 	Schema         int                   `json:"schema"`
+	Lineage        []LineageStep         `json:"lineage,omitempty"`
 	Manager        string                `json:"manager"`
 	Created        string                `json:"created"`
 	Profile        Profile               `json:"profile"`
@@ -205,9 +206,21 @@ func (m *Manager) build(p Profile) (any, error) {
 		return nil, e
 	}
 	m.progress("Verifying your source archive before installation…")
-	base, baseHash, bp, e := m.payload("base")
+	base, baseHash, _, e := m.payload("base")
 	if e != nil {
 		return nil, e
+	}
+	edition, e := m.currentEdition()
+	if e != nil {
+		return nil, e
+	}
+	if _, e = expectedLineage(edition, p.Engine); e != nil {
+		return nil, e
+	}
+	if edition.Version == "1.2" && engineRank(p.Engine) >= 131 {
+		if e = m.ensureOfficial131(); e != nil {
+			return nil, e
+		}
 	}
 	var patch, pp string
 	if p.Engine == "1.50.26" {
@@ -227,7 +240,11 @@ func (m *Manager) build(p Profile) (any, error) {
 	defer os.RemoveAll(stage)
 	game := filepath.Join(stage, "game")
 	m.progress("Extracting a fresh game copy; archived personal saves stay in the source ZIP…")
-	if e = extractZip(base, game, bp, true); e != nil {
+	if e = m.extractKnownSource(base, game, edition); e != nil {
+		return nil, e
+	}
+	lineage, e := m.applyLineage(game, edition, p.Engine)
+	if e != nil {
 		return nil, e
 	}
 	if p.Engine == "1.50.26" {
@@ -240,10 +257,16 @@ func (m *Manager) build(p Profile) (any, error) {
 		}
 	}
 	// Full local data lives on the emulated C: drive, not the archive owner's H: path.
-	if e = atomicWrite(filepath.Join(game, "orioncd.ini"), []byte("C:\\\r\n")); e != nil {
+	if e = writeDefaultGameConfig(game); e != nil {
 		return nil, e
 	}
-	if e = requireHash(filepath.Join(game, "ORION2.EXE"), BaseEngineHash); e != nil {
+	wantBase := BaseEngineHash
+	if p.Engine == "1.2" {
+		wantBase = CDEngineHash
+	} else if engineRank(p.Engine) >= 140 {
+		wantBase = BaselineEngineHash
+	}
+	if e = requireHash(filepath.Join(game, "ORION2.EXE"), wantBase); e != nil {
 		return nil, e
 	}
 	if p.Engine == "1.50.26" {
@@ -273,10 +296,8 @@ func (m *Manager) build(p Profile) (any, error) {
 	} else if !os.IsNotExist(oe) {
 		return nil, oe
 	}
-	manifest := Manifest{Schema: 1, Manager: Version, Created: time.Now().UTC().Format(time.RFC3339Nano), Profile: p, Resolution: r, SourceBase: baseHash, Files: map[string]FileRecord{}}
-	if bp == "base/" {
-		manifest.SourceBaseKind = "fingerprinted-dos-131"
-	}
+	manifest := Manifest{Schema: 2, Lineage: lineage, Manager: Version, Created: time.Now().UTC().Format(time.RFC3339Nano), Profile: p, Resolution: r, SourceBase: baseHash, Files: map[string]FileRecord{}}
+	manifest.SourceBaseKind = "known-edition-v2:" + edition.ID
 	if p.Engine == "1.50.26" {
 		manifest.SourcePatch = PatchHash
 	}
@@ -326,7 +347,7 @@ func (m *Manager) build(p Profile) (any, error) {
 		return nil, e
 	}
 	v.Generation = generation
-	return map[string]any{"verification": v, "path": dest, "prsl": "not injected", "chat": "not injected", "archived_saves": "retained only in original source ZIP", "engine": p.Engine}, nil
+	return map[string]any{"verification": v, "path": dest, "prsl": "not injected", "chat": "not injected", "archived_saves": "retained only in original source ZIP", "engine": p.Engine, "source_version": edition.Version, "effective_baseline": "1.40b23", "lineage": lineage}, nil
 }
 func verifyDir(dir string) (VerifyResult, error) {
 	v := VerifyResult{OK: true, Bad: []string{}, UserChanges: []string{}}
@@ -337,7 +358,7 @@ func verifyDir(dir string) (VerifyResult, error) {
 	if e := readJSON(filepath.Join(dir, "manifest.json"), &mf); e != nil {
 		return v, e
 	}
-	if mf.Schema != 1 || len(mf.Files) == 0 || len(mf.Files) > 10000 {
+	if (mf.Schema != 1 && mf.Schema != 2) || len(mf.Files) == 0 || len(mf.Files) > 10000 {
 		return v, errors.New("unsupported or empty manifest")
 	}
 	resolution, e := resolve(mf.Profile)
@@ -396,6 +417,12 @@ func verifyDir(dir string) (VerifyResult, error) {
 		return v, e
 	}
 	exe, want := "ORION2.EXE", BaseEngineHash
+	if mf.Profile.Engine == "1.2" {
+		want = CDEngineHash
+	}
+	if mf.Profile.Engine == "1.40b23" {
+		want = BaselineEngineHash
+	}
 	if mf.Profile.Engine == "1.50.26" {
 		exe, want = "ORION150.EXE", EngineHash
 	}
@@ -541,6 +568,6 @@ func (m *Manager) state() (any, error) {
 	m.mu.Lock()
 	j, r, exit := m.job, m.runningProfile, m.lastExit
 	m.mu.Unlock()
-	return map[string]any{"version": Version, "platform": platform(), "profiles": ps, "catalog": catalog(), "active": active, "history": hist, "job": j, "running": r, "last_exit": exit, "data_path": m.Data, "runtime_candidates": m.runtimeCandidates(), "settings": m.getSettings(), "runtime_recipe": runtimeRecipeForPlatform(), "prsl_available": false, "chat_available": false, "distribution": m.distributionStatus()}, nil
+	return map[string]any{"version": Version, "platform": platform(), "profiles": ps, "catalog": catalog(), "active": active, "history": hist, "job": j, "running": r, "last_exit": exit, "data_path": m.Data, "runtime_candidates": m.runtimeCandidates(), "settings": m.getSettings(), "runtime_recipe": runtimeRecipeForPlatform(), "prsl_available": false, "chat_available": false, "distribution": m.distributionStatus(), "source": m.sourceStatus(), "effective_baseline": "1.40b23"}, nil
 }
 func encode(v any) string { b, _ := json.MarshalIndent(v, "", "  "); return string(b) }

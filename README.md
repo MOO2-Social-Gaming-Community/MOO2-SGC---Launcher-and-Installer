@@ -1,62 +1,35 @@
-# MOO2-SGC Launcher and Installer — 0.4.1
+# MOO2-SGC Launcher and Installer — 0.4.2
 
-Master of Orion II Social Gaming Community's modular bootstrapper, environment manager, updater, configurator and community-mod launcher.
+A small signed bootstrapper and modular environment manager for owned Master of Orion II installations. Windows, Linux and macOS binaries share the same installer and game-preparation logic. **Real game execution still requires user acceptance testing.**
 
-**Current scope:** owned DOS game import, community patch 1.50.26, selectable bundled rulesets/add-ons, DOSBox setup, verified environments, application updates and recovery. **PRSL and the proposed Chat extension remain separate and unavailable.** This version number is not a claim of game or platform certification.
+## This release fixes the Steam source rejection
 
-## Maintainer: unzip, commit and push with GitHub Desktop
+0.4.1 recognized one legacy DOS 1.31 snapshot. It could find the Steam folder but rejected `ANWINFIN.LBX` because legitimate Steam assets differ from that snapshot. 0.4.2 recognizes the supplied English Steam **DOS 1.40b23** engine and its verified asset set, as well as the supplied English CD **1.2** files. It reads the DOS executable, not the Windows executable, README or ZIP filename, to select the source recipe.
 
-Extract this archive's **contents directly into your cloned repository root**. Preserve the existing `.git` directory. There is no extra enclosing repository folder in the ZIP.
+- Steam source: **1.40b23 → 1.50.26**. No downgrade and no unnecessary 1.31 prerequisite download.
+- Fresh CD source: **1.2 → official DOS 1.31 → 1.40b23 → 1.50.26**.
+- Legacy 1.31 source: **1.31 → 1.40b23 → 1.50.26**.
 
-The destination is:
+**1.40b23 is the effective SGC baseline. 1.50.26 remains the default current community profile.** Baseline, original CD and legacy official profiles are separately selectable. Future fan versions require an exact supported package, not blind updating.
 
-`MOO2-Social-Gaming-Community/MOO2-SGC---Launcher-and-Installer`
+All patches affect a separate managed copy. Original Steam/GOG/CD files and saves are never modified or uploaded. Unknown editions are rejected with a specific diagnostic, not silently accepted. GOG copies must match a recognized content set; no universal GOG/localization compatibility is claimed.
 
-Commit all supplied files, including `.github/`, `release/0.4.1/`, `.gitattributes` and `.gitignore`, then push to the repository's **default branch**. The included **Publish prepared release** workflow verifies the signed files, runs tests, creates a draft `v0.4.1` Release, attaches the individual downloads, downloads them back for verification, and publishes the Release. It refuses to replace different bytes in an already published version.
+## Publish using GitHub Desktop
 
-**The push intentionally triggers publication of the prepared software Release.** The public installer cannot access draft/private assets without credentials; none are embedded. The repository must be public for anonymous installation, and repository/organization settings must allow GitHub Actions and its requested `contents: write` permission.
+Extract the repository ZIP contents directly into your existing clone, preserving `.git`. Commit and push the default branch. Wait for **Publish prepared release** to publish **v0.4.2**. The prepared public files are in `release/0.4.2/`; do not edit them or the signed manifest.
 
-No signing secret, personal access token, local Go installation or manual asset upload is required for publishing the **already signed 0.4.1** package. Future rebuilt versions require a maintainer signing key; see `docs/SIGNING.md`.
+The repository is `MOO2-Social-Gaming-Community/MOO2-SGC---Launcher-and-Installer`. GitHub Releases is primary; optional R2 is not provisioned. This release uses the **same signing key as 0.4.1**. No signing secret needs to be added for publishing already-signed artifacts.
 
-Check the **Actions** tab. When **Publish prepared release** succeeds, download `MOO2-SGC-Setup.exe` from the `v0.4.1` Release and run it from an otherwise empty folder. That tests the online bootstrap path, not an adjacent offline package.
+## Update and first test
 
-## Player: install and prepare
+Close any running game. In 0.4.1 use **Check signed release → Stage launcher update → Apply staged update and restart**, or run the new standalone setup after v0.4.2 is published. Confirm **0.4.2** appears in the launcher.
 
-1. Run `MOO2-SGC-Setup.exe` normally; administrator privileges are not required. It verifies the signed release, downloads and installs the platform launcher, and opens its local browser interface.
-2. Choose the desired profile, engine and community ruleset/add-ons. For the first test, use **Community — standard**.
-3. Under **Prepare your owned game**, select a recognized installed DOS folder or paste your earlier private bundle's `payloads/base.zip` path. Click **Prepare game for play**. It imports local game files, obtains the checksum-pinned community patch and DOSBox when missing, builds and verifies a separate environment.
-4. Click **Launch MOO2**. First confirm a new single-player game can save and reload; then test multiplayer.
+Select **Community — standard**, paste your actual Steam game directory under **Prepare your owned game**, and press **Prepare game for play**. Your already installed DOSBox is reused. Verify the reported source is **Steam English DOS 1.40b23**, then press **Launch MOO2**. The first acceptance target is title screen → new single-player game → several turns → save → exit → reload.
 
-Import never uploads your owned game or alters the original installation. Folder matching currently checks the 408 file fingerprints from the supplied DOS 1.31 baseline; it does **not** claim support for every Steam/GOG/localized/modded edition. The previously supplied exact base ZIP remains supported. Unrecognized files stop import with a specific error.
+See [START-HERE](START-HERE.md), [Windows checklist](docs/TEST-CHECKLIST.md), [test report](docs/TEST-REPORT.md), and [source/lineage design](docs/SOURCE-AND-LINEAGE.md).
 
-The original commercial game is **not** included in this repository or downloaded from GitHub. The community patch and DOSBox come directly from their official upstream hosts, not from an unlicensed repackage.
+## Scope
 
-## Updating and recovery
+Source recognition, patch transforms, independent workspaces, community mod selection, repair, signed application updates and launch configuration are implemented. PRSL and the new Chat extension are still independently disabled. No matchmaking/relay, automatic lobby discovery, or live PRSL hook is enabled. Do not infer gameplay certification from file checks or process startup.
 
-In **Launcher distribution**, choose **Check signed release**, then **Stage launcher update**, then **Apply staged update and restart**. The signed installed helper waits for the running launcher to exit and release its lock. Game sessions block update/rebuild operations. Application updates preserve profiles and saves.
-
-Game patch updates are separately pinned. This version supports only original DOS 1.31 and community 1.50.26; observing a newer upstream version does not authorize an unsupported engine or PRSL adapter.
-
-Windows setup creates a Start-menu **MOO2-SGC** shortcut when possible. It opens the verified installed launcher offline. Re-running the downloaded Setup checks the release feed. The default application root is `%APPDATA%\MOO2-SGC\stable`; this separates the new signing identity from earlier disposable development kits. Earlier installations are neither deleted nor automatically migrated.
-
-Advanced setup commands: `--command verify`, `repair`, `rollback`, `launch-installed`, `apply-staged`. `--offline PATH` remains available for deliberately testing a matching signed release directory; it is **not** selected automatically.
-
-## Important test boundaries
-
-The development environment executes Linux programs. Windows/macOS binaries are cross-compiled; their native smoke tests are configured to run on GitHub after your push. No result from a not-yet-run GitHub workflow is claimed here. Read `docs/TEST-REPORT.md` for locally executed evidence.
-
-The installer/launcher is unsigned by Windows Authenticode and the Mac files are not notarized. Package signatures are separate and do not suppress OS warnings. Do not disable antivirus or run as administrator to force a test through. The available local compiler is recorded in `release/0.4.1/BUILD-RESULTS.json`; use an up-to-date supported Go toolchain for subsequent owner-controlled production builds.
-
-No live DOSBox/MOO2 multiplayer or PRSL gameplay certification is claimed. A version of **0.4.1** intentionally has no alpha/beta suffix while these limitations remain explicit.
-
-## Layout
-
-- `manager/`: launcher, bootstrapper, shared distribution code and tests.
-- `packaging/`: signed build, input verification and publishing tools.
-- `release/0.4.1/`: exact public artifacts for GitHub Desktop push-to-release.
-- `manifests/trust.json`: public keys and the exact GitHub endpoints; no private key.
-- `tests/`: native, HTTPS-fixture and publishing acceptance checks.
-- `evidence/0.4.1/`: current test output. Older evidence is historical.
-- `requirements/`: accepted architecture and modular-mod requirements.
-
-GitHub Releases is primary. Optional Cloudflare R2 transport support remains, but no R2 endpoint/account has been configured in this build. Neocities is not a binary or updater dependency.
+No commercial game archives, full game executables, saved games, private keys, or DOSBox runtime are included in the public repository. See [third-party notices](THIRD-PARTY-NOTICES.md). Keep the owner's existing signing backup outside the repository.

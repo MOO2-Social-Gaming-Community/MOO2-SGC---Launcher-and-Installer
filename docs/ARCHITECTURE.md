@@ -1,4 +1,4 @@
-# Application architecture — 0.4.0-alpha.1
+# Application architecture — 0.4.2
 
 The distribution design is specified in [DISTRIBUTION-ARCHITECTURE.md](DISTRIBUTION-ARCHITECTURE.md); trust and rollback details are in [SECURITY-AND-TRUST.md](SECURITY-AND-TRUST.md).
 
@@ -8,7 +8,7 @@ A bootstrap installation gives the manager an immutable executable location and 
 
 ## Existing game environment contract
 
-The known source archive and community patch have pinned hashes. A fresh environment omits 13 archived personal-state seed files, applies the exact patch overlay only when selected, generates supported mod configuration, preserves known user files across same-engine reconstruction, verifies records and atomically changes the active-generation pointer. The original source archives and previous generations remain untouched.
+Owned sources are verified against per-edition DOS executable and asset fingerprints. The Steam 1.40b23 baseline and CD 1.2 lineage are specified in [SOURCE-AND-LINEAGE.md](SOURCE-AND-LINEAGE.md). Fresh stages are created without importing personal saves/store wrappers; known user files are retained during same-engine reconstruction. Compiled fingerprints and explicit installation steps are recorded in schema-2 receipts, and the active-generation pointer changes only after verification. Original files and previous generations remain untouched.
 
 The descriptor catalog has 25 selectable upstream entries; Core and other exclusive groups cannot be combined arbitrarily. Dependency selection is structural, not certification that every combination has been played. Arbitrary external mod imports and independently fetched versions of each mod are not implemented.
 
@@ -16,7 +16,7 @@ PRSL and the future Chat extension have separate unavailable controls. Neither c
 
 ## Updates
 
-SGC launcher updates now use shared Ed25519-signed manifests/packages, approved-host HTTPS transport, ranged resume, GitHub/R2 mirror failover, content-addressed caching and staged generations. In this development kit, signed metadata comes from its local release folder. Explicit check/stage is available from the manager; applying it requires a shutdown and Setup's apply-staged operation.
+SGC launcher updates now use shared Ed25519-signed manifests/packages, approved-host HTTPS transport, ranged resume, GitHub/R2 mirror failover, content-addressed caching and staged generations. The default metadata source is the configured public GitHub Release feed; an explicitly selected local signed release is also supported. Explicit check/stage is available from the manager; applying it requires a shutdown and Setup's apply-staged operation.
 
 The existing upstream community-patch and DOSBox fetch paths still use exact pinned hashes and official sources. They are not secretly repackaged as signed SGC components. Downloadable mod/package resolution beyond the launcher remains incomplete.
 
