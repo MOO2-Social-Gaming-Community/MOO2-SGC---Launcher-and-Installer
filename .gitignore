@@ -68,3 +68,16 @@ Thumbs.db
 **/ORION150.EXE
 **/base.zip
 **/Master of Orion 2.zip
+
+# Portable working-root content is never repository/release input.
+/game/
+/runtime/
+/state/
+/backups/
+/components/
+/logs/
+/config/
+/distribution/
+/manager/out/
+**/Master of Orion 2*.zip
+**/*KNOWN_GOOD*.zip

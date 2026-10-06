@@ -1,3 +1,7 @@
+# 0.4.5 release identity
+
+Uses the existing moo2-sgc-release-1 public identity, feed moo2-sgc, channel stable, revision 43. No new private key is distributed. Prepared metadata expires 2027-01-03T23:55:32Z. Existing verified installations can still run offline; new installs/updates need fresh authenticated metadata after expiration. Never change signed JSON or use expired metadata as an activation authority.
+
 # Signing and future versions
 
 The 0.4.2 artifacts are already signed using the same identity as 0.4.1. The push-to-release workflow verifies and publishes these exact bytes using GitHub's built-in workflow token. It requires **no private signing key** for publishing this prepared update.

@@ -15,7 +15,7 @@ import (
 )
 
 func TestKnownSourceEditions(t *testing.T) {
-	expected := map[string]int{"cd-en-12": 397, "steam-en-140b23": 405, "legacy-en-131": 408}
+	expected := map[string]int{"cd-en-12": 397, "steam-en-140b23": 405, "legacy-en-131": 408, "manual-en-140b23": 408, "cd-en-12-harness": 398, "steam-en-140b23-harness": 406, "legacy-en-131-harness": 409}
 	for _, s := range sourceEditions() {
 		t.Run(s.ID, func(t *testing.T) {
 			if len(s.Files) != expected[s.ID] {
@@ -33,7 +33,7 @@ func TestKnownSourceEditions(t *testing.T) {
 			}
 		})
 	}
-	for h, id := range map[string]string{CDEngineHash: "cd-en-12", BaseEngineHash: "legacy-en-131", BaselineEngineHash: "steam-en-140b23"} {
+	for h, id := range map[string]string{CDEngineHash: "cd-en-12-harness", BaseEngineHash: "legacy-en-131-harness", BaselineEngineHash: "steam-en-140b23-harness"} {
 		s, e := editionByEngine(h)
 		if e != nil || s.ID != id {
 			t.Fatal(s, e)
@@ -96,7 +96,7 @@ func TestVersionProfilesAndCommands(t *testing.T) {
 			if v == "1.50.26" {
 				exe = "ORION150.EXE"
 			}
-			if !strings.Contains(cfg, exe) {
+			if got := dosboxArguments("moo2.conf", "/game", p); filepath.Base(got[len(got)-1]) != exe {
 				t.Fatal("wrong entrypoint")
 			}
 			if v == "1.2" && strings.Contains(cfg, "/skipintro") {

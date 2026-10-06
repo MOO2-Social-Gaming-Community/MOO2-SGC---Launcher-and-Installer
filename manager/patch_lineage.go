@@ -313,6 +313,9 @@ func (m *Manager) applyLineage(game string, s SourceEdition, target string) ([]L
 		if e != nil {
 			return nil, e
 		}
+		if e = atomicWrite(filepath.Join(game, "ORION131.EXE"), src); e != nil {
+			return nil, e
+		}
 		out, e := applyBaselineBytes(src, baselineRecipe())
 		if e != nil {
 			return nil, e
@@ -320,6 +323,9 @@ func (m *Manager) applyLineage(game string, s SourceEdition, target string) ([]L
 		if e = atomicWrite(p, out); e != nil {
 			return nil, e
 		}
+	}
+	if e := normalizeHarnessGame(game, s, target); e != nil {
+		return nil, e
 	}
 	return steps, nil
 }
@@ -341,17 +347,31 @@ func verifyEditionManifest(mf Manifest, game string) error {
 	if string(a) != string(b) {
 		return errors.New("installation lineage differs from supported recipe")
 	}
-	return verifyPinnedBase(game, mf.Files, expectedBaseFiles(s, mf.Profile.Engine))
+	records := expectedBaseFiles(s, mf.Profile.Engine)
+	if mf.Schema >= 3 {
+		records = normalizedBaseFiles(s, mf.Profile.Engine)
+	}
+	return verifyPinnedBase(game, mf.Files, records)
 }
 func writeDefaultGameConfig(game string) error {
-	// Independent from the store's MIDI configuration (which can require MT-32 ROMs).
-	configs := map[string]string{
-		"orioncd.ini": "C:\\\r\n",
-		"DIG.INI":     "; Managed SB16 configuration\r\nDEVICE Creative Labs Sound Blaster 16\r\nDRIVER SB16.DIG\r\nIO_ADDR 220h\r\nIRQ 5\r\nDMA_8_BIT 1\r\nDMA_16_BIT 5\r\n",
-		"MDI.INI":     "; Managed FM music configuration\r\nDEVICE Creative Labs Sound Blaster Pro\r\nDRIVER SBPRO2.MDI\r\nIO_ADDR 220h\r\nIRQ -1\r\nDMA_8_BIT -1\r\nDMA_16_BIT -1\r\n",
-	}
-	for n, b := range configs {
-		if e := atomicWrite(filepath.Join(game, n), []byte(b)); e != nil {
+	for _, n := range []string{"DIG.INI", "MDI.INI", "ORIONCD.INI"} {
+		b, e := resources.ReadFile("assets/harness/" + n)
+		if e != nil {
+			return e
+		}
+		// Normalize pre-existing case aliases on case-sensitive development hosts.
+		entries, e := os.ReadDir(game)
+		if e != nil {
+			return e
+		}
+		for _, f := range entries {
+			if f.Name() != n && strings.EqualFold(f.Name(), n) {
+				if e = os.Remove(filepath.Join(game, f.Name())); e != nil {
+					return e
+				}
+			}
+		}
+		if e = atomicWrite(filepath.Join(game, n), b); e != nil {
 			return e
 		}
 	}

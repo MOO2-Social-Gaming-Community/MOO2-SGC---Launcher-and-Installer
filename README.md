@@ -1,35 +1,47 @@
-# MOO2-SGC Launcher and Installer — 0.4.2
+# MOO2-SGC Launcher and Installer — 0.4.5
 
-A small signed bootstrapper and modular environment manager for owned Master of Orion II installations. Windows, Linux and macOS binaries share the same installer and game-preparation logic. **Real game execution still requires user acceptance testing.**
+**Portable baseline first. Optional community upgrades second.**
 
-## This release fixes the Steam source rejection
+This release integrates the supplied **Portable Harness 0.3.0-HANDOFF** into the existing signed installer, updater and modular environment manager. The owner has demonstrated the underlying 1.40b23 DOSBox path on Windows 11. The new manager integration still needs Windows acceptance; file checks and Linux process fixtures are not a gameplay certification.
 
-0.4.1 recognized one legacy DOS 1.31 snapshot. It could find the Steam folder but rejected `ANWINFIN.LBX` because legitimate Steam assets differ from that snapshot. 0.4.2 recognizes the supplied English Steam **DOS 1.40b23** engine and its verified asset set, as well as the supplied English CD **1.2** files. It reads the DOS executable, not the Windows executable, README or ZIP filename, to select the source recipe.
+## Canonical Windows working directory
 
-- Steam source: **1.40b23 → 1.50.26**. No downgrade and no unnecessary 1.31 prerequisite download.
-- Fresh CD source: **1.2 → official DOS 1.31 → 1.40b23 → 1.50.26**.
-- Legacy 1.31 source: **1.31 → 1.40b23 → 1.50.26**.
+```text
+C:\Games\MOO2-SGC\
+    Master of Orion 2 - v1_40b23.zip   # private owner-supplied source
+    runtime\windows\dosbox.exe      # existing verified harness distribution
+    game\ORION2.EXE                  # normalized writable 1.40b23 baseline
+    config\moo2.conf                 # tested window/audio contract
+    state\                          # baseline receipts and transaction journal
+    backups\baseline\               # complete retained baseline snapshots
+    components\launcher\            # signed application generations
+    userdata\                       # profiles, cache, optional game environments
+```
 
-**1.40b23 is the effective SGC baseline. 1.50.26 remains the default current community profile.** Baseline, original CD and legacy official profiles are separately selectable. Future fan versions require an exact supported package, not blind updating.
+Do not put this private working directory inside your GitHub clone. The public repository and release contain no commercial game data, emulator, fonts or private signing keys. The portable integration ZIP contains **project code only** and reuses the runtime from the owner's supplied harness.
 
-All patches affect a separate managed copy. Original Steam/GOG/CD files and saves are never modified or uploaded. Unknown editions are rejected with a specific diagnostic, not silently accepted. GOG copies must match a recognized content set; no universal GOG/localization compatibility is claimed.
+The manually patched source is recognized by file hashes, not its name. It retains official 1.31 in `ORION2.EXE` and b23 in `Orion2v140.exe`. Preparation preserves 1.31 as `ORION131.EXE`, copies the verified b23 executable to the managed `ORION2.EXE`, and applies only the documented exact-hash RKERNEL LAN correction. The source ZIP is never modified.
 
-## Publish using GitHub Desktop
+## First use
 
-Extract the repository ZIP contents directly into your existing clone, preserving `.git`. Commit and push the default branch. Wait for **Publish prepared release** to publish **v0.4.2**. The prepared public files are in `release/0.4.2/`; do not edit them or the signed manifest.
+Keep a separate copy of your currently working harness. Extract the **0.4.5 portable integration ZIP** into `C:\Games\MOO2-SGC`, with no extra nested directory. It adds `START-MOO2-SGC.cmd` and separate `SGC-*.cmd` helpers; it does not replace the handoff's PowerShell preparation scripts or runtime.
 
-The repository is `MOO2-Social-Gaming-Community/MOO2-SGC---Launcher-and-Installer`. GitHub Releases is primary; optional R2 is not provisioned. This release uses the **same signing key as 0.4.1**. No signing secret needs to be added for publishing already-signed artifacts.
+Keep the owned baseline ZIP in that same root and the complete original harness runtime in `runtime\windows`. Open **START-MOO2-SGC.cmd**. On first use, it installs the signed launcher from the kit's offline package. Subsequent starts verify and open the installed application without reinstalling an older release.
 
-## Update and first test
+The default profile is **Portable baseline — 1.40b23**. Leave the source input blank and select **Prepare game for play**. After verification, choose **Launch MOO2**. Baseline launch uses the original harness flags and direct program argument; the default is an 800×600 window that does not pause or mute when inactive.
 
-Close any running game. In 0.4.1 use **Check signed release → Stage launcher update → Apply staged update and restart**, or run the new standalone setup after v0.4.2 is published. Confirm **0.4.2** appears in the launcher.
+First Windows acceptance: title/version, sound/video/input, new game, several turns, save, exit, restart and reload. Then test repair/save preservation. Only afterward choose **Community — standard** to construct a separate 1.50.26 environment.
 
-Select **Community — standard**, paste your actual Steam game directory under **Prepare your owned game**, and press **Prepare game for play**. Your already installed DOSBox is reused. Verify the reported source is **Steam English DOS 1.40b23**, then press **Launch MOO2**. The first acceptance target is title screen → new single-player game → several turns → save → exit → reload.
+## Optional versions and mods
 
-See [START-HERE](START-HERE.md), [Windows checklist](docs/TEST-CHECKLIST.md), [test report](docs/TEST-REPORT.md), and [source/lineage design](docs/SOURCE-AND-LINEAGE.md).
+1.40b23 is the default runtime, not a hidden intermediate that is immediately overwritten by 1.50.26. The named portable baseline profile is fixed to b23. Duplicate it or select another profile to use a different engine or rule set. Historical CD 1.2 → 1.31 → b23 construction remains available, but is not repeated when importing the approved b23 source.
 
-## Scope
+Community 1.50.26 and its bundled rulesets/add-ons remain supported in independent environments. PRSL and the proposed Chat extension remain separately disabled. 0.4.5 adds selectable IPX transport: Direct/LAN or the third-party `moo2.thedopefish.com` public IPX service. A disabled MOO2-SGC Online entry reserves the future first-party matchmaking/relay boundary; no first-party lobby backend is deployed yet.
 
-Source recognition, patch transforms, independent workspaces, community mod selection, repair, signed application updates and launch configuration are implemented. PRSL and the new Chat extension are still independently disabled. No matchmaking/relay, automatic lobby discovery, or live PRSL hook is enabled. Do not infer gameplay certification from file checks or process startup.
+## Publish
 
-No commercial game archives, full game executables, saved games, private keys, or DOSBox runtime are included in the public repository. See [third-party notices](THIRD-PARTY-NOTICES.md). Keep the owner's existing signing backup outside the repository.
+Extract the complete **repository ZIP** directly into your existing clone, preserving `.git`. Commit and push with GitHub Desktop. The prepared files in `release/0.4.5/` are signed using the existing owner-controlled signing identity. The release workflow publishes `v0.4.5`; no new signing secret is required for these already-signed files. Never edit signed assets in place.
+
+The separate standalone setup now defaults to `C:\Games\MOO2-SGC` on Windows. Run it after the release is published. The offline integration kit can be tested before publication. An update initiated from an old `%APPDATA%` installation remains there: **0.4.5 does not silently move, delete, or merge old user data.**
+
+See [START-HERE](START-HERE.md), [portable design](docs/PORTABLE-HARNESS.md), [Windows acceptance](docs/TEST-CHECKLIST.md), [test report](docs/TEST-REPORT.md), and [release notes](docs/RELEASE-NOTES-0.4.5.md).

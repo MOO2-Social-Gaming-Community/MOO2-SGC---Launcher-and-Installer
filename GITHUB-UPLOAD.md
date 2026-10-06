@@ -1,7 +1,11 @@
-# GitHub Desktop upload — 0.4.2
+# GitHub Desktop upload — 0.4.5
 
-Extract the ZIP contents directly into the clone, preserving `.git`. Commit and push to the default branch. The existing Publish prepared release workflow verifies signed artifacts and publishes v0.4.2. No signing key or additional account configuration is required for these prepared files. Keep previous published releases unchanged.
+Extract the complete repository ZIP contents into the cloned launcher repository, preserve `.git`, commit and push the default branch. `release/0.4.5` contains ready-signed release files. Wait for **Publish prepared release** and confirm a published **v0.4.5**.
 
-The files under `release/0.4.2/` are already signed. Do not rename/repackage launcher ZIPs or edit the manifest. The root source input fingerprints must remain consistent with the binaries. Existing v0.4.1 source inputs are historical; current publication uses VERSION.
+Do not rename/repack signed packages or edit manifest.json. Same signing identity as 0.4.1/0.4.2; no new signing secret required to publish the supplied artifacts. The publishing workflow checks source fingerprints, signatures and exact uploaded bytes. It does not certify MOO2 gameplay.
 
-After the v0.4.2 release exists, update through the existing launcher or run the new standalone setup. Follow START-HERE.md to test Steam recognition and game preparation. No commercial archives, private keys or local user data belong in the repository.
+The portable integration ZIP is for C:\Games\MOO2-SGC, NOT for the repository. Keep the game ZIP/runtime/saves/private key outside your clone. Git ignore patterns defend against accidental inclusion, but review GitHub Desktop changes before committing.
+
+Older release folders already present in your clone can remain; VERSION selects 0.4.5 for publication. The standalone setup retrieves the published release. The separate offline integration kit can be tested before publication and retains online update support afterward.
+
+0.4.5 specifically repairs network-ready managed environments and adds Direct/Dopefish transport selection. Existing 0.4.4 prepared 1.50 environments should be repaired once after updating so RKERNEL.COM is added and verified.

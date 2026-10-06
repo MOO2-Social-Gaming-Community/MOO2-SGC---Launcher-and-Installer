@@ -10,10 +10,12 @@ import (
 	"io"
 	"moo2manager/shared/buildconfig"
 	d "moo2manager/shared/distribution"
+	"moo2manager/shared/layout"
 	"os"
 	"os/exec"
 	"path/filepath"
 	"runtime"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -27,13 +29,18 @@ func main() {
 }
 func run() error {
 	waitLock := flag.Int("wait-lock", 0, "wait up to 60 seconds for an exiting launcher; never remove its lock")
-	root := flag.String("install-root", "", "installation root (default: user config directory/MOO2-SGC)")
+	root := flag.String("install-root", "", "installation root (Windows default: C:\\Games\\MOO2-SGC; other platforms: user config)")
 	offline := flag.String("offline", "", "directory with manifest.json, manifest.sig and signed launcher package")
-	command := flag.String("command", "install", "install, repair, verify, rollback or launch-installed")
+	command := flag.String("command", "install", "install, ensure-installed, repair, verify, rollback or launch-installed")
 	noLaunch := flag.Bool("no-launch", false, "install/verify only; do not open launcher")
 	noBrowser := flag.Bool("no-browser", false, "pass --no-browser to the launcher")
 	version := flag.Bool("version", false, "print setup version")
 	status := flag.Bool("trust-status", false, "print embedded non-secret trust configuration")
+	portable := flag.Bool("portable", false, "use the portable ROOT/game and ROOT/runtime layout")
+	launcherCommand := flag.String("launcher-command", "serve", "serve, prepare-play, play, verify, recover-portable")
+	profile := flag.String("profile", "baseline", "profile passed to the installed launcher")
+	source := flag.String("source", "", "owned local source passed to preparation")
+	fullscreen := flag.Bool("fullscreen", false, "fullscreen for a direct play command")
 	flag.Parse()
 	if *version {
 		fmt.Println(buildconfig.Version)
@@ -59,6 +66,10 @@ func run() error {
 			return e
 		}
 		*root = filepath.Join(base, "MOO2-SGC", "stable")
+		if runtime.GOOS == "windows" {
+			*root = layout.WindowsRoot
+			*portable = true
+		}
 	}
 	*root, e = filepath.Abs(*root)
 	if e != nil {
@@ -75,6 +86,18 @@ func run() error {
 	}
 	if e != nil {
 		return e
+	}
+	if *portable {
+		if e = layout.Enable(*root); e != nil {
+			release()
+			return e
+		}
+	}
+	switch *launcherCommand {
+	case "serve", "prepare-play", "play", "verify", "recover-portable":
+	default:
+		release()
+		return errors.New("unsupported launcher command")
 	}
 	locked := true
 	defer func() {
@@ -94,6 +117,16 @@ func run() error {
 	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Minute)
 	defer cancel()
 	installer := d.Installer{Root: *root, Trust: trust, Health: health}
+	// Offline portable helpers must upgrade an older launcher, but must not
+	// reinstall/downgrade a newer verified release on every invocation.
+	if *command == "ensure-installed" {
+		*command = "install"
+		if cur, err := installer.Current(); err == nil {
+			if _, rec, err := installer.VerifyGeneration(cur.Current); err == nil && versionAtLeast(rec.Package.Version, buildconfig.Version) {
+				*command = "launch-installed"
+			}
+		}
+	}
 	var entry string
 	switch *command {
 	case "verify", "launch-installed":
@@ -175,7 +208,7 @@ func run() error {
 		return fmt.Errorf("unknown command %q", *command)
 	}
 	fmt.Fprintln(log, time.Now().UTC().Format(time.RFC3339), "success", *command)
-	if !*noLaunch && *command != "verify" && entry != "" {
+	if !*noLaunch && *command != "verify" && entry != "" && *launcherCommand == "serve" {
 		if err := installShortcut(*root, entry); err != nil {
 			fmt.Fprintln(log, "shortcut not created:", err)
 			fmt.Println("Shortcut not created:", err)
@@ -188,6 +221,13 @@ func run() error {
 	locked = false
 	// Immutable executable location; user data lives outside every launcher version.
 	args := []string{"--app-root", *root, "--root", *root, "--data", filepath.Join(*root, "userdata")}
+	args = append(args, "--command", *launcherCommand, "--profile", *profile)
+	if *source != "" {
+		args = append(args, "--source", *source)
+	}
+	if *fullscreen {
+		args = append(args, "--fullscreen")
+	}
 	if *noBrowser {
 		args = append(args, "--no-browser")
 	}
@@ -227,3 +267,30 @@ func (w *limitedWriter) Write(p []byte) (int, error) {
 func (w *limitedWriter) String() string { return string(w.b) }
 
 var _ io.Writer = (*limitedWriter)(nil)
+
+// Releases use exactly major.minor.patch. Reject malformed values rather than
+// guessing how to compare an unknown version scheme.
+func versionAtLeast(have, want string) bool {
+	h, w := strings.Split(have, "."), strings.Split(want, ".")
+	if len(h) != 3 || len(w) != 3 {
+		return false
+	}
+	a, b := [3]int64{}, [3]int64{}
+	for i := 0; i < 3; i++ {
+		var err error
+		a[i], err = strconv.ParseInt(h[i], 10, 32)
+		if err != nil || a[i] < 0 {
+			return false
+		}
+		b[i], err = strconv.ParseInt(w[i], 10, 32)
+		if err != nil || b[i] < 0 {
+			return false
+		}
+	}
+	for i := 0; i < 3; i++ {
+		if a[i] != b[i] {
+			return a[i] > b[i]
+		}
+	}
+	return true
+}

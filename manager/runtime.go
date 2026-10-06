@@ -141,6 +141,10 @@ func (m *Manager) runtimeCandidates() []string {
 			out = append(out, p)
 		}
 	}
+	if m.Portable && runtime.GOOS == "windows" {
+		// The project's pinned runtime has precedence over global/user installs.
+		add(m.harnessRuntimePath())
+	}
 	add(m.getSettings().RuntimePath)
 	managed := filepath.Join(m.Data, "runtime")
 	_ = filepath.WalkDir(managed, func(p string, d os.DirEntry, e error) error {
@@ -183,6 +187,14 @@ func (m *Manager) runtimeCandidates() []string {
 	return out
 }
 func (m *Manager) installRuntime() (any, error) {
+	if m.Portable && runtime.GOOS == "windows" && exists(m.harnessRuntimePath()) {
+		exe, err := m.localHarnessRuntime()
+		if err != nil {
+			return nil, err
+		}
+		return map[string]string{"runtime": exe, "version": "0.83.0", "verification": "existing exact supplied harness file manifest"}, nil
+	}
+
 	r := runtimeRecipeForPlatform()
 	if !r.Supported {
 		return nil, errors.New("no packaged runtime recipe for this architecture")
@@ -195,6 +207,9 @@ func (m *Manager) installRuntime() (any, error) {
 		}
 	}
 	parent := filepath.Join(m.Data, "runtime")
+	if m.Portable && runtime.GOOS == "windows" {
+		parent = filepath.Join(m.Root, "runtime")
+	}
 	if e := os.MkdirAll(parent, 0700); e != nil {
 		return nil, e
 	}
@@ -259,6 +274,24 @@ func (m *Manager) installRuntime() (any, error) {
 			return nil, e
 		}
 	}
+	if m.Portable && runtime.GOOS == "windows" {
+		sourceDir := filepath.Dir(exe)
+		if e = verifyHarnessRuntime(sourceDir); e != nil {
+			return nil, e
+		}
+		dest := filepath.Join(parent, "windows")
+		if exists(dest) {
+			return nil, errors.New("portable runtime already exists; verification failure requires restoring the supplied harness, not silently replacing it")
+		}
+		if e = os.Rename(sourceDir, dest); e != nil {
+			return nil, e
+		}
+		exe = filepath.Join(dest, "dosbox.exe")
+		if e = atomicJSON(filepath.Join(m.Data, "settings.json"), Settings{exe}); e != nil {
+			return nil, e
+		}
+		return map[string]string{"runtime": exe, "version": r.Version, "verification": "exact supplied harness file manifest"}, nil
+	}
 	rel, _ := filepath.Rel(extracted, exe)
 	dest := filepath.Join(parent, "staging-"+r.Version+"-"+fmt.Sprint(time.Now().UnixNano()))
 	if e = os.Rename(extracted, dest); e != nil {
@@ -269,6 +302,12 @@ func (m *Manager) installRuntime() (any, error) {
 		return nil, e
 	}
 	return map[string]string{"runtime": exe, "version": r.Version, "archive_sha256": r.SHA256, "execution_test": "not performed by download"}, nil
+}
+func gameEntrypoint(p Profile) string {
+	if p.Engine == "1.50.26" {
+		return "ORION150.EXE"
+	}
+	return "ORION2.EXE"
 }
 func dosboxConfig(game string, p Profile) (string, error) {
 	if e := validateProfile(p); e != nil {
@@ -281,23 +320,41 @@ func dosboxConfig(game string, p Profile) (string, error) {
 	if strings.ContainsAny(game, "\"\r\n\x00") {
 		return "", errors.New("game path cannot be represented safely")
 	}
-	exe := "ORION150.EXE"
-	if p.Engine != "1.50.26" {
-		exe = "ORION2.EXE"
+	base := harnessBaseConfig()
+	if p.Role == "standalone" {
+		return base, nil
 	}
-	lines := []string{"# MOO2 Mod Manager " + Version, "# No PRSL or Chat hooks. Only this game directory is mounted.", "[sdl]", "fullscreen=" + strconv.FormatBool(p.Fullscreen), "[dosbox]", "memsize=32", "[cpu]", "core=auto", "cycles=auto", "[sblaster]", "sbtype=sb16", "sbbase=220", "irq=5", "dma=1", "hdma=5", "[ipx]", "ipx=true", "[autoexec]", "@echo off", `mount c "` + game + `"`, "c:"}
-	if p.Role == "host" {
-		lines = append(lines, fmt.Sprintf("IPXNET STARTSERVER %d", p.Port))
+	// Networking is transport-specific while the in-game Create/Join role remains
+	// MOO2's responsibility. Direct sessions start/connect to a local IPX tunnel;
+	// relay services connect every participant to the same tunnel endpoint.
+	lines := []string{base, "[ipx]", "ipx=true", "[autoexec]", "@echo off", `mount c "` + game + `"`, "c:"}
+	switch effectiveNetworkService(p) {
+	case "direct":
+		if p.Role == "host" {
+			lines = append(lines, fmt.Sprintf("IPXNET STARTSERVER %d", p.Port))
+		} else {
+			lines = append(lines, fmt.Sprintf("IPXNET CONNECT %s %d", p.Host, p.Port))
+		}
+	case "dopefish":
+		// The long-running community endpoint uses the historical DOSBox IPX
+		// default UDP port 213. Host and Join both connect as IPX clients; the
+		// player then creates or joins the named network game inside MOO2.
+		lines = append(lines, "IPXNET CONNECT moo2.thedopefish.com 213")
+	default:
+		return "", errors.New("unsupported network service")
 	}
-	if p.Role == "join" {
-		lines = append(lines, fmt.Sprintf("IPXNET CONNECT %s %d", p.Host, p.Port))
-	}
-	args := " /skipintro"
-	if p.Engine == "1.2" {
-		args = ""
-	} // Never send a later fan-patch flag to the CD executable.
-	lines = append(lines, exe+args, "exit", "")
+	lines = append(lines, gameEntrypoint(p), "exit", "")
 	return strings.Join(lines, "\n"), nil
+}
+func dosboxArguments(cfgPath, game string, p Profile) []string {
+	args := []string{"--noprimaryconf", "--conf", cfgPath}
+	if p.Fullscreen {
+		args = append(args, "--fullscreen")
+	}
+	if p.Role == "standalone" {
+		args = append(args, filepath.Join(game, gameEntrypoint(p)))
+	}
+	return args
 }
 func (m *Manager) launch(p Profile) (any, error) {
 	r, e := resolve(p)
@@ -316,7 +373,7 @@ func (m *Manager) launch(p Profile) (any, error) {
 		return nil, fmt.Errorf("verification failed; use Repair: %v", v.Bad)
 	}
 	var mf Manifest
-	if e = readJSON(filepath.Join(dir, "manifest.json"), &mf); e != nil {
+	if e = readWorkspaceManifest(dir, &mf); e != nil {
 		return nil, e
 	}
 	if r.Fingerprint != mf.Resolution.Fingerprint {
@@ -327,12 +384,27 @@ func (m *Manager) launch(p Profile) (any, error) {
 		return nil, errors.New("DOSBox was not found. Install the verified runtime or select your existing executable")
 	}
 	exe := candidates[0]
+	if m.Portable && runtime.GOOS == "windows" {
+		// Do not fall back to an arbitrary installed DOSBox in portable mode.
+		// A missing/tampered local runtime is a repairable error, not a reason
+		// to discard the validated harness contract.
+		exe, e = m.localHarnessRuntime()
+		if e != nil {
+			return nil, e
+		}
+	}
 	game := filepath.Join(dir, "game")
 	cfg, e := dosboxConfig(game, p)
 	if e != nil {
 		return nil, e
 	}
 	cfgPath := filepath.Join(dir, "dosbox-manager.conf")
+	if m.isPortableBaseline(p.ID) {
+		if e = os.MkdirAll(filepath.Join(m.Root, "config"), 0700); e != nil {
+			return nil, e
+		}
+		cfgPath = filepath.Join(m.Root, "config", "moo2.conf")
+	}
 	if e = atomicWrite(cfgPath, []byte(cfg)); e != nil {
 		return nil, e
 	}
@@ -341,7 +413,10 @@ func (m *Manager) launch(p Profile) (any, error) {
 	if e != nil {
 		return nil, e
 	}
-	cmd := exec.Command(exe, "-conf", cfgPath)
+	args := dosboxArguments(cfgPath, game, p)
+	fmt.Fprintln(logfile, "MOO2-SGC", Version, "engine", p.Engine, "runtime", exe)
+	fmt.Fprintln(logfile, "Arguments:", encode(args))
+	cmd := exec.Command(exe, args...)
 	cmd.Dir = game
 	cmd.Stdout = logfile
 	cmd.Stderr = logfile
@@ -372,7 +447,7 @@ func (m *Manager) launch(p Profile) (any, error) {
 			m.lastExit = "DOSBox exit: " + e.Error() + ". Inspect " + logpath
 		}
 	}()
-	return map[string]any{"pid": cmd.Process.Pid, "log": logpath, "configuration": cfg, "fingerprint": v.Fingerprint, "status": "DOSBox process started; game and IPX connection are not yet verified", "instructions": "In MOO2 choose Multiplayer / Network, then Start New Game or Join Game. Match engine and mod fingerprints on both machines."}, nil
+	return map[string]any{"pid": cmd.Process.Pid, "log": logpath, "arguments": args, "game_path": game, "configuration": cfg, "fingerprint": v.Fingerprint, "status": "DOSBox process started; game and IPX connection are not yet verified", "instructions": "In MOO2 choose Multiplayer / Network, then Start New Game or Join Game. Match engine and mod fingerprints on both machines."}, nil
 }
 func (m *Manager) refreshPatch() (any, error) {
 	dst := filepath.Join(m.Data, "cache", "patch-1.50.26.zip")

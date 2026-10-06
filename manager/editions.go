@@ -18,10 +18,12 @@ import (
 )
 
 type SourceEdition struct {
-	ID      string     `json:"id"`
-	Version string     `json:"version"`
-	Label   string     `json:"label"`
-	Files   []BaseFile `json:"files"`
+	EngineFile string     `json:"engine_file,omitempty"`
+	Harness    bool       `json:"harness,omitempty"`
+	ID         string     `json:"id"`
+	Version    string     `json:"version"`
+	Label      string     `json:"label"`
+	Files      []BaseFile `json:"files"`
 }
 
 func sourceEditions() []SourceEdition {
@@ -49,7 +51,7 @@ func editionByID(id string) (SourceEdition, error) {
 func editionByEngine(hash string) (SourceEdition, error) {
 	for _, s := range sourceEditions() {
 		for _, f := range s.Files {
-			if f.Name == "ORION2.EXE" && f.SHA256 == hash {
+			if f.Name == "ORION2.EXE" && s.EngineFile == "" && f.SHA256 == hash {
 				return s, nil
 			}
 		}
@@ -71,6 +73,20 @@ func detectFolderEdition(root string) (SourceEdition, error) {
 	files, e := folderFiles(root)
 	if e != nil {
 		return SourceEdition{}, e
+	}
+	// Manual patches retain ORION2.EXE at 1.31; inspect the real b23 output first.
+	if p, ok := files["ORION2V140.EXE"]; ok {
+		if e := noSymlinkAncestors(p); e != nil {
+			return SourceEdition{}, e
+		}
+		if e := regularFile(p); e != nil {
+			return SourceEdition{}, e
+		}
+		if st, e := os.Stat(p); e == nil && st.Size() <= 8<<20 {
+			if h, e := hashFile(p); e == nil && h == BaselineEngineHash {
+				return editionByID("manual-en-140b23")
+			}
+		}
 	}
 	p, ok := files["ORION2.EXE"]
 	if !ok {
@@ -178,6 +194,16 @@ func detectArchiveEdition(archive string) (SourceEdition, error) {
 	root, e := zipRoot(fs, "ORION2.EXE")
 	if e != nil {
 		return SourceEdition{}, e
+	}
+	if f := fs[root+"ORION2V140.EXE"]; f != nil {
+		b, e := readZipKnown(f, 8<<20)
+		if e != nil {
+			return SourceEdition{}, e
+		}
+		h := sha256.Sum256(b)
+		if hex.EncodeToString(h[:]) == BaselineEngineHash {
+			return editionByID("manual-en-140b23")
+		}
 	}
 	b, e := readZipKnown(fs[root+"ORION2.EXE"], 8<<20)
 	if e != nil {

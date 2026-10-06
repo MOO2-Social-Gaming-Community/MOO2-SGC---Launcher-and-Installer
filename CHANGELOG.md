@@ -1,3 +1,22 @@
+# Changelog
+
+## 0.4.5 — 2026-10-05
+
+- Requires and verifies the exact LAN-fixed `RKERNEL.COM` for 1.40b23 and 1.50.26 before launch, preventing the observed Network Game crash from older managed environments that omitted the runtime kernel. Repair/rebuild restores it from the verified owned baseline without modifying Steam/GOG or the source ZIP.
+- Adds selectable network transports: **Direct / LAN**, **moo2.thedopefish.com** (legacy third-party public DOSBox IPX service), and a disabled **MOO2-SGC Online** placeholder for future first-party matchmaking/relay.
+- Separates MOO2's in-game Create/Join role from transport selection. With the Dopefish service, every participant connects to `moo2.thedopefish.com` on UDP 213, then creates or joins the named game inside MOO2.
+- Migrates old portable source receipts to the complete verified 1.40b23 baseline when available, so existing single-player environments can be safely repaired for networking.
+
+## 0.4.4 — 2026-10-05
+
+- Fixes **Prepare game for play** when the user supplies a recognized owned-game ZIP directly. The source field now content-detects and fingerprints MOO2 archives instead of treating them as the old exact `base.zip` payload format.
+- Makes windowed DOSBox Staging explicitly scale the MOO2 image to the available viewport with `viewport = fit` and `integer_scaling = off`, preserving MOO2's 4:3 aspect ratio while removing avoidable internal padding.
+- Keeps the portable 1.40b23 baseline, Steam/GOG source isolation, 1.50.26 optional community environment, PRSL separation, and signed update architecture unchanged.
+
+# 0.4.3 — Portable runtime integration
+
+Canonical root C:\Games\MOO2-SGC; manual 1.40b23 baseline import/normalization; exact RKERNEL correction; full local harness runtime verification; original launch/audio settings; transactional root game backups/recovery; optional community profile isolation; same-key update compatibility. See docs/RELEASE-NOTES-0.4.3.md.
+
 # 0.4.2
 
 

@@ -1,0 +1,3307 @@
+{
+  "schema": 1,
+  "version": "0.83.0",
+  "platform": "windows-amd64",
+  "files": [
+    {
+      "name": "LICENSE.txt",
+      "size": 4609,
+      "sha256": "4f5d1f22684db45fee4d26e236c27d60a50b45e59a57196cd0c2fab7bf35b974"
+    },
+    {
+      "name": "README.txt",
+      "size": 985,
+      "sha256": "f0fe6e1075d154bae04d4b22b386229bbfafb0bb5f3cee62ca2d8f2d81a65400"
+    },
+    {
+      "name": "SDL2.dll",
+      "size": 1640960,
+      "sha256": "700d1a3ea72b13435c29a0ced794e84c10ac8187db08e1891f1437f25f31cea6"
+    },
+    {
+      "name": "SDL2_image.dll",
+      "size": 115200,
+      "sha256": "4eea90297e173bc06d00da396fb5452286dff5e32e274fdcfcfdf8a5215eff2c"
+    },
+    {
+      "name": "concrt140.dll",
+      "size": 324208,
+      "sha256": "2405355f0a58067b258f8df33c327e3a3d716eaac5a3a5aebb757842d85bd376"
+    },
+    {
+      "name": "doc/licenses/BSD-2-Clause.txt",
+      "size": 1531,
+      "sha256": "3508b68a6809285471c9ee263d7f75035bb314f859b28e6f3702be28576fb480"
+    },
+    {
+      "name": "doc/licenses/BSD-3-Clause.txt",
+      "size": 1756,
+      "sha256": "ee86122f5c04e0b8f342d089050d001317186b2018fd7e49645e58b19cf9b589"
+    },
+    {
+      "name": "doc/licenses/DEBUG.COM.txt",
+      "size": 1505,
+      "sha256": "b2d00bed9dd096e49a73160e897fda779b515c8f52265d8e55acaace154cf9c2"
+    },
+    {
+      "name": "doc/licenses/GPL-2.0.txt",
+      "size": 18372,
+      "sha256": "8adc338120db39d9db7479ea5f96d94220404714549f4f3fc493df5bd4bc8453"
+    },
+    {
+      "name": "doc/licenses/LGPL-2.1.txt",
+      "size": 27037,
+      "sha256": "2eab67bf79ddbecb62eb414ec90cbb38aba7782a59053f1d00ddd70602f7e1f3"
+    },
+    {
+      "name": "doc/licenses/MIT.txt",
+      "size": 1306,
+      "sha256": "1577927c9510d8579a6c6210670127ae02c8ce4f7a935c8470d45e6b5c3b06ab"
+    },
+    {
+      "name": "doc/licenses/UNICODE.txt",
+      "size": 2361,
+      "sha256": "4e9afcf824030c1c1ce73c97caef05c19112c9436928ffc503ff9a03def341db"
+    },
+    {
+      "name": "doc/licenses/Zlib.txt",
+      "size": 1057,
+      "sha256": "f5e68dc13e6725eb145100d1a3fe2785e2762fb09833d8579e65457f82cbe822"
+    },
+    {
+      "name": "doc/vc_redist.txt",
+      "size": 680,
+      "sha256": "92664d26b2b6d0b9a5211d0d40c0f77cda0b179c47b4a1bb2a5e04837b6dabc9"
+    },
+    {
+      "name": "dosbox.exe",
+      "size": 24577024,
+      "sha256": "67a907289bad3e25a9be7dd4dc38d882c1c7e74949f8daa103a52476d99f24f5"
+    },
+    {
+      "name": "dosbox_with_debugger.exe",
+      "size": 24703488,
+      "sha256": "393dc872b2aecf03b0489c567ade056aeb434d0663cd2f68e9d575c1edbf9392"
+    },
+    {
+      "name": "glib-2.0-0.dll",
+      "size": 1356288,
+      "sha256": "232b77fb53b80900b25302a3b3611bb5df0edfd716bbbd03b6af8d134611de4d"
+    },
+    {
+      "name": "iconv-2.dll",
+      "size": 1089024,
+      "sha256": "ba994a918b2b9cc7894bfc6697dc6da99c4428f9bb5ac7dd717974ee2b7be1e2"
+    },
+    {
+      "name": "iir.dll",
+      "size": 73728,
+      "sha256": "d95f1802c2adba8f7354628b1097e5a610c265f7a00742c89e87a9b42355b24b"
+    },
+    {
+      "name": "intl-8.dll",
+      "size": 95744,
+      "sha256": "5a695fd43279ccdd41c6e8ca1b6c92344ce1d1865cfed506b69c19e3108c1345"
+    },
+    {
+      "name": "libfluidsynth-3.dll",
+      "size": 528384,
+      "sha256": "9aea6d1fce82ffb4c77a6b599d0e13fa746e1220e9fee53d1164a9cf93262467"
+    },
+    {
+      "name": "libpng16.dll",
+      "size": 197632,
+      "sha256": "6b65d13ed624e2b526126478f397be1ae3c07ee27acfc25ca7bb13184733a2b6"
+    },
+    {
+      "name": "libspeexdsp.dll",
+      "size": 109568,
+      "sha256": "36551516bee19e38000486116743b0dd6978a1e04ecdab4d50abc2136fb28632"
+    },
+    {
+      "name": "msvcp140.dll",
+      "size": 557728,
+      "sha256": "0f885b509a685d2bbfa652fed26b5fb31d88fbdab0a978c641d1c7b8aa460aa9"
+    },
+    {
+      "name": "msvcp140_1.dll",
+      "size": 35952,
+      "sha256": "bfad5aef4c63a669e3c140655cdfdf395b6c979b400a447bd5dcb65ed8826c3d"
+    },
+    {
+      "name": "msvcp140_2.dll",
+      "size": 280200,
+      "sha256": "3ea06f0ee098b4823cb79599df3780e7f23cce52c19aac31d2a0d47efe33a5e9"
+    },
+    {
+      "name": "msvcp140_atomic_wait.dll",
+      "size": 50304,
+      "sha256": "640b2aefced484d0368eea5bdd06addd0658a3a70a49256e560d6923b404a479"
+    },
+    {
+      "name": "msvcp140_codecvt_ids.dll",
+      "size": 31872,
+      "sha256": "f2069a52880ec885ee7f0511186100eb7fada0411a2b4948fafea7735b878a18"
+    },
+    {
+      "name": "mt32emu-2.dll",
+      "size": 184832,
+      "sha256": "5f3a417bd46474179d33f6f6151e3e68d006792e0e0446969c50e953bb738480"
+    },
+    {
+      "name": "ogg.dll",
+      "size": 31232,
+      "sha256": "8d4fe9e3776282b93c216cdce73fb1d19db6e6e9b49df56ac26fb1719b2aed47"
+    },
+    {
+      "name": "opus.dll",
+      "size": 442368,
+      "sha256": "261c8e1c398adc14f8c5a3a3863a97f7a2dd6006a317d18050eed93cfba79995"
+    },
+    {
+      "name": "pcre2-8.dll",
+      "size": 604672,
+      "sha256": "87a95675824c276412684a41908874a16015409f18b07f1d10357ec8a23e1b12"
+    },
+    {
+      "name": "plugins/Nuked-SC55.clap",
+      "size": 358912,
+      "sha256": "56e0dd6228e5f6e400fa5bf6c7b517bd3203f54019d2e6dfcc643b94d433e9cc"
+    },
+    {
+      "name": "resources/disk-noises/fdd_seek1.flac",
+      "size": 10254,
+      "sha256": "4a2bd251beb22224a19232ebe598a3bba95cfcfe6da52f99438444f35d0514cd"
+    },
+    {
+      "name": "resources/disk-noises/fdd_seek2.flac",
+      "size": 10254,
+      "sha256": "4a2bd251beb22224a19232ebe598a3bba95cfcfe6da52f99438444f35d0514cd"
+    },
+    {
+      "name": "resources/disk-noises/fdd_seek3.flac",
+      "size": 10254,
+      "sha256": "4a2bd251beb22224a19232ebe598a3bba95cfcfe6da52f99438444f35d0514cd"
+    },
+    {
+      "name": "resources/disk-noises/fdd_seek4.flac",
+      "size": 10254,
+      "sha256": "4a2bd251beb22224a19232ebe598a3bba95cfcfe6da52f99438444f35d0514cd"
+    },
+    {
+      "name": "resources/disk-noises/fdd_seek5.flac",
+      "size": 14805,
+      "sha256": "a2757ecb9de9df2057db87049c2dd8370c80952094f3ab1b1ded3c89fa8386d6"
+    },
+    {
+      "name": "resources/disk-noises/fdd_seek6.flac",
+      "size": 11570,
+      "sha256": "3c27f15791993ba96fc5c97ed39226ec7a49e4a4d6812783a7a3e010d7451f70"
+    },
+    {
+      "name": "resources/disk-noises/fdd_seek7.flac",
+      "size": 12840,
+      "sha256": "e73d7c72d7b20fa55cd31d0d9f9c7bf4b887c4e4320486bedbfdabbd2dfd3bd3"
+    },
+    {
+      "name": "resources/disk-noises/fdd_seek8.flac",
+      "size": 7523,
+      "sha256": "c62d0c4f27272c9c2d9c053a987249b7799ce54f5011beec56386b84af6e2bf3"
+    },
+    {
+      "name": "resources/disk-noises/fdd_seek9.flac",
+      "size": 11570,
+      "sha256": "3c27f15791993ba96fc5c97ed39226ec7a49e4a4d6812783a7a3e010d7451f70"
+    },
+    {
+      "name": "resources/disk-noises/fdd_spin.flac",
+      "size": 79636,
+      "sha256": "411a84c467e77ca3244045da2f32203b080887d5fa53292e828d08486128bd25"
+    },
+    {
+      "name": "resources/disk-noises/fdd_spinup.flac",
+      "size": 167,
+      "sha256": "cab41ac9df8ed38b79997e4e753aaff96641b6ec17c41dea1d0710d9047a4455"
+    },
+    {
+      "name": "resources/disk-noises/hdd_seek1.flac",
+      "size": 566,
+      "sha256": "091dc0cc41b01b448d89761a3defb2da1d1bbe250333637efb284095e0bd79d9"
+    },
+    {
+      "name": "resources/disk-noises/hdd_seek2.flac",
+      "size": 863,
+      "sha256": "c4bbaa2a8877421a32d4f47545ef5171058386aebdaa5d1ad64594161db0bfce"
+    },
+    {
+      "name": "resources/disk-noises/hdd_seek3.flac",
+      "size": 1154,
+      "sha256": "f2899e1577efc6a27f4a47ffe94fa5861c6e8e5c641008274febaff3de58a0ff"
+    },
+    {
+      "name": "resources/disk-noises/hdd_seek4.flac",
+      "size": 524,
+      "sha256": "fd62dc57cd4e21b3a153b81c6a72dee384a09e7f6a08cb06e6901a0a24edc14b"
+    },
+    {
+      "name": "resources/disk-noises/hdd_seek5.flac",
+      "size": 811,
+      "sha256": "b94ae6254aef66dd0f35fd258a94829c0c97e1730082db7329dae55515cd1cf0"
+    },
+    {
+      "name": "resources/disk-noises/hdd_seek6.flac",
+      "size": 874,
+      "sha256": "27c076c68d3026bea95930d2830e8505a74cd7190c622fd19f1225d1a9b62295"
+    },
+    {
+      "name": "resources/disk-noises/hdd_seek7.flac",
+      "size": 754,
+      "sha256": "94bd7a61087dc9291fd86e768188dce6334b7bc49fae53aa5598c7827304138a"
+    },
+    {
+      "name": "resources/disk-noises/hdd_seek8.flac",
+      "size": 2461,
+      "sha256": "10f15ae4497c1cf8d5800003afe7b3bd6aec64e716d46b3f095f84720b7c395f"
+    },
+    {
+      "name": "resources/disk-noises/hdd_seek9.flac",
+      "size": 1784,
+      "sha256": "03c418c2296b2f9655be54d2406fb9089d81ade06b07073d29dc4db92265956a"
+    },
+    {
+      "name": "resources/disk-noises/hdd_spin.flac",
+      "size": 289789,
+      "sha256": "9c017d3a6cddfc1d72407802ad2b5770ef1f2c4a92114865512c1a80ce3c1dd9"
+    },
+    {
+      "name": "resources/disk-noises/hdd_spinup.flac",
+      "size": 118872,
+      "sha256": "58b63d397501e3ea798a08829b3bf13ce0348624dcefaf829a6359150d4b4994"
+    },
+    {
+      "name": "resources/docs/0.83/getting-started/bass-readme.txt",
+      "size": 1569,
+      "sha256": "7e6cba51faa8b97b0b40f5682e893a4cffbb37a1c1cf14fa136cbd2a968d2f67"
+    },
+    {
+      "name": "resources/docs/0.83/getting-started/beneath-a-steel-sky.html",
+      "size": 122738,
+      "sha256": "a23ee82b2b008be4dc4bd56affbc636f18d21bd3f284b97c5b3c6eaf4d1cdd17"
+    },
+    {
+      "name": "resources/docs/0.83/getting-started/customising-prince-of-persia.html",
+      "size": 98403,
+      "sha256": "ec6c0ff0298dc39f1a2c6a3fa6effb5c851832990500bd366666adf0937abf3e"
+    },
+    {
+      "name": "resources/docs/0.83/getting-started/images/beneath-a-steel-sky-dirtree1.png",
+      "size": 77785,
+      "sha256": "36b94addd7277c9121fdafde925610237f59ea493963864e7794cceb388fd300"
+    },
+    {
+      "name": "resources/docs/0.83/getting-started/images/passport-to-adventure-dirtree1.png",
+      "size": 84207,
+      "sha256": "958c05aa50228b767541c6e12f16e0befad5c4cfe59dfc1b95a7d463662b9aa7"
+    },
+    {
+      "name": "resources/docs/0.83/getting-started/images/prince-of-persia-1-dirtree1.png",
+      "size": 44028,
+      "sha256": "f2366a7ba6e5d8a206bbfd9aabfeb899661db3d3368532e8fa21df54d7ad8b8c"
+    },
+    {
+      "name": "resources/docs/0.83/getting-started/images/prince-of-persia-dirtree1.png",
+      "size": 44028,
+      "sha256": "f2366a7ba6e5d8a206bbfd9aabfeb899661db3d3368532e8fa21df54d7ad8b8c"
+    },
+    {
+      "name": "resources/docs/0.83/getting-started/images/prince-of-persia-dirtree2.png",
+      "size": 75441,
+      "sha256": "5a1d08c64ce9011896b1c7737ccf63ba5afbc53ef90b685c04ae105b8c3024a8"
+    },
+    {
+      "name": "resources/docs/0.83/getting-started/introduction.html",
+      "size": 67284,
+      "sha256": "68f6238d72d5f688fb39b817564c04d835dd12a4c4e97a26a57728b0a1f7a6e0"
+    },
+    {
+      "name": "resources/docs/0.83/getting-started/next-steps.html",
+      "size": 60418,
+      "sha256": "7d4f9e3c070f88011b9ea5579129b4d355c641be17c7364da9833b1fe81062d4"
+    },
+    {
+      "name": "resources/docs/0.83/getting-started/passport-to-adventure.html",
+      "size": 106766,
+      "sha256": "8a99b93b628cc0bf648e0d3d75a3f2d3b94733e95fb7fb324e510324e4f4086e"
+    },
+    {
+      "name": "resources/docs/0.83/getting-started/setting-up-prince-of-persia.html",
+      "size": 91299,
+      "sha256": "64ee5d2a3ec45b8d223501d5766d973f7ae7943fcf78f9a945d9d1b0609fc427"
+    },
+    {
+      "name": "resources/docs/0.83/getting-started/star-wars-dark-forces.html",
+      "size": 113802,
+      "sha256": "9c837e27998b5b1c2834f9277e7e0d692d0f6b902a4eb01da3355bbb8d4f9c9f"
+    },
+    {
+      "name": "resources/docs/0.83/manual/appendices/keymapper.html",
+      "size": 64932,
+      "sha256": "39abcbe0e66dff009b9b3b8072adc321f06cd767f4662a16d0c98f93136d697a"
+    },
+    {
+      "name": "resources/docs/0.83/manual/appendices/shortcuts.html",
+      "size": 71766,
+      "sha256": "1037193214c83d7114871b164cc8fadd1ed96fcd8c2f422914b0c79a2c5b8567"
+    },
+    {
+      "name": "resources/docs/0.83/manual/graphics/3dfx-voodoo.html",
+      "size": 65213,
+      "sha256": "81f0662d076f58e69df20698c7d7fededd0dedf80f2a9dba9b10176415303875"
+    },
+    {
+      "name": "resources/docs/0.83/manual/graphics/adapters.html",
+      "size": 90782,
+      "sha256": "847724ce1f6e067734b00a56cf9bb5a87a1016a0cd2daf9ce6251749f2108702"
+    },
+    {
+      "name": "resources/docs/0.83/manual/graphics/composite-video.html",
+      "size": 65676,
+      "sha256": "0300e88cf71a8ed1682aca42a54bf9d3247524cdf9e87ff4e3a1053eb5c03611"
+    },
+    {
+      "name": "resources/docs/0.83/manual/graphics/display-and-window.html",
+      "size": 94305,
+      "sha256": "6dadb3a74d45e550acaacac01dd7ce221bf4c826c7040064b7fe6779bc2afd09"
+    },
+    {
+      "name": "resources/docs/0.83/manual/graphics/reelmagic.html",
+      "size": 60657,
+      "sha256": "8e5ddc0bdba164b37870199102048aeedf2b6ca221edade3e57244326dcbab48"
+    },
+    {
+      "name": "resources/docs/0.83/manual/graphics/rendering/aspect-ratios-and-scaling.html",
+      "size": 84486,
+      "sha256": "dc59a8b262f1471333b7f1290e353a2555832b34495a072395fde5ee01a8220b"
+    },
+    {
+      "name": "resources/docs/0.83/manual/graphics/rendering/colour-and-image-adjustments.html",
+      "size": 88837,
+      "sha256": "f0d89eb14f8a85fb857dcd9422b75c6dd9fc3ddd8d428b686b9b024e109436c0"
+    },
+    {
+      "name": "resources/docs/0.83/manual/graphics/rendering/overview.html",
+      "size": 54792,
+      "sha256": "0642fcd87bf2688c951aa6581b01d63e339c4705126a809fd8c7eea426db75aa"
+    },
+    {
+      "name": "resources/docs/0.83/manual/graphics/rendering/shaders.html",
+      "size": 74012,
+      "sha256": "b6ea827035644dcef308b66ae3a4a7f25d9a9e9ce5ade0f8c4b347667862337d"
+    },
+    {
+      "name": "resources/docs/0.83/manual/graphics/rendering/special-features.html",
+      "size": 64502,
+      "sha256": "25bad05003acf5ff3b98f8c67ce3b3dd6cbd9546ecf322d60e828086346679fd"
+    },
+    {
+      "name": "resources/docs/0.83/manual/http-api.html",
+      "size": 72740,
+      "sha256": "eb0ca59d76fe65aedca297577e184a675fec5407f5737b9db9eae31337c0364b"
+    },
+    {
+      "name": "resources/docs/0.83/manual/input/joystick.html",
+      "size": 68314,
+      "sha256": "8cf67bbcc490361b134a26ccc56fc4f3c0de07c7e0ccf6191b3c2040884487f9"
+    },
+    {
+      "name": "resources/docs/0.83/manual/input/keyboard.html",
+      "size": 57936,
+      "sha256": "6da1e33da54226892d34a7669cb2ff74a418326ff13a755607d008456afb0e47"
+    },
+    {
+      "name": "resources/docs/0.83/manual/input/keymapper.html",
+      "size": 72585,
+      "sha256": "2016862967ec52759e2d78405a6a7872e1be08ec7d226e2dcc4373b7abb50e8a"
+    },
+    {
+      "name": "resources/docs/0.83/manual/input/mouse.html",
+      "size": 83282,
+      "sha256": "df3f6ab4a05254f7958885e82f00131d87b22a443719397ccee504551287ae49"
+    },
+    {
+      "name": "resources/docs/0.83/manual/input/overview.html",
+      "size": 54507,
+      "sha256": "7727cceb155361cc4257e78c463f778a905f695cd93b5a3e129dcc44f16cadcc"
+    },
+    {
+      "name": "resources/docs/0.83/manual/introduction/about-this-manual.html",
+      "size": 64764,
+      "sha256": "bccb79aa3c49e702139526d31611ec23a47cbc0f68a707d7a7e98834febfea3f"
+    },
+    {
+      "name": "resources/docs/0.83/manual/introduction/dos-eras.html",
+      "size": 97256,
+      "sha256": "403bc8a56e16e5570ed5c44057e2dd3e917a3370a5590a54b00e460456efb878"
+    },
+    {
+      "name": "resources/docs/0.83/manual/introduction/dos-primer.html",
+      "size": 72235,
+      "sha256": "2d9d061ed0db9da30d980beaf33d63e689bb8fc48c3064ad9be85044f691f9a7"
+    },
+    {
+      "name": "resources/docs/0.83/manual/introduction/what-is-dosbox-staging.html",
+      "size": 64254,
+      "sha256": "e9b9339d4590caaf045825bbe572eab04f2d4965461e71fa39376ca1dab55419"
+    },
+    {
+      "name": "resources/docs/0.83/manual/networking/ethernet.html",
+      "size": 63238,
+      "sha256": "76c554f0a5f6dc29ca9ef63e90c70255365d489d1ac131ab1ea5b556b6f561aa"
+    },
+    {
+      "name": "resources/docs/0.83/manual/networking/ipx.html",
+      "size": 56049,
+      "sha256": "bcae0d2aeaad1c3904b146af6df8f27f035ffeb84853daf61df6c439dd5cca9c"
+    },
+    {
+      "name": "resources/docs/0.83/manual/networking/multiplayer.html",
+      "size": 62576,
+      "sha256": "ea7f55b620528d0723f557704c19bcd706e877ab27d21dd46a78f12deff61fdc"
+    },
+    {
+      "name": "resources/docs/0.83/manual/networking/serial-ports.html",
+      "size": 60229,
+      "sha256": "344147e24168cdc6d06b9238634e0911cd50812cd0a91dee3a9dbff4b3c546b7"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/disk-noise.html",
+      "size": 58041,
+      "sha256": "af03ff28ca62b2a55c51ed9db92d1249211203a9a7346ea6e60965ae9a5a00c9"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/midi.html",
+      "size": 98471,
+      "sha256": "2489b8e04924bc1769217cf29658fad50d424ec144f73e042b92d4f72981261b"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/mixer-effects.html",
+      "size": 64433,
+      "sha256": "44311ed479bc3e116b3ec6e98a501191a24b11bd2476cf859e0b2bab3946902e"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/mixer.html",
+      "size": 81858,
+      "sha256": "f68e7bff5bb7a8c1d85621f0534fea896bb882fcf1313f313fc2903495dd3e2f"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/on-subjectivity.html",
+      "size": 56158,
+      "sha256": "bd09284de83a2b2c9f2868471633f46d8cce3a398a69eb4daae951f8fbb66ea2"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/output-filters.html",
+      "size": 59147,
+      "sha256": "f0aab35f9ae2a066e7942b3dade1d173d8a54a622337693202bb50e06d4216e0"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/overview.html",
+      "size": 62866,
+      "sha256": "a30df81b51761d3f5ff0ee58652120510a128390e7f547054529067923126cc9"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/sound-devices/adlib.html",
+      "size": 76751,
+      "sha256": "93a8b00903cd4900fd67a78a0dc62ab4750a424e861186f05771f7a7403f31a9"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/sound-devices/cd-da.html",
+      "size": 57451,
+      "sha256": "168d8ee44e92d0250bd1fffa7549f7a202a5101e1daf0a2f436bb8cf45521d85"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/sound-devices/cms.html",
+      "size": 60238,
+      "sha256": "a914598b33af61b90aae2c1778fbcb140d1f0b93f2a4872eb853999c4a3c471a"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/sound-devices/covox-variants.html",
+      "size": 60891,
+      "sha256": "282391202c4014dadd37622d6a83863f3463cd5ad4dedec08472b297fc771cc4"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/sound-devices/fluidsynth.html",
+      "size": 73463,
+      "sha256": "5820b30cbe57b30179d847898e18b55288c0e5348664acf5df859713fc971b19"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/sound-devices/gravis-ultrasound.html",
+      "size": 85524,
+      "sha256": "55ff55505302b20f711aad7befd229a01f42524fdfe03e22997e681ea657547a"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/sound-devices/ibm-ps1audio.html",
+      "size": 62055,
+      "sha256": "ccf787a30f5447334d7b06af0c7b00e3ab8c07a1672c3174c31798289e78c531"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/sound-devices/imfc.html",
+      "size": 61020,
+      "sha256": "dfa5be55f1a8ea901c7d3c022b8d360d41250b1f22a0a94b0c09004c5c96290e"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/sound-devices/innovation.html",
+      "size": 59761,
+      "sha256": "bcc44f25c363ddfde1d37d4013ac568808ae54c5790dc07e264f30610e690d44"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/sound-devices/pc-speaker.html",
+      "size": 58990,
+      "sha256": "1b58b03abf272ad9e939f07f83587464b7fea3a0b4f34601d8cb549da680ab2f"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/sound-devices/roland-mt-32.html",
+      "size": 85158,
+      "sha256": "7ed88473edc20d4b28b446de4d7659c7d9aaa157b4084265f0db9d7fbfd97ee7"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/sound-devices/roland-sound-canvas.html",
+      "size": 77098,
+      "sha256": "0c6a04dba8596554db95bba1586bebecf728160b5ab1645690a818e4af0717c9"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/sound-devices/sound-blaster.html",
+      "size": 110013,
+      "sha256": "02ba1029772ebb8c79fe2e6fb16fd70c05f40636f621805b1c39174b9caccb1b"
+    },
+    {
+      "name": "resources/docs/0.83/manual/sound/sound-devices/tandy.html",
+      "size": 68428,
+      "sha256": "361072e262ed4ff4f8f500edce9116c8d5f75dcdc2201bca891c0954ce03184e"
+    },
+    {
+      "name": "resources/docs/0.83/manual/system/cpu.html",
+      "size": 90985,
+      "sha256": "39c1abd5e7eddcbb3d382d1139a1f6fc429f308f9f2bd0b6ff095f3ebe462478"
+    },
+    {
+      "name": "resources/docs/0.83/manual/system/dos.html",
+      "size": 70899,
+      "sha256": "4643c8ee775163ec94a1853d5b6438b656c56b0347b6e7ffa827c03d9d78e8bd"
+    },
+    {
+      "name": "resources/docs/0.83/manual/system/localisation.html",
+      "size": 66082,
+      "sha256": "abb6e6f38a80902304a1a2e056f66822bac1a6221e0f4ca60c4586254578f723"
+    },
+    {
+      "name": "resources/docs/0.83/manual/system/machine-types.html",
+      "size": 58685,
+      "sha256": "b076061c5fcdf16cfdbdf98135e7f5fcc7256346013646ff4ba87b5d6f5d9e0b"
+    },
+    {
+      "name": "resources/docs/0.83/manual/system/memory.html",
+      "size": 62886,
+      "sha256": "6747e0216ffc3aefb2e1fd206d555df29d4c3f1f10008f2fa4a784207d79a80e"
+    },
+    {
+      "name": "resources/docs/0.83/manual/system/overview.html",
+      "size": 65427,
+      "sha256": "2203c7220265442fbeb36448ef6fe197920e12fb8a3036905df578f92900cafa"
+    },
+    {
+      "name": "resources/docs/0.83/manual/using-dosbox-staging/capture.html",
+      "size": 66198,
+      "sha256": "5017c4576116b987e40ec53a59de9131abbea9c2dafa14e3fe234b04c3733492"
+    },
+    {
+      "name": "resources/docs/0.83/manual/using-dosbox-staging/command-line.html",
+      "size": 82632,
+      "sha256": "c0a7cf4b96bd0c5b035136569c6bd32c177f72951d5acb78244dfc3caa916f8d"
+    },
+    {
+      "name": "resources/docs/0.83/manual/using-dosbox-staging/commands.html",
+      "size": 64162,
+      "sha256": "d016ee59e01335ac33d1d8552393bc1682a003661b8a3a17b45227bfcf3496ca"
+    },
+    {
+      "name": "resources/docs/0.83/manual/using-dosbox-staging/configuration.html",
+      "size": 76610,
+      "sha256": "dc02b6ad4c1e2533ed29500d24f429864902ba13cbd77e1767fab09fd1217a04"
+    },
+    {
+      "name": "resources/docs/0.83/manual/using-dosbox-staging/hardware-resources.html",
+      "size": 73820,
+      "sha256": "5c86471f2a027ec2025eae176d90b855990f607bd825b7986a243561a880d7b9"
+    },
+    {
+      "name": "resources/docs/0.83/manual/using-dosbox-staging/images/gatekeeper.png",
+      "size": 341981,
+      "sha256": "83be293d666ba35bd797f23090275ef37f9be566f8c1aed62188bf03c281d1a2"
+    },
+    {
+      "name": "resources/docs/0.83/manual/using-dosbox-staging/images/macos_dmg_run_command.png",
+      "size": 385298,
+      "sha256": "ffdde3a9fedf75115f83793ec9acf206736c5411ecac3b3f491a235dae7a79f2"
+    },
+    {
+      "name": "resources/docs/0.83/manual/using-dosbox-staging/images/properties.png",
+      "size": 30288,
+      "sha256": "d030cb42d1a50f3a59a950110d6aba152c7d98b8dfe8c29dc764a68276e0d2a9"
+    },
+    {
+      "name": "resources/docs/0.83/manual/using-dosbox-staging/images/smartscreen1.png",
+      "size": 17377,
+      "sha256": "6e35c5902490bc7fff9cc5f3fca60cb976709fd0048e70402a095bd452636ba3"
+    },
+    {
+      "name": "resources/docs/0.83/manual/using-dosbox-staging/images/smartscreen2.png",
+      "size": 22626,
+      "sha256": "b038fa4a2a91492674ac4d94c244d3189bde47378bc03260b71b6a6bdf342ec1"
+    },
+    {
+      "name": "resources/docs/0.83/manual/using-dosbox-staging/installation.html",
+      "size": 60086,
+      "sha256": "16a2e285412d9bfb70e2997972df903819f06215185c5b2e7ecddede1f01ce95"
+    },
+    {
+      "name": "resources/docs/0.83/manual/using-dosbox-staging/shell.html",
+      "size": 81864,
+      "sha256": "b06fddc9f38e65b8b34f3a77db825e455ae3bcbaa1af59b6a3a0089dc87b8a92"
+    },
+    {
+      "name": "resources/docs/0.83/manual/using-dosbox-staging/starting.html",
+      "size": 77455,
+      "sha256": "d0f9f2447ad5cf74f8c17082342f2112530270baba05ef12368f92b9ec7780ea"
+    },
+    {
+      "name": "resources/docs/0.83/manual/using-dosbox-staging/storage.html",
+      "size": 98949,
+      "sha256": "bcbbd21e342132c4cab74cd0101c1d39103c900969547d89ae8b42943e56a2d7"
+    },
+    {
+      "name": "resources/docs/0.83/manual/using-dosbox-staging/windows-31.html",
+      "size": 65188,
+      "sha256": "71860ea6a53bfefc1787c3b5508463ff6ab202bab3433bb1c6e71af3b2997500"
+    },
+    {
+      "name": "resources/docs/about/index.html",
+      "size": 63043,
+      "sha256": "b6f3e7fac50329db3dccaf627e8dd520e8735611dfdd795844a72cdd02dd29b1"
+    },
+    {
+      "name": "resources/docs/assets/external/cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f379.svg",
+      "size": 2333,
+      "sha256": "25c38834b7c4a99254f8825ece4e0f92472f332c0f80fbb443fb3bdce9550755"
+    },
+    {
+      "name": "resources/docs/assets/external/cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f37a.svg",
+      "size": 1214,
+      "sha256": "932fecac8ca9b6aedf87e7afa950a73319a23d0f11f6293b114b16b7fc016387"
+    },
+    {
+      "name": "resources/docs/assets/external/cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f534.svg",
+      "size": 113,
+      "sha256": "93f28a18a1df638b539f6bde99c048a50ad7b8a5643c6966a0546a0c50f7cace"
+    },
+    {
+      "name": "resources/docs/assets/external/cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f60e.svg",
+      "size": 997,
+      "sha256": "d32bd9f51b2a54f620f9693e833935c5e2cb2304cbf89aab75fd10f054711ce5"
+    },
+    {
+      "name": "resources/docs/assets/external/cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f610.svg",
+      "size": 411,
+      "sha256": "0814064e227c96db27c5428d3a4922425b4ba68661d6a590c34fb0b79b8f59b3"
+    },
+    {
+      "name": "resources/docs/assets/external/cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f630.svg",
+      "size": 1212,
+      "sha256": "c5f5535f429ac5a4a500bacef0bf5ca414d2ed0fdd43957003bbe74e1e2719c4"
+    },
+    {
+      "name": "resources/docs/assets/external/cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f7e2.svg",
+      "size": 113,
+      "sha256": "66b1c8e22d1f5804ed048c6a1f5fe5d4210c274967d4f7f42e595851d6cd9f47"
+    },
+    {
+      "name": "resources/docs/assets/external/cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f976.svg",
+      "size": 2960,
+      "sha256": "48acd5f29354232fb5a1d21686f612d435cde0b366cd130b8092f6900bcdefba"
+    },
+    {
+      "name": "resources/docs/assets/external/cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2615.svg",
+      "size": 1294,
+      "sha256": "8b8afd8f60833ca51907899d4a3279cdfd355282858ba8a73cd1034d2a1e31ff"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.googleapis.com/css.4ce4a530.css",
+      "size": 44997,
+      "sha256": "77845fab3af5a1b9de481684dde6125be07a67142aeb32526f63e451b69d63a8"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.googleapis.com/css2.581eacba.css",
+      "size": 2482,
+      "sha256": "2a938c12b362026753f4e974e524abed45e8217adaf946ad62e0224f0e623294"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memtYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWqW106F15M.woff2",
+      "size": 26368,
+      "sha256": "be7296389be234abc22997275b6b7d056a0e6ff9d6e7dd63cfe7d3232aac9dac"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memtYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWqWt06F15M.woff2",
+      "size": 37752,
+      "sha256": "a6fa0e8ac2a665c121a19c2e2434fb286e3afdef7b9288739a73c7cb6849108c"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memtYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWqWtE6F15M.woff2",
+      "size": 54944,
+      "sha256": "f2d92a95ae369af994faeba39e2f987974e7cb1f3f3a984e6538d535f1ff9e9b"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memtYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWqWtU6F15M.woff2",
+      "size": 4844,
+      "sha256": "23db8c30fcaf25e39a14a799e776804c7fd541ff0663189db7bb652d15129a73"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memtYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWqWtk6F15M.woff2",
+      "size": 17212,
+      "sha256": "7a79d808ca680f3d672a68aa28098ad9ca9d4a93ae24a04b4b00c07f4ab67d40"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memtYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWqWu06F15M.woff2",
+      "size": 17880,
+      "sha256": "0d3c34da39df0aa6b82347b45364e9e95fcece8029b5d9e7325bcef4e56234f1"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memtYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWqWuU6F.woff2",
+      "size": 50216,
+      "sha256": "186836b74ceac07b2764c07c0379420e3014efb30fe918461c235e0ef6cbc4a2"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memtYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWqWuk6F15M.woff2",
+      "size": 22920,
+      "sha256": "90e5211e2fa04327726f93c19dc01dffebc18d8def23931848be1213dc826ac3"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memtYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWqWvU6F15M.woff2",
+      "size": 32016,
+      "sha256": "9dbf8ed5c11ef7e7e80a08cb18d7f7e0e93eea2f77345ee8a73d6e08e122c36e"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memtYaGs126MiZpBA-UFUIcVXSCEkx2cmqvXlWqWxU6F15M.woff2",
+      "size": 56528,
+      "sha256": "b011091d0c5f7c3c5139a40f3120b157f6c4b587164ff66e66a2bccd58a5a91f"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS-muw.woff2",
+      "size": 48320,
+      "sha256": "d8e4fe0452aa2076429a9bb5d8757d00a994dd95986cf950e9a1a371b9a072a0"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTS2mu1aB.woff2",
+      "size": 16920,
+      "sha256": "7abb700b280437b795e68b3a85a1dcbfdf04bb815555762033ade4f7894f2554"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSCmu1aB.woff2",
+      "size": 16496,
+      "sha256": "cc762462ea67b7815649ea3cc005699e3b95b3244b59eb2ce2d22e3ad33497c2"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSGmu1aB.woff2",
+      "size": 35156,
+      "sha256": "d5bab8e28732fe3d10dcef4f77b9c248605bbb2a87d289a2539251ceafab536a"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSKmu1aB.woff2",
+      "size": 49268,
+      "sha256": "95dd03b930aca04ab393f625101f7367e3abc83b3b09e6074de1fc081ba6fd1c"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSOmu1aB.woff2",
+      "size": 4504,
+      "sha256": "197ef1e4874d6f8f59bcb8f303029b7fd40aebd7a23aa96c1b649b3faea5d57c"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSumu1aB.woff2",
+      "size": 26588,
+      "sha256": "2809606237a64bd9c1461e727f369ddfd77a350e4900fffe64e8bfe16a2b3454"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTSymu1aB.woff2",
+      "size": 21332,
+      "sha256": "08ea4cf0a7c61077656395aa7dc728a6d184ee4bdae03a1bc34c17ee97e8f31c"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTUGmu1aB.woff2",
+      "size": 26596,
+      "sha256": "8f80f993e523f2e6c2d097552740fd26331658da23ffad31d26edcdd3aeec370"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/opensans/v44/memvYaGs126MiZpBA-UvWbX2vVnXBbObj2OVTVOmu1aB.woff2",
+      "size": 51912,
+      "sha256": "a093b888254afd7deb8e37cccfd434e7d06ed47d22cfed9621631d80e1e81554"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhEq3-OXg.woff2",
+      "size": 10308,
+      "sha256": "a4f562a288609dcb8f13e2b52296f1f3360957f09060735d4f00b5886e5bc7e0"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhFq3-OXg.woff2",
+      "size": 22916,
+      "sha256": "4cc0d52e0fa37c28084e0cbce3589a8ab32dd21e6ea619489c5f7c6e8c43b922"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhGq3-OXg.woff2",
+      "size": 35912,
+      "sha256": "6d72c2150c28b5305e7bfd0290edcf6038e556a9dd11a6ef15a1652548a35693"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhIq3-OXg.woff2",
+      "size": 14044,
+      "sha256": "308f763acd5f648b0556c1f79b848102f494d0450072cfd2fd8064ddf287f4f8"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhLq38.woff2",
+      "size": 32796,
+      "sha256": "b81cd55177300649be8f95b3b747d721ce607e8ed2856e25bd0c630cfd631faf"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/robotomono/v31/L0x5DF4xlVMF-BfR8bXMIjhPq3-OXg.woff2",
+      "size": 18592,
+      "sha256": "4052cc0b0f8b1b39da6cfaf90460f8b3c84dfc4b7562e9308ffa0998c3b9a005"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/robotomono/v31/L0x7DF4xlVMF-BfR8bXMIjhOm32WWg.woff2",
+      "size": 35328,
+      "sha256": "ae82dafb6340b538592b30dc18a367f56de3840b20669767adc011966405f6cf"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/robotomono/v31/L0x7DF4xlVMF-BfR8bXMIjhOm36WWoKC.woff2",
+      "size": 14952,
+      "sha256": "0cb63d7235b7187dc154ab6f74579e4b53f80dc3d73b3ae4345e0edd4d54b0fd"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/robotomono/v31/L0x7DF4xlVMF-BfR8bXMIjhOm3CWWoKC.woff2",
+      "size": 38696,
+      "sha256": "d99c99caa6207dc8377f4e40a7ddda295798c3bda29435f2bb811b5ef6d20e64"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/robotomono/v31/L0x7DF4xlVMF-BfR8bXMIjhOm3KWWoKC.woff2",
+      "size": 10832,
+      "sha256": "70ffbb14019b25feb140bd32c530200d42c86a0c42383e5937007eaa6cf27114"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/robotomono/v31/L0x7DF4xlVMF-BfR8bXMIjhOm3OWWoKC.woff2",
+      "size": 24408,
+      "sha256": "f206990c959d138c477ec5a669f3a9703017799480a2531a4ba006be7ef3a332"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/robotomono/v31/L0x7DF4xlVMF-BfR8bXMIjhOm3mWWoKC.woff2",
+      "size": 20504,
+      "sha256": "1b8b1c7d2220fd721ef5981825e9c609df47385c90eee45023306b20237bb797"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/titilliumweb/v19/NaPDcZTIAOhVxoMyOr9n_E7ffBzCGIVzY4SY.woff2",
+      "size": 6776,
+      "sha256": "99cebfd10359dddb7912c59b84fcd1fcef078235e36530aae3e267046943eb17"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/titilliumweb/v19/NaPDcZTIAOhVxoMyOr9n_E7ffBzCGItzYw.woff2",
+      "size": 12116,
+      "sha256": "f356ff5613e1b6789a47ae3bd6b72fa6fb61d44493811bcb758fb4229b7a8bcb"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/titilliumweb/v19/NaPDcZTIAOhVxoMyOr9n_E7ffHjDGIVzY4SY.woff2",
+      "size": 6676,
+      "sha256": "ecacf58d7980d1446d142077950407cee02f6e7ec3b6c914a5cbbaedce0a9b60"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/titilliumweb/v19/NaPDcZTIAOhVxoMyOr9n_E7ffHjDGItzYw.woff2",
+      "size": 11732,
+      "sha256": "9e3162d81ed6681322ab34791660f1b45c79945197e7a7dbb217005b2926caf4"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/titilliumweb/v19/NaPecZTIAOhVxoMyOr9n_E7fdM3mDbRS.woff2",
+      "size": 6820,
+      "sha256": "ecd15a1dce7380c9d4af38ee3dc9bcc4fcd53101040d88abd7ea98968938120c"
+    },
+    {
+      "name": "resources/docs/assets/external/fonts.gstatic.com/s/titilliumweb/v19/NaPecZTIAOhVxoMyOr9n_E7fdMPmDQ.woff2",
+      "size": 12344,
+      "sha256": "861b80b49d2a634d8746e2e45c672309d9ba69a2fdd95da2af034d7a1d09b3f9"
+    },
+    {
+      "name": "resources/docs/assets/external/mirrors.creativecommons.org/presskit/icons/by.svg",
+      "size": 1563,
+      "sha256": "fabf6080e1e50597f2b81498f84a34261fce42428b65b65c2c69e9de51770b89"
+    },
+    {
+      "name": "resources/docs/assets/external/mirrors.creativecommons.org/presskit/icons/cc.svg",
+      "size": 2573,
+      "sha256": "97111c7c4815658fb79dae4382e2acede7d1de3ffe9a6bdb9872478bee98f840"
+    },
+    {
+      "name": "resources/docs/assets/external/mirrors.creativecommons.org/presskit/icons/sa.svg",
+      "size": 1801,
+      "sha256": "f8f3fee4544ea5f1488e0b62b70dfd0693e966df525811d7b566d37103985033"
+    },
+    {
+      "name": "resources/docs/assets/external/unpkg.com/iframe-worker/shim.js",
+      "size": 1391,
+      "sha256": "e8e412dbcfea9b7e31b5ffa288d7b6035915e714c542f4176a0cdbe262fc9609"
+    },
+    {
+      "name": "resources/docs/assets/external/unpkg.com/mermaid@11/dist/mermaid.min.js",
+      "size": 3572661,
+      "sha256": "581ed7d74bd9048d0e3a91363927d72ef22942d7722546b27f7cc29e35390eb8"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/assets/fonts/Web437_IBM_VGA_8x16.woff",
+      "size": 9788,
+      "sha256": "0f09694548cd0190408ffd60d64f105f6784025980c20bca796efbf16632c5a3"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/bass-amiga.jpg",
+      "size": 1756913,
+      "sha256": "93d40c6c47dd7cd8de6172d24b26aa68d7408c660afc59525b74327c75ff7435"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/bass-aspect.jpg",
+      "size": 216941,
+      "sha256": "f2ac53edb273a6fa517a4ef81f6c800685577062dc0abe78f1286830978538f1"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/bass-ingame1.jpg",
+      "size": 1459187,
+      "sha256": "093aa691b48f1f5ec081054fd4b1040b89cbc25f66f67af576e72601c5129eef"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/bass-ingame2.jpg",
+      "size": 1475979,
+      "sha256": "2d7bb926d399a56240b555cc76af462b4930e821e1b541a4cac71837a61c4e19"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/bass-mixer1.png",
+      "size": 54829,
+      "sha256": "8f46b585d0565395cd9db59184a779396421a4be7ade6592218ae205b75e9b68"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/bass-mixer2.png",
+      "size": 56306,
+      "sha256": "6dc2f0b60c78ba88228f8e12108928f1a5e6dfc2868997f8cefee64cc95a717b"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/bass-setup1.png",
+      "size": 290195,
+      "sha256": "5b4159454a156dbab302a900a62e64c64d56780ace533836e14510839a167d91"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/bass-setup2.png",
+      "size": 287821,
+      "sha256": "0052f48c7df2308d8a2ee39b391690a08ff4a7a09b2f1ed3190db72b86613520"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/bass-setup3.png",
+      "size": 285998,
+      "sha256": "d1232ad995c66448f8efe6a0e7dc09465e7ddc034ec5f4050108f2ed7290f9e8"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/config-help.png",
+      "size": 32889,
+      "sha256": "6eec4ee1086e85ebc803d71ebcd1274152e109a7127512bd70c985169d81b429"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/config-render.png",
+      "size": 22090,
+      "sha256": "f7b7822f2dfbf6a6559fab48f94bad71168af719741e1ece01e865b783ac0353"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/dark-forces-ingame.jpg",
+      "size": 1400640,
+      "sha256": "e57f939bbf66a7c8c671f50fd34bf6d6059965ad8a77077d04e73e6c395a3ca6"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/dark-forces-midi.png",
+      "size": 30680,
+      "sha256": "191f3d8596f80e169efc5578757bd2e2606f83f13f7370811a121db18efcb692"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/dosbox-start.png",
+      "size": 30431,
+      "sha256": "98ca0410c00642c2a54981f8f7cc188cd7742adf27cad1428811d2920e4a27b5"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/indy3-ingame-ega.jpg",
+      "size": 925203,
+      "sha256": "196d6ba7101fa594c88c69b98459c4e54360904aa2189d98ecbfd33929997160"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/indy3-ingame-vga.png",
+      "size": 1122328,
+      "sha256": "116a383633b72353c98b3d61149aebcb26ce568cf81309bb7c888e69eaacc042"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/indy3-start.png",
+      "size": 963044,
+      "sha256": "6673d9920bb5ecccde7ae8e2c38d780c60d79699f25ca8b6aae8a764383dddd4"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/indy3-title.png",
+      "size": 1149832,
+      "sha256": "4b95ad062aada48b5a9053a69ab2838cfd081ac6e15cbc8b4c106c8e7ce95d7d"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/loom-ingame-ega.jpg",
+      "size": 901263,
+      "sha256": "4cc356a7e895aa45a1bf34f92b4be31b47d773c6c048b82dafff9cce43570e64"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/loom-ingame-vga.jpg",
+      "size": 1058584,
+      "sha256": "7568dba4d11bb0fd6336ef5931c97b7ce652fad3ad372e28132f67c947668fe6"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/mixer-listmidi-fluidsynth.png",
+      "size": 13626,
+      "sha256": "36a30e8f469d31210ff673f716aef5783876527cc4cfbaf15589355ef4f8cff1"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/mixer-listmidi-mt32.png",
+      "size": 10758,
+      "sha256": "35077e95d6b8ace8d94166fb9724e0229b853197445323f2c9aab87ab33080fe"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/mixer-listmidi-sound-canvas.png",
+      "size": 8318,
+      "sha256": "72a0a4027269b5f8c40830a40ddac2b153cc18e85d33bffffa30c8de59eef165"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/mixer-listmidi.png",
+      "size": 23969,
+      "sha256": "cff754240d44fe99e3cafcf897ec644993ca7ca56e04e8d0cb74b418697db093"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/monkey-ingame-ega.jpg",
+      "size": 1140839,
+      "sha256": "3e444f4d968c0f2559367b24dc7bf084bb3850e20fb98cdfda34e3408bbb5046"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/monkey-ingame-vga.jpg",
+      "size": 1202145,
+      "sha256": "cd6ded00b41f707092140b6114a298ec3d11b7cce58d21dd4f1bec229f4bedc7"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/notepad++.png",
+      "size": 28015,
+      "sha256": "25dc34b17683769ea860c62838f7cbefd790284ea4cee14d4000f14fdd6fccca"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/pop-cga.jpg",
+      "size": 1175376,
+      "sha256": "cf0d9caa9a6513113ef18fca63df2d1c0ee296cc7eebdb21a9451d336b15fb25"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/pop-ega.jpg",
+      "size": 635553,
+      "sha256": "97a342992bbcc376936e0a89db7be497ddaec6765650b3a5d45d9777c5ff233f"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/pop-hercules-amber.png",
+      "size": 364503,
+      "sha256": "4f59cd27a85ab1a07a9bc2f05834c8b6b7923974a442b720178e28c53f26ef00"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/pop-hercules-green.png",
+      "size": 271035,
+      "sha256": "346856c143002f521a913db271762e0a0c7ca37096e79055e9c5505b295630cd"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/pop-hercules-white.png",
+      "size": 343610,
+      "sha256": "3ce9bc6c4fa7aa699d61f3e2440266e01273a837a4700ed8059179adefc0568b"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/pop-intro.jpg",
+      "size": 1430153,
+      "sha256": "f6c5fc3add1074273dd81f5999dafc9b5c9c501c571d6e8d606bd8d8bddcdd5e"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/pop-logs1.png",
+      "size": 1467408,
+      "sha256": "24c24701ba1a957a04ff7dffa2e8508a59ae3cdf43d19f7be3dffd97ea416a12"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/pop-logs2.png",
+      "size": 1090702,
+      "sha256": "1f8a0600db1e020b02c8b246ee09ebcfc2e2a352e38aee4646eb6dbf07da0a38"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/pop-title.jpg",
+      "size": 1418419,
+      "sha256": "88025bb5572029f81523c791bf985fc4984471b6a425c4e39601d253ad982ff3"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/pop-vga.jpg",
+      "size": 1045483,
+      "sha256": "beec3b5b77c165a2d855155eb6aaa3043102cc46fd9837b01337d8e07df12d0d"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/getting-started/textmate.png",
+      "size": 194381,
+      "sha256": "6ebb032a301661d9505c776b969b1730860e4f33ed03036606a6d8aa36988f8b"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/manual/mixer-listmidi-fluidsynth.png",
+      "size": 13626,
+      "sha256": "36a30e8f469d31210ff673f716aef5783876527cc4cfbaf15589355ef4f8cff1"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/manual/mixer-listmidi-mt32.png",
+      "size": 10758,
+      "sha256": "35077e95d6b8ace8d94166fb9724e0229b853197445323f2c9aab87ab33080fe"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/manual/mixer-listmidi-sound-canvas.png",
+      "size": 8318,
+      "sha256": "72a0a4027269b5f8c40830a40ddac2b153cc18e85d33bffffa30c8de59eef165"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/manual/mixer-listmidi.png",
+      "size": 23969,
+      "sha256": "cff754240d44fe99e3cafcf897ec644993ca7ca56e04e8d0cb74b418697db093"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/manual/monitor-aspect-ratios1.png",
+      "size": 47424,
+      "sha256": "3bfd609d43621a4ab2ed9908b97b5ddb027f4312407f989991742a88b5f0c545"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/manual/monitor-aspect-ratios2.png",
+      "size": 85658,
+      "sha256": "a48f3e48809dfef0a6f0ab2da94c1a9c72e54c4bf25d96181deb82e5b6222e62"
+    },
+    {
+      "name": "resources/docs/assets/external/www.dosbox-staging.org/static/images/manual/pop-hercules-aspect-corrected.jpg",
+      "size": 908554,
+      "sha256": "20e699e17a0368eebefd4a79b4412497b68c7190ed26e1d96d9aea36e72d1d67"
+    },
+    {
+      "name": "resources/docs/assets/fonts/Web437_IBM_VGA_8x16.woff",
+      "size": 9788,
+      "sha256": "0f09694548cd0190408ffd60d64f105f6784025980c20bca796efbf16632c5a3"
+    },
+    {
+      "name": "resources/docs/assets/images/dosbox-staging-no-border.svg",
+      "size": 10119,
+      "sha256": "5cd4701c1a20bc12110675c83f897cd81db9072ba9fb7c8fc6b63324b44223f0"
+    },
+    {
+      "name": "resources/docs/assets/images/dosbox-staging-nobg.svg",
+      "size": 9403,
+      "sha256": "0f29cb20bccd8750d168f4c46f92a13d54753ee2f41d8c4dd4eaad715fba4843"
+    },
+    {
+      "name": "resources/docs/assets/images/dosbox-staging.svg",
+      "size": 12809,
+      "sha256": "048aba1c4769dd772894990eba611cff25de26600b36dc39583798c177c2538c"
+    },
+    {
+      "name": "resources/docs/assets/images/favicon.ico",
+      "size": 15406,
+      "sha256": "4c8773c39ebaba19b3338d3c13fb8a48992d339747ca8cf9944c8470f0de18cb"
+    },
+    {
+      "name": "resources/docs/assets/images/favicon.png",
+      "size": 1870,
+      "sha256": "023854c43fc4b25b795ee4951c8019e3de0593ffeb6f918b5d1f2a9b47a57cfe"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/bundle.79ae519e.min.js",
+      "size": 114316,
+      "sha256": "3c49aee07b33e2d43cbee02db7cea5818fee19e29fb9991a8ed34858164a0afa"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/bundle.79ae519e.min.js.map",
+      "size": 1026989,
+      "sha256": "be26920b7f3d5ac86898f7c8afaf45dd3388bfe138e84fbdacd860c167c38e4a"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/glightbox.min.js",
+      "size": 56343,
+      "sha256": "c67c59cdf980793b0216c9de9c6ebf688418838822af1e50b09439e3aa289ff3"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.ar.min.js",
+      "size": 17074,
+      "sha256": "89a1dcb094a8491d968c151ab254a03195c87ff2adaa2408c769928284847125"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.da.min.js",
+      "size": 4654,
+      "sha256": "2a12734048eae74e0a05e5c108fdf24c2b71dfcd8da712336ca9e3d27ab92956"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.de.min.js",
+      "size": 6119,
+      "sha256": "bcaa7c5c19bc730c05bb91e22ae0e386e1ac4a0580c42b7d94f9b8757aadadab"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.du.min.js",
+      "size": 6208,
+      "sha256": "452da04fe449b9c65c61384fec582dc63824bd4e559fae2c3926a7790b68e976"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.el.min.js",
+      "size": 14950,
+      "sha256": "a6fd5cbbb21d127407bc31c6c4298bf92ec7e1496a1ea83d5e4add14325a0c21"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.es.min.js",
+      "size": 11499,
+      "sha256": "dec4ec90bd6f478ca3e65636a8e3fedf512b23d01a51a01d7e7822f67ebbaaf8"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.fi.min.js",
+      "size": 9342,
+      "sha256": "681541fcf5b1987ad8b00766e9c06389ecf99c3d7ae817fa891f923f691b8668"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.fr.min.js",
+      "size": 10669,
+      "sha256": "4dd56aa2551e770ad26ef4b85092cd31447671e0e84b39514278547f54177377"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.he.min.js",
+      "size": 6882,
+      "sha256": "3f7d5c28ada94d78c9bc8041e271c355800ba36dbab98ad95d57b6bc25993621"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.hi.min.js",
+      "size": 3383,
+      "sha256": "631fff52e3623f2dfba35af076c6b8b5a450eeffe30a5cfac7458dab77cbe0a6"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.hu.min.js",
+      "size": 9437,
+      "sha256": "876c969bbf4a2b84738f4e0a14922ee331cb7c2193a621f65db7f836fdd33a38"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.hy.min.js",
+      "size": 1264,
+      "sha256": "0efbcb902bdb7ec0dddffa5e2ba347b74c49ffc5f43fd73ffed83528eba12e95"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.it.min.js",
+      "size": 11232,
+      "sha256": "00a5073df2e922e5fded1c5a4d4011aec02472ab9d9182a7c6508d60b625c453"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.ja.min.js",
+      "size": 2313,
+      "sha256": "c4fded308f633681a6ed53b6c10d8ca5916fdfd50f6b82ec914d725be0cb8bd6"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.jp.min.js",
+      "size": 36,
+      "sha256": "04114edc36dc114edce5afbb3c7f795f45c77d8673c1edcdca5675ddab5d5199"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.kn.min.js",
+      "size": 3494,
+      "sha256": "a064d0d7438334957a442b626140fb72f4ede8ebe17eb5c4e25682d87c88bbf8"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.ko.min.js",
+      "size": 7972,
+      "sha256": "73d1bdb1de4aef6c5920f516924c5ab1c440db50a6f5c6126bd0fb7cf5d37664"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.multi.min.js",
+      "size": 817,
+      "sha256": "9761f475ae79f36420ff714df9950efb264effcf9230efd55b511a0de899e979"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.nl.min.js",
+      "size": 6026,
+      "sha256": "399ef26d61ed2d5806f58ea723dfaca09f4a7c9b51e315bdd17482c8e3013a3e"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.no.min.js",
+      "size": 4754,
+      "sha256": "57f9db9290f9ed36080755f53ee342a04f55a5954e4add915d1c301a37464573"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.pt.min.js",
+      "size": 10171,
+      "sha256": "3a25d2abaa23063cf13fc56c19ae4cc5050cb6215115e9d08f4a6f4b78780067"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.ro.min.js",
+      "size": 10958,
+      "sha256": "cfa26a8ea4293d81e8547ba2321d703a0fe9881f0721fca5f33a3f80bf156ee9"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.ru.min.js",
+      "size": 10331,
+      "sha256": "50ef3c0fab4a3f2d260e8973c63363aa0dcf02b559ea9d11d5f02b6197585c17"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.sa.min.js",
+      "size": 4901,
+      "sha256": "41c558a4355c3eae8f0a27ae870712738f14b0bd88038042ac8ab8b411e5817f"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.stemmer.support.min.js",
+      "size": 3647,
+      "sha256": "2e7213605846a18014ec750910cb18a8a4c60bb23200103b3fad9ef27b10c705"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.sv.min.js",
+      "size": 4523,
+      "sha256": "942b165bcc8218e3246fc4735af9b1c2f66514366d0000be051bf1bb896d413e"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.ta.min.js",
+      "size": 2406,
+      "sha256": "17a32dc49c27c9d27945625a7e8d066d42f64ea1ce5a5b34de427723fbf9ae2a"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.te.min.js",
+      "size": 2330,
+      "sha256": "079c8fcf028aeef388e98ec8607c8ea50ba9660c46797c8a119d05f8f8205838"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.th.min.js",
+      "size": 1031,
+      "sha256": "348461266843e316b26820004a96d3fd87a1579829d244ce510c17293eef0439"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.tr.min.js",
+      "size": 15009,
+      "sha256": "e8bf57b1033b8bd92ea04a94c533015aa1a7f0a8d6830194b974e94e1e4aca3c"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.vi.min.js",
+      "size": 784,
+      "sha256": "2e39c3fd7305f6e66fc0424796a7696cb8e36dc0f5c3a83ea1bc44dfe3fecb56"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/min/lunr.zh.min.js",
+      "size": 2158,
+      "sha256": "d8c5b72c36ec9c3197602546e9ba5b57ada3f725d564a551bf16eabafb548e88"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/tinyseg.js",
+      "size": 22878,
+      "sha256": "1b044c239610ef65fceff6039567442bb1692d413f5ee8686fee81b1a3067761"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/lunr/wordcut.js",
+      "size": 677463,
+      "sha256": "3d38fde68af348915288e45eeb338af8256c8611fa2cfef307e6ab95808b3567"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/version-selector.js",
+      "size": 6642,
+      "sha256": "decf5c113f5a4d395c8da909db69f4a1dcecb3bb86a0f6852485517b84232a9a"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/workers/search.2c215733.min.js",
+      "size": 39481,
+      "sha256": "cfb35333fafd6d2eb148eba21452849fb7fbde32fdfbf986836573f963106188"
+    },
+    {
+      "name": "resources/docs/assets/javascripts/workers/search.2c215733.min.js.map",
+      "size": 216029,
+      "sha256": "780dccece24891aa19da6285715e2c7d0cd884237a87a3a9be6684823584921f"
+    },
+    {
+      "name": "resources/docs/assets/stylesheets/extra.css",
+      "size": 23019,
+      "sha256": "f4d14751b1b07f510f0a0d851e0dcb8a80799caf38c39f75ebae1758e230e733"
+    },
+    {
+      "name": "resources/docs/assets/stylesheets/glightbox.min.css",
+      "size": 13749,
+      "sha256": "6d3f62d4d17969f9c70e9438cf671004725019e868123f2ebc295a006f8d5d2d"
+    },
+    {
+      "name": "resources/docs/assets/stylesheets/main.484c7ddc.min.css",
+      "size": 139849,
+      "sha256": "484c7ddccf764ac57a8f89781a99733dce01b8af53e12e9a4c2040667f1950af"
+    },
+    {
+      "name": "resources/docs/assets/stylesheets/main.484c7ddc.min.css.map",
+      "size": 47588,
+      "sha256": "9ae8d47341da48630354400311d50e1dfe14b0d4372b73e8c1a347c0cdb3a717"
+    },
+    {
+      "name": "resources/docs/assets/stylesheets/palette.ab4e12ef.min.css",
+      "size": 12641,
+      "sha256": "ab4e12ef511f9c36de818455892c5c57cc3f98a8c86c36fa609601a88a720da2"
+    },
+    {
+      "name": "resources/docs/assets/stylesheets/palette.ab4e12ef.min.css.map",
+      "size": 3670,
+      "sha256": "bcf19de0132bed966de2c46b3b56b69f4bf720b2fe35e8dca22b568a017ee3f9"
+    },
+    {
+      "name": "resources/docs/get-involved/code-of-conduct.html",
+      "size": 58449,
+      "sha256": "201da858eab9fdc9cd2f5b04b0444b8289b648ce055f79758594d4ff662547b6"
+    },
+    {
+      "name": "resources/docs/get-involved/index.html",
+      "size": 62205,
+      "sha256": "9a0a4188c47b0b973ee68d1eaa7dc8e221285be42b194285ff47553d7c387140"
+    },
+    {
+      "name": "resources/docs/getting-started/index.html",
+      "size": 51592,
+      "sha256": "6ac6f1ca44534783fabd911e7c489615cb6f5479ec4aa8fcf5abfd104cf63c37"
+    },
+    {
+      "name": "resources/docs/manual/index.html",
+      "size": 51592,
+      "sha256": "6ac6f1ca44534783fabd911e7c489615cb6f5479ec4aa8fcf5abfd104cf63c37"
+    },
+    {
+      "name": "resources/docs/search/search_index.js",
+      "size": 763632,
+      "sha256": "9ba37c9e60dc3f4c84c2434bd5407bf5c380c44e3e3193912655be055f6203a6"
+    },
+    {
+      "name": "resources/docs/search/search_index.json",
+      "size": 763618,
+      "sha256": "685eb8eb10afcdd2c30c26858d4f28dd9401c5f0c8aa5bcbd2fd0398ad65618d"
+    },
+    {
+      "name": "resources/drives/y/dos/debug.com",
+      "size": 22324,
+      "sha256": "c4a6b9870da51719df3cfab4b46f5bc0053ee3a00da10dc7767e966cba0a0c6c"
+    },
+    {
+      "name": "resources/drives/y/dos/deltree.com",
+      "size": 3336,
+      "sha256": "9a201a2862280aec0c3aa2cc28d4b48546547db5c46a117383968064b92af6a0"
+    },
+    {
+      "name": "resources/drives/y/dos/xcopy.exe",
+      "size": 22785,
+      "sha256": "076225153c97164e52b51c00ed17aad4a46c9add26d940e279f6ce678b372526"
+    },
+    {
+      "name": "resources/drives/y/testpics/calib1.png",
+      "size": 2536,
+      "sha256": "ff08a000800b05b2131f6fce3864f4b1bdbf198a204e18af7135cd678a07c30d"
+    },
+    {
+      "name": "resources/drives/y.conf",
+      "size": 775,
+      "sha256": "c0351bab00debcd5ad3603f6c58bb41eea0ff18d438eb72a37d830d809884092"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA.CPI",
+      "size": 58880,
+      "sha256": "a162b31df52b233e29079093baa9933a2283bda22df9b786660a436cd950fe51"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA10.CPI",
+      "size": 58880,
+      "sha256": "c5adee5fa987a12d000bd5829e6c7a2d87622642ba11b23eae98e95afca098ed"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA11.CPI",
+      "size": 58880,
+      "sha256": "5a7430fc6d84f104b20c85dd38fb5c05a7cbbc9ce7a4a44db4d6ac31dff84daf"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA12.CPI",
+      "size": 58880,
+      "sha256": "b6778523a1bf4c995d5b0279c4e0fb17030b6d4f206499b9bd613c77ab155610"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA13.CPI",
+      "size": 58880,
+      "sha256": "78d9fc661eac69d1ab968f72013084c7c3324eb8bfe98d06162546c9806dd8a3"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA14.CPI",
+      "size": 58880,
+      "sha256": "fd66dc380a21cc32e573af22e84057947f67c81882a5b1d075d76d2bf4317624"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA15.CPI",
+      "size": 58880,
+      "sha256": "6e0912823cba2643da77f1a97b87f0dd4f8651af93bcd34eadf1e52ed35f8c22"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA16.CPI",
+      "size": 58880,
+      "sha256": "2ee0a6d471e433c49dfb764a30bc3272f2729f62dbe6fdaeb26ffb2dff64a9fa"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA17.CPI",
+      "size": 58880,
+      "sha256": "7f048d7b6157ba37f4c3e80741b2301db7390604a9c8fe472299e8d9c1082e71"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA18.CPI",
+      "size": 29540,
+      "sha256": "8932a850cd7d797f89147f58c5abbcba05c3ed433ac61220dc357b55868536ee"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA2.CPI",
+      "size": 58880,
+      "sha256": "dd7fc05939e5e7c8432ede8fb0c8d167023a8e685459f2482d09886d4f6a2f4b"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA2ISO.CPI",
+      "size": 58880,
+      "sha256": "31e8590215ce7677cfde60e0d818856f2df81f2acb09fa7b1fddde7e774243dc"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA2KOI.CPI",
+      "size": 19760,
+      "sha256": "cbd3a927c4a972987ea30bd96225ac0aef70c94ba646e90c1550333cf78080b2"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA2MAC.CPI",
+      "size": 58880,
+      "sha256": "ca3743db5e1fa2fb75ec67bd55f121d17ab371f5b93957a9d786d95c018a4607"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA2WIN.CPI",
+      "size": 58880,
+      "sha256": "61a5d68083797765d54023530432686f3dee8f90476449f82e6e4a5076a613c1"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA3.CPI",
+      "size": 58880,
+      "sha256": "4c500f4e9988e23458c47bc32445cfff7c97d9a08f1b775ab930bfb7b34d12ed"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA3ISO.CPI",
+      "size": 58880,
+      "sha256": "4227b143b9e476fe5973b58980e8c65697a465bf419ccd4d77b69d063eefc077"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA3WIN.CPI",
+      "size": 58880,
+      "sha256": "13ac4d37efed96cea7a1af87057bb4878ed701b08470555490b196635254ed83"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA4.CPI",
+      "size": 58880,
+      "sha256": "92d6ba796c1b80edb61081013670e13ea7c2e9d11bcaae3629166c531384377f"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA4ISO.CPI",
+      "size": 58880,
+      "sha256": "cb4b0c77f0a1292cdb921799018296869b30fac046d6bce9f8f068fc44b47567"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA4WIN.CPI",
+      "size": 19760,
+      "sha256": "b686310afaaf3382a381ea1c6797246a9aa18350e1c93305252f5966032ca1a4"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA5.CPI",
+      "size": 58880,
+      "sha256": "98ca65cf089ff0c89b9d6b4d4510e60972a12367cfc12a5c537db5e091c2825d"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA5ISO.CPI",
+      "size": 49100,
+      "sha256": "f902db0a13ad4f524953568916999956bc45b71a6571a065c7fcd9f9df68e9ab"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA6.CPI",
+      "size": 58880,
+      "sha256": "9e1374e55df4338a6e18ba6eaafc8ef55ca7678224c976e37b4e93ffa956f037"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA6ISO.CPI",
+      "size": 58880,
+      "sha256": "814db6df5e7fa7de0a0d7fdc0c70aadbe93a958754eb151c20d5452a9b037a29"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA7.CPI",
+      "size": 58880,
+      "sha256": "f96348400c4f5397c9a182647ffaccfe227d048299308954c5ad3ae35cb642d4"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA8.CPI",
+      "size": 58880,
+      "sha256": "2b1a04af17221b09081da9add181a3a83960d6d027dae2c9d1d9fdc6452e0c56"
+    },
+    {
+      "name": "resources/freedos-cpi/EGA9.CPI",
+      "size": 58880,
+      "sha256": "4acfcdb6f0060a9f1c61c63377e86f60bdda89f03b841dcb7cede6881e0d3418"
+    },
+    {
+      "name": "resources/freedos-cpi/EGAISO.CPI",
+      "size": 58880,
+      "sha256": "53bf4e84bddcece56333fea5a50408eabc8baeac3ebbff4f7e0e752dda8608f2"
+    },
+    {
+      "name": "resources/freedos-cpi/EGAKOI.CPI",
+      "size": 58880,
+      "sha256": "15d2f7c46d52f69bd9e876cd12c02e94fd32b4dddfc8f6863f1be448a3bfe781"
+    },
+    {
+      "name": "resources/freedos-cpi/EGAMAC.CPI",
+      "size": 58880,
+      "sha256": "bd3274924295a8a68f89d116bc864012915915ea838473a5cafaf5d87131b84d"
+    },
+    {
+      "name": "resources/freedos-cpi/EGAWIN.CPI",
+      "size": 58880,
+      "sha256": "4a17bf1be57730a7d9cc0c1c50abebb2895baaf84ff7fe2bb54e3b30155b0114"
+    },
+    {
+      "name": "resources/freedos-keyboard/KEYBOARD.SYS",
+      "size": 40362,
+      "sha256": "5cf40be4b062681f4b50446a60f0bd4b5077451ef278dea74044ef22862fb433"
+    },
+    {
+      "name": "resources/freedos-keyboard/KEYBRD2.SYS",
+      "size": 29750,
+      "sha256": "39131eddb9c55a4488fa4b3555f5c0f4d00acaf197b91adb5b5c79123f844a56"
+    },
+    {
+      "name": "resources/freedos-keyboard/KEYBRD3.SYS",
+      "size": 32178,
+      "sha256": "00b0e774792fde542eb3d29e9b1de1e11d00bf685e39989d91b6b45a5453a401"
+    },
+    {
+      "name": "resources/freedos-keyboard/KEYBRD4.SYS",
+      "size": 13105,
+      "sha256": "3d4723d1c5c2e276849f8353790f0ced5b2eb4ff5464c2be58bee5d07a7878e8"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/abreed.map",
+      "size": 3453,
+      "sha256": "9556674aa4631857ef8b5a5bacc1ec2507d8c416b05e1a2c0109020186ecabb5"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/abreedta.map",
+      "size": 3523,
+      "sha256": "0a20c93c9eb940c289de20692834e9e4caf5935ee5dfe0d32ad56e33ff79f8e5"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/actuas.map",
+      "size": 3334,
+      "sha256": "a9be2daa42c89d388aa6a71a6e6e81f7014404bfacf50fd9bfa6f2611aa77edf"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/aitd.map",
+      "size": 3415,
+      "sha256": "a03538da828d622a5623f5d360373cd03607d57d1de736e12e6a139fd55a1fe1"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/aitd2.map",
+      "size": 3415,
+      "sha256": "a03538da828d622a5623f5d360373cd03607d57d1de736e12e6a139fd55a1fe1"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/aitd3.map",
+      "size": 3415,
+      "sha256": "a03538da828d622a5623f5d360373cd03607d57d1de736e12e6a139fd55a1fe1"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/aitdjack.map",
+      "size": 3415,
+      "sha256": "a03538da828d622a5623f5d360373cd03607d57d1de736e12e6a139fd55a1fe1"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/aladdin.map",
+      "size": 3457,
+      "sha256": "1df4dad8d299a4afa908d9bba209716a78779a9f3d4a3ec917b428ddf2f02965"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/alienc.map",
+      "size": 3542,
+      "sha256": "80888dfacedc8022b9bb294fdf776370473a5e5642cb6ba8e7c77027d9aac068"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/alienr.map",
+      "size": 3463,
+      "sha256": "7d85dbb4766851d383f552257a41b51d2bae789e5ead81b674eab60855120c44"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/alientri.map",
+      "size": 3544,
+      "sha256": "3c0054190810bacb0320e1605a971eef30978840d59f54e86f8dc4579fd7785a"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/alphasto.map",
+      "size": 3562,
+      "sha256": "779ed76ae3a1a2824db855a143f3cdf1c3912e5d21b71f9977aec3587686399a"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/alqadim.map",
+      "size": 3453,
+      "sha256": "b384b81593f20a156cb69bfbb4b199f4202ef6a1438ce7e8a51a405d0c11b65f"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/amok.map",
+      "size": 3523,
+      "sha256": "5911d770f73977f89c60ba5b146bdf369dfa0577a02e07dfa8bb34050da44b40"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/another.map",
+      "size": 3478,
+      "sha256": "0db25541ed528f6a25d8ea9382e0a92d6131c6218ad0a730f0df07bd67f42027"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/batmanac.map",
+      "size": 3420,
+      "sha256": "aa3411148e1bd37187b6b3df6e48ccb780ae4ad336ee808eac0a724e7ffdf0ce"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/batmanf.map",
+      "size": 3594,
+      "sha256": "94d0c6eff49362a9cc033c97ea147fe4975be67fe48ec91e9618299bd045b601"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/bigredr.map",
+      "size": 3414,
+      "sha256": "002c81ba70b2f4385fc40f95605f55a06eb44b92a739949708e1f19a2532a39c"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/blam.map",
+      "size": 3506,
+      "sha256": "9cf5064b8b1e5737fedda003038532ddc91499bdd9f0a63504b7a56da3794545"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/blood.map",
+      "size": 3528,
+      "sha256": "a432b59308a89e69bffe4ba67776f45194dd1f52e0b56806a5e1cd8b2fcb722b"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/bluesb.map",
+      "size": 3435,
+      "sha256": "03a9d5874a17cf8b61b756cd69273a4fece3f9ce4a85dacb94d50a67e3a6c311"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/bluesbja.map",
+      "size": 3369,
+      "sha256": "10327696faa4fb075e8286ec9669643efa0fae716449e96f34b9b0dd6b57d44e"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/bstone.map",
+      "size": 3540,
+      "sha256": "09cd3e0adf9e428ce87fe3e8c2f8c69a6639df87e4bd0f08451bb5cae021b15d"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/bstone2.map",
+      "size": 3540,
+      "sha256": "09cd3e0adf9e428ce87fe3e8c2f8c69a6639df87e4bd0f08451bb5cae021b15d"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/bthorne.map",
+      "size": 3477,
+      "sha256": "e5076b43e0415a9a2709b7754cc82813c2a2794a1c46147f013d2f21031bd59b"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/cadillac.map",
+      "size": 3435,
+      "sha256": "9888828b3b40e506eaa547818119f107d327e34d887e7123d903bd1ed001ce3f"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/cataco3d.map",
+      "size": 3575,
+      "sha256": "87ee242375383ae6121d3da6cdd2bd6461eb5a3e7c27dadd51c7504596f8b5ef"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/catapoc.map",
+      "size": 3574,
+      "sha256": "bd536d6340240d85eee0cd8f99c05e503b8c7c8476de4c960b4e8f9002e9f067"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/chxquest.map",
+      "size": 3575,
+      "sha256": "6ef13f207e813175d61383536e2b2ddd04be405ac4f208e8d32310ab07d5eb9b"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/cite.map",
+      "size": 3529,
+      "sha256": "7acb7de42efb7c59e61456231bc1f980734a577d9299672527a3b7e29c03d840"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/ckeen1.map",
+      "size": 3502,
+      "sha256": "b5a5ca43c93dbc4ad69fa8ba4fb12ce801b221d146d2242d08d310f676c250eb"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/clifd.map",
+      "size": 3560,
+      "sha256": "84d01fc96cecbca501ad413352ff6519c83aa0b8e23f3e8868b23a295f442bee"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/coolspot.map",
+      "size": 3437,
+      "sha256": "5a0875b306f4feab1d464e7eed5b64bd6425d0a1d616874e75d9dd4c76a83c05"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/covertac.map",
+      "size": 3529,
+      "sha256": "2ca3d8d51729fa51017c433a8c971b65d24daeb23e4da7ef987b5c56664d8b4e"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/crusnreg.map",
+      "size": 3546,
+      "sha256": "25b02536dc06b5e8ba42153ad466ddc2a4702ead948c34307aa7fcf29b5bd7d7"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/crusnrem.map",
+      "size": 3547,
+      "sha256": "6ca87dfb41e7d88ed446dc3f4cead255fbd8d71a5491973c16c6ab6d911b24dd"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/cyberm.map",
+      "size": 3620,
+      "sha256": "faee74ab3cc666276b8cf07c3f79fbec7b444e08bf79062731323e4f9939a0fe"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/d.map",
+      "size": 3453,
+      "sha256": "781e3ea72465b1a0fab3adf43ebf8a267aff6302b8e2814b31e125ee06c4a755"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/dderby.map",
+      "size": 3526,
+      "sha256": "a36cd05380185e6ee9e409fb4fef47f3590c28f57932b890d160afcc43b58999"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/dderby2.map",
+      "size": 3472,
+      "sha256": "0f6b17074773bca20c21de5330de302d79844b4432f38f058eaec2ecd71eb715"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/ddragon.map",
+      "size": 3379,
+      "sha256": "ea3a46da035b55b154b8fcb76947ebd1d4726acee3fa3416d0d11cc199691ebc"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/ddragon2.map",
+      "size": 3376,
+      "sha256": "f5084f5b6003312771b968a30a6c01a5f52daff4af4812f3b5f9576ead469886"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/ddragon3.map",
+      "size": 3398,
+      "sha256": "525215f88f2900d00c2690812e99848db3e78d4cbe389a1f3b71e6faba40b04b"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/descent.map",
+      "size": 3619,
+      "sha256": "368f1467b63aff2c7faa76d59c616745ead5ca53685026678cd10e9ad60331e5"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/descent2.map",
+      "size": 3655,
+      "sha256": "37cbc365098d9838f1de7837aa3e96a17d48b6ba0b53840e551ef3251211bb0d"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/disc.map",
+      "size": 3461,
+      "sha256": "a6023a645c2a883dd045f9fd4424855471960cebc4df5ff3159dc9173b992a0d"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/dnukem.map",
+      "size": 3499,
+      "sha256": "ce1e91cb167f4da7cc30cd39978afdcee4b8093721863fd120b254e32c151546"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/dnukem2.map",
+      "size": 3499,
+      "sha256": "66ab56592011ff329f16b33f3f4bc3651fd8047229eb5d5227d1c92cdeb04f6f"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/doom.map",
+      "size": 3575,
+      "sha256": "6ef13f207e813175d61383536e2b2ddd04be405ac4f208e8d32310ab07d5eb9b"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/doom2.map",
+      "size": 3575,
+      "sha256": "6ef13f207e813175d61383536e2b2ddd04be405ac4f208e8d32310ab07d5eb9b"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/drally.map",
+      "size": 3436,
+      "sha256": "47579b069399ba3801cdcf5b35905972503599004de1bb868eca429cfa1d852e"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/dstrike.map",
+      "size": 3560,
+      "sha256": "ba3a1ff5ae9e2a012ac4b0f61fd216b4105e1693180f75dde37db2b09f17c2dd"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/duke3d.map",
+      "size": 3500,
+      "sha256": "e65dd77581ef77de4be561f7dcb37fff1ebbf7ad9deb6df1eb5c0e173a599a64"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/ecstatic.map",
+      "size": 3467,
+      "sha256": "80e60f87df39e01cf707e23faaeacb10f781aaf4b9a567e8ff54b0c6476d0a3f"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/ecstatic2.map",
+      "size": 3611,
+      "sha256": "bd45081ae54854b61e1ac7248b73ab8125d51a3ba5499b339b1ab9351b71466d"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/eradicat.map",
+      "size": 3553,
+      "sha256": "9e90b72e77ae47625f2652403c373abed50f84b0b27d9a558003639115081da2"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/ewj.map",
+      "size": 3440,
+      "sha256": "ce0c86522dad334d0a676de4af09bcddbf168836105486fb2c0e0864745b5090"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/ewj2.map",
+      "size": 3516,
+      "sha256": "b5061ec9eff006737c401d6d1ee4aeefc37aba71df598151dc38308e951b40ef"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/exhumed.map",
+      "size": 3500,
+      "sha256": "05b43645bffff39bb2ac516f1b3523d0c42be677f45ea1f0325ff392803c1c3c"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/extremea.map",
+      "size": 3583,
+      "sha256": "d57f0938ceb5addf9c9984d375c6ba59866f3d3da37618917d29d03bbcf9aa9d"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/fadetb.map",
+      "size": 3637,
+      "sha256": "0ceb4d454554fc41b203bcf983283a7fedf37c91f04cdb13bc1082143a37123d"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/fatalr.map",
+      "size": 3541,
+      "sha256": "79d969fbb3e76859b5115164238ee71446ad8a5585d78c72a3f40f6421089976"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/fb.map",
+      "size": 3449,
+      "sha256": "1fed8e5db24e49586b49db86c92fa5979515dbc1dc63d39cc9a78e30e045d836"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/fifa.map",
+      "size": 3448,
+      "sha256": "64b6f1c67a2ea2730dd8342e657bacd604c8908d4ee6b99ae3bf37bf897d7344"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/fifa96.map",
+      "size": 3429,
+      "sha256": "d23bd705ec7b791f20eaeea4dc739ea202f09771fadffcc9bb9d3503cf8356a7"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/fifa97.map",
+      "size": 3486,
+      "sha256": "e3aadfaea0e5277ceeed060f1428c592ff20ac10349c6babb9e877f73cddf8c8"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/firestrm.map",
+      "size": 3610,
+      "sha256": "f240efb4b5496726d80e9168a70ff9b1df69ea3a563d09870eba150084f4492f"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/funtrack.map",
+      "size": 3538,
+      "sha256": "101603dd6ccfd11724a9b1425662d3a5a5cb55f27e8fe7b6149804381d52b025"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/fxfightr.map",
+      "size": 3502,
+      "sha256": "9fae8024b36e6e1c66455093c4cde653de117c92ed2ca731b69b0a8a06a5d005"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/gb2.map",
+      "size": 3405,
+      "sha256": "e38cc92944c6f6bd5938596563f15e388c2e4e89ad993c8d723e03b05ba49717"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/gods.map",
+      "size": 3421,
+      "sha256": "bf2a9349c43a853001ef3bbd76cfd4f73780ef7eb637d707cb14a7ab2be165ea"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/goldnaxe.map",
+      "size": 3512,
+      "sha256": "b6cd4f5947d48ec85555a912ad4e3b59571bb4e1625b03e0f0907d519a96f358"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/gta.map",
+      "size": 3600,
+      "sha256": "cd0a111b4262ff0aa1bf1c486429dd51da32a90127d45eb0bfda51d60270ec32"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/gtalond.map",
+      "size": 3600,
+      "sha256": "cd0a111b4262ff0aa1bf1c486429dd51da32a90127d45eb0bfda51d60270ec32"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/heretic.map",
+      "size": 3474,
+      "sha256": "99a8295f5b2ab6997058569cff04b981185bc453a36ed9d8a42e96e4e93772d1"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/hexen.map",
+      "size": 3548,
+      "sha256": "614dc7da8c63fe8f67168e20ef7589130931879a76a49ca7975b6f635a078aea"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/hioctane.map",
+      "size": 3565,
+      "sha256": "ee8cf42be6519ac1a7162194a9d344d321cf2da42211583bd18dcd39822e8eb5"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/horde.map",
+      "size": 3434,
+      "sha256": "36e5b03f28e33abd919922aab8f96392217c186195f9e6f9e97e5f368fce3cde"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/hulkpant.map",
+      "size": 3539,
+      "sha256": "683fdc92098c88f82e045c62b6a0ef1e87fbdbb2df2ddd69ae63e38399065fba"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/humans.map",
+      "size": 3449,
+      "sha256": "d724ce0e6ebc23704dfcaa06acdd9e123e0a2233ca60c0c85ef5dcbae2b8b36e"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/jazz.map",
+      "size": 3481,
+      "sha256": "ed096b9039bcbd426c5f98132af33eed6c01390575b3124cb62578a6eef19c84"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/jbazooka.map",
+      "size": 3476,
+      "sha256": "f58e39f4060fc41a1ebf7f8e6f214fa473128c0c984fedacf8c2514ee91bcebd"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/jdredd.map",
+      "size": 3596,
+      "sha256": "3d05c8deba110c8dd7f5aff1c3d11c10fce691efc5c32c39b70070b9fa7da140"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/jimpower.map",
+      "size": 3421,
+      "sha256": "3f3d7091af191bced1e38ae4bd0cad65570f8f8858e1d0925d4182dfd57a38c2"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/joemac.map",
+      "size": 3415,
+      "sha256": "a966167fd162e1e6ece5776bc2af21b25a81c47ecc3cc27a94ff4655f63ad230"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/jstrike.map",
+      "size": 3560,
+      "sha256": "ba3a1ff5ae9e2a012ac4b0f61fd216b4105e1693180f75dde37db2b09f17c2dd"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/jungbook.map",
+      "size": 3438,
+      "sha256": "f79bd730832e161c2574c568271f912ca8034b54c727f2aa91f712841cbcf302"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/jurassic.map",
+      "size": 3584,
+      "sha256": "1161d6da2463f181728c0fc27fb7b9bf9d2f4ecd12b496baf7b2a9e6520b123e"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/krusty.map",
+      "size": 3419,
+      "sha256": "f6b60333a6b36c14bd1bf77c8aab096861cca4a8ac1b2abc89d12af76bb6755d"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/lba.map",
+      "size": 3431,
+      "sha256": "38ef852a4bbe0a8a16bbee0efb849d6ed8ba5fef52113c4c7e634b44f06485ab"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/lba2.map",
+      "size": 3562,
+      "sha256": "355d01bc6007bafb3b986926a263cd883f4e83fbdf905696884d9ee6266ebfde"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/lionking.map",
+      "size": 3457,
+      "sha256": "1df4dad8d299a4afa908d9bba209716a78779a9f3d4a3ec917b428ddf2f02965"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/lollypop.map",
+      "size": 3462,
+      "sha256": "7614261c075c54c8e351eff12afa80f29f8c7b1842a5df196817656f0e281d37"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/lostv.map",
+      "size": 3480,
+      "sha256": "5007a1d92cc174317a00bf414e51dfdfff4521faca9d084ff811b6b92cc6f16f"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/lostv2.map",
+      "size": 3593,
+      "sha256": "9186bd520653683a2011f5f5d8f27304df9070ec06c521fc2faa2c8c111ef61e"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/magicp.map",
+      "size": 3419,
+      "sha256": "916d52b8991f71fc2115236dde3607f1b9d1d8073f85605d7c3e3e09c55d413a"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/mars3d.map",
+      "size": 3620,
+      "sha256": "f789c80b8797130d76d17b59c4e492513d2ee1515afac2d048a163972f9e4daa"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/mdk.map",
+      "size": 3490,
+      "sha256": "942f89290ac8f374b0461e6bd59d4767bffcf78b92187b5e6c7071dcfaf9ec25"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/megarac2.map",
+      "size": 3490,
+      "sha256": "01d869b089514bb78f5a10ad7b072c76963f164bf6bca90ac1e26e6d92cf0c68"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/megarace.map",
+      "size": 3575,
+      "sha256": "8bf5194f9b716e8cc6a57063cb7840ea090cf2358b4116a8e7d190b64dbb5e8e"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/menace.map",
+      "size": 3465,
+      "sha256": "2e3d76848072b7b3a67d0e57b04a53e0911776dae7ca0ed853d3734273194120"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/microcsm.map",
+      "size": 3415,
+      "sha256": "7cbbea698781c5c373191e145d5ad30727ade6c9bb44700c6995cb47000aefeb"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/mk1.map",
+      "size": 3680,
+      "sha256": "301cc19a9934b6eff98dbe4021cbd9dc99ec4ebe7b68695e18c9aa6ff71ea746"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/mk2.map",
+      "size": 3680,
+      "sha256": "301cc19a9934b6eff98dbe4021cbd9dc99ec4ebe7b68695e18c9aa6ff71ea746"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/mk3.map",
+      "size": 3680,
+      "sha256": "a4ba1e80d3eba5315db6765104ac9edbf57fa9934a1114bcd17da5c0b919dfc4"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/mktril.map",
+      "size": 3511,
+      "sha256": "6e2044e9f51c67d3bec5f94bbcab4a36740c50d96c582e76f9c241c78094874a"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/mm.map",
+      "size": 3573,
+      "sha256": "02fc88ec3aa5e163c445017ab33b14800907ef59584dc5e2f89fcd4ff5c9fe05"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/mm2.map",
+      "size": 3592,
+      "sha256": "fe3426824a7a90237bd12758eb4a151899a62c445d59247c77fb4ec1dedccb96"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/moktar.map",
+      "size": 3447,
+      "sha256": "eb631f84cd2b6a2644b647948ada3fdda6e3e3f6bd873f9171fd257a4c5fa34b"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/moon.map",
+      "size": 3458,
+      "sha256": "77bab6e7d99c2e5b9cdb1cc634ddad79f1b40f55e452946c859a27f87a0e364d"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/nba97.map",
+      "size": 3458,
+      "sha256": "0fa2bd0e35ff7cd0f23b14439dfac65f6eca79eeab1f9171be2e8bae99e672fb"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/nbajamte.map",
+      "size": 3504,
+      "sha256": "fec009f7f9f1ae006c55d5ac0644db163c45965ba9fd9e3154368282db3d88ee"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/nfsse.map",
+      "size": 3525,
+      "sha256": "d9c3e8dd9b75450cdae1cae22a77df924f3e5b815c87c71f9a99a4baa3c62e8a"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/nhl97.map",
+      "size": 3401,
+      "sha256": "109852ae50300124c3392c2f7f134518c18c06ac1a3889ba37b7de394c2c1962"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/novas.map",
+      "size": 3510,
+      "sha256": "31b0b9db3b2baa534542ad44ec95e2750bc973f247068150ecfaab9bbd3ad42f"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/oddworld.map",
+      "size": 3543,
+      "sha256": "127cc103f571bcdd41f8db3d0205d265f9a1ed6195547e0ad9ecf0dfa4029c8b"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/omf2097.map",
+      "size": 3401,
+      "sha256": "ba63470ae674e84d430e61ee809199c412bc9afacd01a7e3738c536a8747b8b9"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/panzakb.map",
+      "size": 3416,
+      "sha256": "8287c7cb68d8a2bf543f47ced09a696b7a38e207574bf0a2b5ed0a4f33d3eb76"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/petesamp.map",
+      "size": 3450,
+      "sha256": "f49671d888c0281c95fb554b93e385bc5d1c6d97b87d4408dd9321fc7d74474e"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/pitfghtr.map",
+      "size": 3394,
+      "sha256": "250382bd8a77d038765ce3720f5d61b7c27e9bc9e049ed53d7995e1ad5572dbb"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/pop.map",
+      "size": 3481,
+      "sha256": "217454a385b7b2f370fe297ecd815a7c9f66afd2f950279bdff9b0a22ed34a57"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/pop2.map",
+      "size": 3515,
+      "sha256": "bebabd708d2402cd579186fb04e58ef21e3f5aacffccd89f524ea0655b3d9d3d"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/prayfd.map",
+      "size": 3585,
+      "sha256": "2939b59fafd621e42c8ca7eede2a66318f7a9ac676594475efa0a51079a093fd"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/preh.map",
+      "size": 3413,
+      "sha256": "06184d0acc8c527500cc63e5090a23fd542cce6e740b4bc8ae5d8799202961bb"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/preh2.map",
+      "size": 3413,
+      "sha256": "06184d0acc8c527500cc63e5090a23fd542cce6e740b4bc8ae5d8799202961bb"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/primrage.map",
+      "size": 3472,
+      "sha256": "e526e05f19f6116b6bee0665d0bd21090fa4bc026bc8723c639aeb168d52119b"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/pushover.map",
+      "size": 3390,
+      "sha256": "a7dfe30255cd3c6927eadfda1d10eef4cf84bb0be8f1b3db16e2dba46e972c49"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/quake.map",
+      "size": 3585,
+      "sha256": "f1fe0b2218ad216d08160938300fa3caca236c2d6d7efb1ef45ab38daa4db2ac"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/raiden.map",
+      "size": 3435,
+      "sha256": "5a6bbb0b6ff8747c03f1f2662fabf5313cfd2fef734e0250d9648ec887895322"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/rallyc.map",
+      "size": 3561,
+      "sha256": "6f055479ac6151591ac0c71b1b0c23426a294332fe154d8b8ebe0ce29b25d9a6"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/raptor.map",
+      "size": 3468,
+      "sha256": "33e1b75a660054d721a00dbf535cc2f5a975592f9f33251564d8da1289e69d8f"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/rayman.map",
+      "size": 3432,
+      "sha256": "67dd3dd6703ba40226067ff85ce2936edf06805dca3849f9854b7de2e086e07b"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/redneck.map",
+      "size": 3528,
+      "sha256": "e5d1f0534e29ffdc455fa2dc3b12982fcc7116c854836e88277e4ad507d2c50f"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/redneck2.map",
+      "size": 3528,
+      "sha256": "e5d1f0534e29ffdc455fa2dc3b12982fcc7116c854836e88277e4ad507d2c50f"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/reloaded.map",
+      "size": 3551,
+      "sha256": "33bd0adbfdc4f5c80ce8ecec17c2dd71939798afa2d3776e2e23124879392aaa"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/rg97.map",
+      "size": 3485,
+      "sha256": "28cea91412f3be800e9378a254bc50b20c16217c4f0bc83130c8f460a9ac4d47"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/rise.map",
+      "size": 3529,
+      "sha256": "5135b497c1fcf27e9e02008ba9b9a09fddbae60b240f0ab58bccd6a59421f181"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/rise2.map",
+      "size": 3601,
+      "sha256": "8d00432c597512b32b20cb4ea1c6653559bef182c4c8fd0a03730d5e4ecf8b17"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/rott.map",
+      "size": 3674,
+      "sha256": "27c92e759084ea61d466c20f7b40de0e6e746fa620cae2d224df2126112c592d"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/scorchdp.map",
+      "size": 3483,
+      "sha256": "9c047772b9c72b2a4336302e38431c7ba4d0b9d29e16ab5fee309cccd7054efb"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/screamr.map",
+      "size": 3493,
+      "sha256": "ffaa4cb6078282889557d32940736eee5b4b9bf3dd2a0a8eaf7bf13b2d77f570"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/screamr2.map",
+      "size": 3491,
+      "sha256": "f5ee8f4c56a387d5472cd4787d8f27b5250acb9d4dc6104b2dd2749b42de3ab8"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/sf2.map",
+      "size": 3459,
+      "sha256": "4d01f6423105d592c87bb5eb34af7e4efe5bf7ac65bb42a37dc733d0cd6c0d01"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/shadoww.map",
+      "size": 3547,
+      "sha256": "c1a2db8b35f61d92a9415fc008ba625aac0a2e21f300e926be94614ca0e0f46f"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/shells.map",
+      "size": 3539,
+      "sha256": "7eab47a6626da286d796ec1723a0ebcc10bbbc16f34a2d80e445686f5baa68c0"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/simparc.map",
+      "size": 3414,
+      "sha256": "545f6c521f48a1c3b591f214e675c607619010e4963709e4e69a04777cf45daa"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/simpbvs.map",
+      "size": 3421,
+      "sha256": "1666f356ecb7e0d285b3d71dc5be97e1b629f0f64f92122c63b7989e98cacc52"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/skynet.map",
+      "size": 3516,
+      "sha256": "63cb4490587588ffdfb4f8c26c1cc03830d3b335c897f6030223c6c08c9dc7f5"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/spacer.map",
+      "size": 3496,
+      "sha256": "645621062d8303b899b95056e9641abf94a02891d236acfe81f280d213aaabe7"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/spearod.map",
+      "size": 3540,
+      "sha256": "09cd3e0adf9e428ce87fe3e8c2f8c69a6639df87e4bd0f08451bb5cae021b15d"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/speedbl2.map",
+      "size": 3402,
+      "sha256": "8ac4921d949ac49a3d1526c817a36b52d985a9880b1d2b38eeb1f0aa313e9dcd"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/spidey.map",
+      "size": 3636,
+      "sha256": "38dca919f48d3141790e0a0dbc37a37aca6b9afc3703fa9afca9fa7bbbcfd61e"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/srally.map",
+      "size": 3490,
+      "sha256": "f7ed21af6df4c9f0a6e15d43de3c9286e5f9eeaec7d925fd7168a521d1cfcda8"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/ssf2t.map",
+      "size": 3613,
+      "sha256": "5eddfec979134fd264d45938a241d363dcaa5048171678be393209921b6ce52b"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/stargunr.map",
+      "size": 3468,
+      "sha256": "63e4ab59015724b09df6027013f62b210f9bd8caeba28e10f6995414f7dab602"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/streetr.map",
+      "size": 3635,
+      "sha256": "ea9c73af5e57bc46c122483146fc9683719a9cfa3b0716de299944ac2c95c9ca"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/strife.map",
+      "size": 3602,
+      "sha256": "5718351801f524ef4af116e1c2b5367701b526a1128f6e99a780a3abbb85376e"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/superc.map",
+      "size": 3436,
+      "sha256": "ccb85168defa140321f088450342091979616f8ff48e90419687a51621a9db28"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/swdf.map",
+      "size": 3598,
+      "sha256": "3bec968e7243e4d5e7043d0017b8761ce6e7103e1cece2bbc36aa576f0fb2054"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/swiv3d.map",
+      "size": 3495,
+      "sha256": "db9e3c2e3c89c39d30c2c0db0850c154780ba9c1212221a308ca0b51458380e8"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/tbraider.map",
+      "size": 3518,
+      "sha256": "a37228fa2502fda51d3d55ef3604b093b873c87f0eaa019ea954a56fb0db1ae0"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/term2.map",
+      "size": 3402,
+      "sha256": "f153aec1952a6ed5d09eaeee0b52f863a14284c2a05c501c0ce3e010963fdde5"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/termfs.map",
+      "size": 3516,
+      "sha256": "63cb4490587588ffdfb4f8c26c1cc03830d3b335c897f6030223c6c08c9dc7f5"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/timec.map",
+      "size": 3477,
+      "sha256": "1f7aa9862a5fe9122eb3ac03c41fb111ff046ce6b2cb97fcaf460190f8720847"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/timegate.map",
+      "size": 3470,
+      "sha256": "0e0012781765649b438f7b9e52af16036801798fe1beb914442dc9a23202b924"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/timewar.map",
+      "size": 3527,
+      "sha256": "2fb4996aa055bfc15c9d5baf31caca808e3fdce29d2c3f7fc7c97c2858dc41fd"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/tmnt.map",
+      "size": 3551,
+      "sha256": "c151ac01ab5d759db653a5990c982bf78f051fe973e7f92592135f76aed53820"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/tmntarc.map",
+      "size": 3435,
+      "sha256": "0f24977386a8ac5bae07e729f9aadc34b3778752a50aec0c31a0f2671bced710"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/tmntman.map",
+      "size": 3415,
+      "sha256": "38b166c303ad4135857f85850c5ab1a5e28cea3ab403cebf226e58e15890cb46"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/trackatk.map",
+      "size": 3493,
+      "sha256": "77b4350e4d298935906d1d19318315204ce56aa51ec0455da0d924af5b9f8737"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/turric2.map",
+      "size": 3443,
+      "sha256": "c77f7adbee5f52c01faf04f7dff59468504aeac8f239dd109dedaa6c973b6ac1"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/tvcd.map",
+      "size": 3556,
+      "sha256": "caec2fad8d4cde86f5dddea7ccec7b6db79264dbfc05f8f85b76a60863fbae70"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/tyrian.map",
+      "size": 3449,
+      "sha256": "379020f5a8d90c886a64bf6ae79dc9d3516e83a73bf8df74d181d7769e7ab6f7"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/wacky.map",
+      "size": 3488,
+      "sha256": "7f27dfb865a036acfb886b2363cc8e39211eb221fce9e8fdb11df313e2a353ff"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/warriors.map",
+      "size": 3419,
+      "sha256": "b0d98390424b6abdc03b395a26dfde3a700813298b8fc8919abc7a52b4d6d7a3"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/wcrew.map",
+      "size": 3559,
+      "sha256": "210267628832db2fab7b22536a9a5e365344da81bf256a236b9f79c57cb83822"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/whaven.map",
+      "size": 3584,
+      "sha256": "9d6b2b3826155d2841c06162ad414d77a5ecaead38c435b03623b3e839fe8a21"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/whaven2.map",
+      "size": 3584,
+      "sha256": "9d6b2b3826155d2841c06162ad414d77a5ecaead38c435b03623b3e839fe8a21"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/wilds.map",
+      "size": 3458,
+      "sha256": "7f9ec052c8a868d85d7833d92eaad9330218ffdbd959aa0ab3b7abe74fd53191"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/wipeout.map",
+      "size": 3487,
+      "sha256": "0cebccd78c8695db123c9d62bb58e66eb5d6c513c23e1ca806ed5d3d9d97de41"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/wolf3d.map",
+      "size": 3540,
+      "sha256": "09cd3e0adf9e428ce87fe3e8c2f8c69a6639df87e4bd0f08451bb5cae021b15d"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/wrallyf.map",
+      "size": 3414,
+      "sha256": "86d36901c37886d65db415257acb8b96dd69e7b25bf926eab376f75dee5da136"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/wwfarc.map",
+      "size": 3572,
+      "sha256": "38d6765c3c4da1693f7d51f0cdb257b30cbeec4d38c6083030ed4415fbff43a5"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/wwfiyh.map",
+      "size": 3572,
+      "sha256": "a8da483a25322bf8094a831752ae3590f10bde0cf926e84c998f6ed41cbbe6f4"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/xenon2.map",
+      "size": 3402,
+      "sha256": "64ecd98a36597ab30dac959499a04a4fea2fcffc276a0e718c86b63151fbea16"
+    },
+    {
+      "name": "resources/mapperfiles/xbox/xmcota.map",
+      "size": 3705,
+      "sha256": "bb1532cf88045b5f85a4a02a8b4694aa8e4f27c4239e58b728bcc4d68ced6625"
+    },
+    {
+      "name": "resources/mapping/ASCII.TXT",
+      "size": 94975,
+      "sha256": "144ea972942b9f00450535e238b0ed2915a630186286484f4929e93a63553049"
+    },
+    {
+      "name": "resources/mapping/CAPITAL_SMALL.TXT",
+      "size": 33016,
+      "sha256": "4bcb2044ef0df4f1cec1fd324c4da25645a8f935b3c86a66435f1dff86eae91e"
+    },
+    {
+      "name": "resources/mapping/DECOMPOSITION.TXT",
+      "size": 40990,
+      "sha256": "037913ffc579dc8dbbcb901da33850f35e3ef85d6a802bfc385531e11429e65a"
+    },
+    {
+      "name": "resources/mapping/MAIN.TXT",
+      "size": 174816,
+      "sha256": "411d645fc46ecc0a1a2ba5a9ded8b8c9e2e06422441b29e10ab5418f256765c0"
+    },
+    {
+      "name": "resources/mapping-freedos.org/CP_30000.TXT",
+      "size": 6160,
+      "sha256": "8e0e93619433db4c7ba559585fb81a8f837d1923eac2b6386f976e25e2146194"
+    },
+    {
+      "name": "resources/mapping-freedos.org/CP_30006.TXT",
+      "size": 8201,
+      "sha256": "194cc48340a923f5fd9588c95c5625dce39ff842341165573f92874df0f0723d"
+    },
+    {
+      "name": "resources/mapping-freedos.org/CP_30034.TXT",
+      "size": 4866,
+      "sha256": "a261aed142aa3e542ee14bff7beb18fae76c66f5874294bd1ac02e1126ebba52"
+    },
+    {
+      "name": "resources/mapping-freedos.org/CP_60643.TXT",
+      "size": 5981,
+      "sha256": "798ba29522d7cbbae857b4acda6497e3c5a041e433c07e2e9ae9a6e9a1fd5680"
+    },
+    {
+      "name": "resources/mapping-freedos.org/CP_61667.TXT",
+      "size": 6166,
+      "sha256": "39cd08cb017badb3e0e293f61649d7565fc99e437c3a081636f47e4df5e8c62c"
+    },
+    {
+      "name": "resources/mapping-freedos.org/CP_62691.TXT",
+      "size": 6135,
+      "sha256": "d2c02a714e5014b026dd254488dbef81292dce6e1d4ba6b1b2b82c8e1cbd7ca2"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_1250.TXT",
+      "size": 9804,
+      "sha256": "4a3150478b2c3cc7da9aef374b6e8c97f8f774ed888f1d8900a3ae7f199e3558"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_1251.TXT",
+      "size": 9479,
+      "sha256": "b0c51350e91ecf6fbe250fcdc5b855afff1dccb6598a4d44cdf93f52a25f9a97"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_1252.TXT",
+      "size": 9629,
+      "sha256": "147f3ef25a59db4c25b22143bc61c734e2189877676255870e819b9765f09c87"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_1253.TXT",
+      "size": 9212,
+      "sha256": "fcc702cb8a1d7f388c42a92bbae85738595d16d041597b51423d29ab6c6ea3e9"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_1254.TXT",
+      "size": 9620,
+      "sha256": "ddad37548880ce4bc7c6572b74c6fd8d1f6265adbe79d12317a192e286fe4b1f"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_1255.TXT",
+      "size": 8578,
+      "sha256": "3146e801215aae8a05bd8e46492997945a8d266892b17c151f09618cdc024597"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_1256.TXT",
+      "size": 8931,
+      "sha256": "42a85a5047148639ae8f8d11806abf27f1f692a90c98343392b099b4a7a196cd"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_1257.TXT",
+      "size": 9492,
+      "sha256": "82456778dc5f39a7e0f0ae461645d216be3b4229e4116c472ae738654672e8f6"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_1258.TXT",
+      "size": 9482,
+      "sha256": "c1ea095fc5ef4e00d9e7668f2e574c67a875bed7b9e610a2410b8ca29d95ccbb"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_437.TXT",
+      "size": 10067,
+      "sha256": "ab1ffa61e3d12d95cd260d424e685a31d6e04ad5a906baa725bff3e68cd61e4a"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_737.TXT",
+      "size": 10100,
+      "sha256": "c844ab25c588c25facc5c8dcabeb71df4b4a521bf90cbf8825426f8b7845aaf6"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_775.TXT",
+      "size": 10040,
+      "sha256": "74cf401647e10624c0e637067a351a7da8d6970d4be9af0c33a2d6f0ef897595"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_850.TXT",
+      "size": 9913,
+      "sha256": "af25e03444588f2f8c966dd9cd053d1abfb2204002f1663bbcde08b83a68c8ce"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_852.TXT",
+      "size": 10212,
+      "sha256": "3927a96719d0287223f836cfb06346496ae01d07c2bc67dd908eabf0fbe51f5a"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_855.TXT",
+      "size": 9836,
+      "sha256": "93cd3f1a218e6b4f98db76c2c5115d6c6bd5a91c1253a502a3c1df5608125da3"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_856.TXT",
+      "size": 9584,
+      "sha256": "e52f2cddf3d8a5de24a9fcea57edf41e5bf73c80671cf325a53c771159f0e8e3"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_857.TXT",
+      "size": 9891,
+      "sha256": "d8a589eb24b6e7207f69d1eadceb7a6e0a18709038dc1d2822567519262ca1d4"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_860.TXT",
+      "size": 10119,
+      "sha256": "83f0dc2ae7002cb7a61407b8b9770ac29e33612074174913ac3776fdc9901930"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_861.TXT",
+      "size": 10100,
+      "sha256": "c12982956c752692cde5be7afddcc8b7dae058f8a082722604bfae66416600a8"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_862.TXT",
+      "size": 9670,
+      "sha256": "13cf14a56402a9495f873c17a6ebc9af8ed66c5b1f36a7e15f7bcf1143d21110"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_863.TXT",
+      "size": 9967,
+      "sha256": "54255ab4df37285be379ee94f7846be6b961fd0364a3bea7212d3ff929a0aeeb"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_864.TXT",
+      "size": 9834,
+      "sha256": "6d19c2a5a108b1828ccb320e3f2afe4cd2848576fbf673db2518beab1caf8ad1"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_865.TXT",
+      "size": 10086,
+      "sha256": "ce37cea6e1b089fa7dcd72a658377b69c637110fd67933f43150ff468e12a6af"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_866.TXT",
+      "size": 10039,
+      "sha256": "03a677b04deb92577311fc4adc1149c410040929ab6033f07f9abd0554ca7b21"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_869.TXT",
+      "size": 9592,
+      "sha256": "b23149ef462a069ec8beb8d12d98e39ab0c8fe185ffe95dc5c4edbe26fe102f0"
+    },
+    {
+      "name": "resources/mapping-unicode.org/CP_874.TXT",
+      "size": 8713,
+      "sha256": "50fccb1e28aa1db827beca7fa8138827331b33ab690f993ede736a11f24466df"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_1089.TXT",
+      "size": 3451,
+      "sha256": "7731637a0f5509f92b8f1f8c7f7a2c1052b91b373c4bde09390625c329bbb6fe"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_1111.TXT",
+      "size": 5117,
+      "sha256": "2365f03e659719f7a37635a0fa0f7365e49593ea58df233ab379c41db5040adc"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_1117.TXT",
+      "size": 6243,
+      "sha256": "a3f7f76da699ad46f89b2b60570b2ede830d3c296503a246413657227767035d"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_1270.TXT",
+      "size": 5730,
+      "sha256": "1db6c58dd52fd4f0876807ead796fb7e4ee423f58fb169ec11f32b443efe7f2b"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_1275.TXT",
+      "size": 5273,
+      "sha256": "c71fbf71ebb355a0f9994624323ed3a946350a6c9d174941cd2c349ed4424eba"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_1280.TXT",
+      "size": 5426,
+      "sha256": "f4c20267089fca9af08d3bbb325fb714fd507e43ec08090a69034e144eade3cd"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_1282.TXT",
+      "size": 5888,
+      "sha256": "9e4726e5465e358c7f9a869b0a7d3ec9b75e0bcba27b7d3e8e3845796d3b417b"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_1283.TXT",
+      "size": 5189,
+      "sha256": "493db240272e7192b2a533bd5a3f3f2543cc5dfa0ffbae8c6bf5b83631d7ee8a"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_28601.TXT",
+      "size": 4359,
+      "sha256": "599289e457b582c55e2ef26a4dd7011a183a374baae2c227a485d0cefcb770da"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_3021.TXT",
+      "size": 5282,
+      "sha256": "f45cad930deda562ff120cc4aa4429f73ce0fc71534a2f9c7533e3bf678bce38"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_3848.TXT",
+      "size": 3155,
+      "sha256": "3fdbd06427e5fc6be317dcdeaa1f6e761ba73d2b44c81e5e1c7ccff7da7447e8"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_58601.TXT",
+      "size": 8185,
+      "sha256": "925943162d835a85f93fb041bfeef80f3203e9425ed6661c604aab2e883d8c89"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_59620.TXT",
+      "size": 5913,
+      "sha256": "3b1aa89279a1c956497683b06c24626b530a003b95b5194218ea2d25f0e6383f"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_60270.TXT",
+      "size": 5431,
+      "sha256": "6d9eba1e1381b953d033f5d6cd3c93208a940bcdfe685d88e8bbace3c25aef6e"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_62318.TXT",
+      "size": 4934,
+      "sha256": "49e0a2ec73fdd68432e3e10d6a0cdc29f72c1a25ae25c9c7b6b4274d8144b98f"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_63342.TXT",
+      "size": 5323,
+      "sha256": "ec359e86408b9f6960543ec0a637f150b8d06e7c48ad196c031c15a86731e73d"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_65501.TXT",
+      "size": 4773,
+      "sha256": "cd7f6ed38c5115f126128605b0a7f248c2d9417879c9fb13d080492574d078d4"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_65502.TXT",
+      "size": 3919,
+      "sha256": "fd90f21bf5327cb034d2891bd3b30d0653825f430516d726ea26dd9b9b1535d5"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_65503.TXT",
+      "size": 3985,
+      "sha256": "3000942f34a035848e4e0eb846d09f22228b7e5a6b88344e90a9e0312c333cdf"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_65504.TXT",
+      "size": 4103,
+      "sha256": "3e1468c569f272cea56c55cfcd4d9e73edeb3eecb5c671a2c583dbc04a1d21a3"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_65506.TXT",
+      "size": 4584,
+      "sha256": "595a8c264db0e1c4745a31c2f8e182cadf0ffd02bb43754c12c982852386173b"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_708.TXT",
+      "size": 5215,
+      "sha256": "74201c7d6c8a51bf906e9925406b45b5ee1cc5f90068d3910ee8eb114d02b6bd"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_720.TXT",
+      "size": 5318,
+      "sha256": "f0ecfe8f8a56d74bf18a3317b94d82a631db673f909450eba34f630fd5e305d6"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_773.TXT",
+      "size": 6256,
+      "sha256": "e503ac86383a4b8561df9f8aeb4d8bd443d75961e4e412a9adf265e8199cf7cd"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_776.TXT",
+      "size": 8644,
+      "sha256": "61a16e231d16f2d71547d2f3a8f0d2ec0852ad7d40f81c4e7b823c5df1d32683"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_777.TXT",
+      "size": 8658,
+      "sha256": "ef2cde5f59359de1f9e5daf8b182d56346753c31dd808a7d276772c270346f7c"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_778.TXT",
+      "size": 8697,
+      "sha256": "09e6d323d381c82614b19030509eadb04bf9d34c5c40c8c6472721d34b233514"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_813.TXT",
+      "size": 4676,
+      "sha256": "0f0a8df0ea0517e961f59f714ed9bf03ac31a3dd0a489e2e04543e536c21976f"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_819.TXT",
+      "size": 4941,
+      "sha256": "2d1c6e6ce5579bcc8726bc6bc40ec297ba1f540c63e6f1106cd22e3a3360cea3"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_851.TXT",
+      "size": 5726,
+      "sha256": "ac5831f01b4a84c0e74420b89f78973a116757990fc1c135b37fe19b1ce0ddb0"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_853.TXT",
+      "size": 5801,
+      "sha256": "d16c5b294dc1ae29bec43f7cf8a14c5895f56ea3cc116c32e22635afd01bbb4f"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_878.TXT",
+      "size": 5805,
+      "sha256": "2de2eb3c107d8430413e82113533383e46e292bff3e00ceca92acb8cc4c032ff"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_899.TXT",
+      "size": 5933,
+      "sha256": "39bb88d7914062cb6502d6997560e335d8d26480644f085dc87951186449f547"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_912.TXT",
+      "size": 5953,
+      "sha256": "7da65b5e2000441f22172f25edac7d9e83c4e1cf5601ed7c5ca7b66fcd4eb7b2"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_913.TXT",
+      "size": 5010,
+      "sha256": "7602a1e7ac3f045d6250c71c880e44b0dce94a6b1526c69cb104165283a8230b"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_914.TXT",
+      "size": 5189,
+      "sha256": "f157dd70afebddd1189e51ff4e58a7179f50966673b334b2cbc80da7f87a70c3"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_915.TXT",
+      "size": 5562,
+      "sha256": "ddb0d4d5df485959e5f254cb3d668f20cdbe7325f828ae724ba15ceb7c846f03"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_916.TXT",
+      "size": 2933,
+      "sha256": "015729fcbc0177c01095cacf1d67477a65a6b8e7f1091caef5351bd28d19e7a0"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_919.TXT",
+      "size": 5342,
+      "sha256": "1ea4e590a6d3d827c1735f71667c86b189e80f1ec4adad68ee2cf89834498c1f"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_921.TXT",
+      "size": 5916,
+      "sha256": "94fa526833b664dcb3132ee93940f5e10fa2c9281f958ad04e6506d3dfa9b3f6"
+    },
+    {
+      "name": "resources/mapping-wikipedia.org/CP_922.TXT",
+      "size": 5742,
+      "sha256": "b5f1a3f9bced0b74e7f8acf18bbd2a7fc4f85f503100df0466b86113362a9d3a"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/arcade-1080p.preset",
+      "size": 421,
+      "sha256": "a0e16964aa23eb9fd3ccceb6033720965ac3a261f8fd40745286d29548e0eb19"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/arcade-1440p.preset",
+      "size": 421,
+      "sha256": "d49db5055025103f2b485c6240051fcb53f1c2fffe841d1ea60e1296cd3f323a"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/arcade-4k.preset",
+      "size": 421,
+      "sha256": "67f00d29bf2bde8fadb9f2cae6df051ad7eecdeb9fe7b9a3ebcadd2765dcee0c"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/arcade-sharp-1080p.preset",
+      "size": 390,
+      "sha256": "40abb3692b1d61fecff6165031e175d12e732bd7814543281e24ec6e596872ad"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/arcade-sharp-1440p.preset",
+      "size": 390,
+      "sha256": "601105197efc81bda340fef6be1bc4ce46f0d379fe3cb85c45f0bda662673feb"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/arcade-sharp-4k.preset",
+      "size": 390,
+      "sha256": "741cfd5449a440f9ba890aa3e65142e6bd90c560cbe07599a4d98b5afe8f65d3"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/cga-1080p.preset",
+      "size": 420,
+      "sha256": "246eedeb90086fb47d96395680c86aa847af510a8c0804e78838a8205379d476"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/cga-1440p.preset",
+      "size": 421,
+      "sha256": "541999b346ef585e4b3abfd59b7e801f987640d4be39820775503a1d4236d3f7"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/cga-4k.preset",
+      "size": 421,
+      "sha256": "4b010d8235c5b49181b4440a9d9c9cfffad2e593f955351e593c10595b4cceae"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/cga-720p.preset",
+      "size": 420,
+      "sha256": "9cab309070bde8dfd90f9e3288ebf93ab6ded3d932a9328c29a3ae8db98152b2"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/composite-1080p.preset",
+      "size": 420,
+      "sha256": "51368136ad326b7a9ae561f0ae2765e539ba2b8131efce27bbfa3c6a1cc3588b"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/composite-1440p.preset",
+      "size": 421,
+      "sha256": "59fdfb9eff8872fcc393977de496eaca4c9541e94f4aef1ddc514ee209a85b9f"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/composite-4k.preset",
+      "size": 421,
+      "sha256": "50f73341fc59074d017773e70c784e22cfa51aae35d628403feddd7677850a1a"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/ega-1080p.preset",
+      "size": 389,
+      "sha256": "847297ba77a6e913b18f7ee12864752533b0ef57b2d8ae0edb5f81900bd75cc8"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/ega-1440p.preset",
+      "size": 389,
+      "sha256": "3763fd2e182d1a4cdac13a6c885a2bc61d81cea70a555dd2a9b346255d2e11df"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/ega-4k.preset",
+      "size": 389,
+      "sha256": "ee3cbcd1d43b9061fa4f92d5e8326f6794d82efd220f801c094be4daf7e1cb41"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/ega-720p.preset",
+      "size": 389,
+      "sha256": "b2ca6c30ade33e5765264cf460df2cefbb1ecb8d5993c883a12933fe5b56df26"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/hercules.preset",
+      "size": 350,
+      "sha256": "55e7ccf0d9a5c3b100311143698ebc047b01539e3a81b9255d9e8f7e01e58913"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/monochrome-hires.preset",
+      "size": 350,
+      "sha256": "f2dc1becc1502caf2e53b9b375761de7a00fb869e78af1784bd6496a148a256b"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/monochrome-lowres.preset",
+      "size": 350,
+      "sha256": "5480f255390c6ab5a3c51c2058333b1da8e01ae4ac7ed892bb8c237d22e999f9"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/vga-1440p.preset",
+      "size": 350,
+      "sha256": "05ac35285913f92976d6312f6194850d668370a59df6f464097e321deb97c746"
+    },
+    {
+      "name": "resources/shader-presets/crt/crt-hyllian/vga-4k.preset",
+      "size": 351,
+      "sha256": "426f4e8188ef15034427fc150caa16237963e5abb538d17d59aadf1cb84cdf6e"
+    },
+    {
+      "name": "resources/shader-presets/misc/fixvideo/scanlines.preset",
+      "size": 70,
+      "sha256": "922d8dc0cbfda73882c01e1d431040552a1a2de6d316e6ee8a9331156966a394"
+    },
+    {
+      "name": "resources/shaders/_internal/checkerboard-dedither-linearize.glsl",
+      "size": 1191,
+      "sha256": "ac5b0b0fde6c9d997878738bc445cde7681df77172c581ee3e4167ee7035a10b"
+    },
+    {
+      "name": "resources/shaders/_internal/checkerboard-dedither-pass1.glsl",
+      "size": 2308,
+      "sha256": "6a640c5be56254da0f4f57010e16804213c8fa517835a4b5b22e41b2e8e12da8"
+    },
+    {
+      "name": "resources/shaders/_internal/checkerboard-dedither-pass2.glsl",
+      "size": 4251,
+      "sha256": "d04f60fa81fb78b33c146b6aaeca70c6c9b19f50eb84ade31ca09c8736fc1eee"
+    },
+    {
+      "name": "resources/shaders/_internal/checkerboard-dedither-pass3.glsl",
+      "size": 4095,
+      "sha256": "9f1290b510904a963aab8a59c183e1f53ba65f64925cd76608b284befb56fc6b"
+    },
+    {
+      "name": "resources/shaders/_internal/image-adjustments.glsl",
+      "size": 12744,
+      "sha256": "96421165fe22f5990d53da99dd853fd12002723f5ae26693c7a2378dc1c28b6e"
+    },
+    {
+      "name": "resources/shaders/_internal/integer-downscale.glsl",
+      "size": 664,
+      "sha256": "5368a4693a0d5fdc60725a5861f940f9023f86d6efd7a634e95c32cf8213701a"
+    },
+    {
+      "name": "resources/shaders/_internal/integer-upscale.glsl",
+      "size": 661,
+      "sha256": "f56a0316b1146ac7a19bcd698d287e0b87e0c7b25e97babe95ecd2c3d1f7e47b"
+    },
+    {
+      "name": "resources/shaders/crt/crt-hyllian.glsl",
+      "size": 20996,
+      "sha256": "288bf07ac2cbb5c0bf52f8424e009b055d450c649eb257a58b7a00fd6408b415"
+    },
+    {
+      "name": "resources/shaders/crt/vga-1080p-fake-double-scan.glsl",
+      "size": 5748,
+      "sha256": "cffcc2c949f2c91a2c1197429cea9c470b9947646a976616c62bb376d1721f11"
+    },
+    {
+      "name": "resources/shaders/crt/vga-1080p.glsl",
+      "size": 6624,
+      "sha256": "bf851052deed82a11f484d9a26b794de4ca8216e11099ad4727d796a01bfaa32"
+    },
+    {
+      "name": "resources/shaders/interpolation/bilinear.glsl",
+      "size": 761,
+      "sha256": "3828dfa7088137156e08145c8a7ebf55cf456c79af11c6fcfb69a7e5d10a9527"
+    },
+    {
+      "name": "resources/shaders/interpolation/catmull-rom.glsl",
+      "size": 4599,
+      "sha256": "bd2baef21359cf1937eef5a0894cffe70413584b637591a421eb442776d87a8a"
+    },
+    {
+      "name": "resources/shaders/interpolation/nearest.glsl",
+      "size": 881,
+      "sha256": "565025b27cda6cf8e1d3fd6941c643f315c9b64bd572cebae08fff020572e207"
+    },
+    {
+      "name": "resources/shaders/interpolation/sharp.glsl",
+      "size": 2390,
+      "sha256": "0dc6c806d674151b57abb0bd2fd1ca6ae9332d5a4759e754f860a226f9df5af2"
+    },
+    {
+      "name": "resources/shaders/scaler/advinterp2x.glsl",
+      "size": 2203,
+      "sha256": "aa9deec595980c10337cfa6aee1a824cfcd18b9d5f5b2bb6ce881cf71be72336"
+    },
+    {
+      "name": "resources/shaders/scaler/advinterp3x.glsl",
+      "size": 2944,
+      "sha256": "cf8f0d81578573abc9459fbb48276c4fcaa3f738106dc7465aed6bfdb5130f67"
+    },
+    {
+      "name": "resources/shaders/scaler/advmame2x.glsl",
+      "size": 2159,
+      "sha256": "c2dbae44649236d9a03bb09b9fa5313408cb33ea0267a8f2d344faeb2e449050"
+    },
+    {
+      "name": "resources/shaders/scaler/advmame3x.glsl",
+      "size": 2355,
+      "sha256": "14a8c19784b4c98dd7903f5fb3465a30c111399bd90feb305312b6065bb62c4c"
+    },
+    {
+      "name": "resources/shaders/scaler/xbr-lv2-3d.glsl",
+      "size": 14077,
+      "sha256": "963d2a583a8221630ad0f31084b3d4c0bbf6c084ac4c5629b349f6d75b83a3e7"
+    },
+    {
+      "name": "resources/shaders/scaler/xbr-lv2-noblend.glsl",
+      "size": 6827,
+      "sha256": "4b1defc421c2d91e83fd2c8e61ebc2052b4732d7e6313e1dc86e9390f98f5f8a"
+    },
+    {
+      "name": "resources/shaders/scaler/xbr-lv3.glsl",
+      "size": 10156,
+      "sha256": "f937124759dca0f40d5c289946fecfdaf6dc38e97b625026febf2680b7ac7fbe"
+    },
+    {
+      "name": "resources/translations/de.po",
+      "size": 562409,
+      "sha256": "571fcbbca487f222792492976f970a0a9bb4147710137ca542d0d7dedc49d6a1"
+    },
+    {
+      "name": "resources/translations/es.po",
+      "size": 454579,
+      "sha256": "25101e531ef27eab7b0b8480b419684f892cc30bb561807b4f532325013936ed"
+    },
+    {
+      "name": "resources/translations/fr.po",
+      "size": 534919,
+      "sha256": "0e77a5ec940e5a0204731b6f7fdf6969cefd8979002fc1e2f80fcb06094c9141"
+    },
+    {
+      "name": "resources/translations/it.po",
+      "size": 571596,
+      "sha256": "f367efbd5fae489623684f99d3e1387079174e99f722e45ecfd2f1c1643d6449"
+    },
+    {
+      "name": "resources/translations/nl.po",
+      "size": 563112,
+      "sha256": "2de3594b8c70df50cf1fdfb4125f8714e377ccb3a7e0515137361e762ea0c263"
+    },
+    {
+      "name": "resources/translations/pl.po",
+      "size": 470474,
+      "sha256": "0a5bf0adf89b18e8c4645d226d5b110b6d5607ad3f62d8501134cbfc8e2c70c4"
+    },
+    {
+      "name": "resources/translations/pt_BR.po",
+      "size": 454420,
+      "sha256": "8d42d63779babfeff255160bebeaf7ce04221094e5b08c18dd334bd6de424b46"
+    },
+    {
+      "name": "resources/translations/ru.po",
+      "size": 440718,
+      "sha256": "755062a356f90d8b067cb4eb47c5e1ebdd537789be10b693fd93c45b88190fac"
+    },
+    {
+      "name": "resources/webserver/index.html",
+      "size": 5691,
+      "sha256": "9640c64a63774375a044ffa8671794676dd7ca5420a0e616463a600dfc419c94"
+    },
+    {
+      "name": "resources/webserver/style-index.css",
+      "size": 1776,
+      "sha256": "a2a9bfe1e6645b21d370fa1a0fe4a922c7563cfcb1bd4c40f23e06e9e448e75b"
+    },
+    {
+      "name": "slirp-0.dll",
+      "size": 126464,
+      "sha256": "f8089d627ddd2938ec53a3ed91d8438ec15be69e3537827515cfdfe327256bed"
+    },
+    {
+      "name": "vccorlib140.dll",
+      "size": 352384,
+      "sha256": "19839407c3fdbc824e5bce189bf68ddf8097f12ec28b757797ffa0415c144ddd"
+    },
+    {
+      "name": "vcruntime140.dll",
+      "size": 124544,
+      "sha256": "d5e4d9a3e835fa679450145d6a7d94e36573a509317111904d9b3712c30d9066"
+    },
+    {
+      "name": "vcruntime140_1.dll",
+      "size": 49792,
+      "sha256": "1f2d41c4aa5db0bc33ebf7b66d72943a817d7ce6cbe880502a9403823633093f"
+    },
+    {
+      "name": "vcruntime140_threads.dll",
+      "size": 38528,
+      "sha256": "219915cf20822f34d5e7c1fdd4e21ae7f3396881096c51036225fb8f84b47afa"
+    },
+    {
+      "name": "zlib-ng2.dll",
+      "size": 333824,
+      "sha256": "c457495bcec12c6dd5bec2bb3de3d016fafd66e60e9d6bf1e2f9be0683e07cc6"
+    },
+    {
+      "name": "zlib1.dll",
+      "size": 90112,
+      "sha256": "058952f7c821f47cf68ee315f26f083e4c588673ed107b6f10ddf5aa7f427ac3"
+    }
+  ]
+}

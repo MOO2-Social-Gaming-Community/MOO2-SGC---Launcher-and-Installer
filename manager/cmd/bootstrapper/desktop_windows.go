@@ -18,7 +18,7 @@ func showSetupError(err error) {
 	if len(os.Args) > 1 {
 		return
 	}
-	text, _ := syscall.UTF16PtrFromString("MOO2-SGC setup could not finish.\n\n" + err.Error() + "\n\nSee %APPDATA%\\MOO2-SGC\\stable\\logs\\bootstrap.log when available.")
+	text, _ := syscall.UTF16PtrFromString("MOO2-SGC setup could not finish.\n\n" + err.Error() + "\n\nSee C:\\Games\\MOO2-SGC\\logs\\bootstrap.log for new portable installs, or the explicit installation root when updating an older install.")
 	title, _ := syscall.UTF16PtrFromString("MOO2-SGC Setup")
 	_, _, _ = syscall.NewLazyDLL("user32.dll").NewProc("MessageBoxW").Call(0, uintptr(unsafe.Pointer(text)), uintptr(unsafe.Pointer(title)), 0x10)
 }

@@ -1,3 +1,7 @@
+# 0.4.5 architecture extension
+
+The current portable-root contract is defined in [PORTABLE-HARNESS.md](PORTABLE-HARNESS.md). It adds a fixed named baseline workspace, private canonical b23 source, exact local runtime verification and transactional root-game replacement. Original generation/profile/update logic remains for other profiles and preexisting nonportable installs. The following earlier design remains background except where this contract supersedes it.
+
 # Application architecture — 0.4.2
 
 The distribution design is specified in [DISTRIBUTION-ARCHITECTURE.md](DISTRIBUTION-ARCHITECTURE.md); trust and rollback details are in [SECURITY-AND-TRUST.md](SECURITY-AND-TRUST.md).

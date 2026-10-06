@@ -110,7 +110,7 @@ with tempfile.TemporaryDirectory(prefix='sgc-https-fixture-') as td:
     time.sleep(.05)
    check('signed update helper restarts a new real launcher session',new_url is not None)
    check('restart preserved user data',marker_save.read_text()=='preserve user data')
-   new_where=tuple(new_url.split('/#'));check('restarted launcher reports 0.4.1',api('state',where=new_where)['version']==v)
+   new_where=tuple(new_url.split('/#'));check('restarted launcher reports '+v,api('state',where=new_where)['version']==v)
    api('action',{'action':'quit'},where=new_where)
    for _ in range(200):
     if not (root/'installation.lock').exists():break

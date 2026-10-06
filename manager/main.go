@@ -8,6 +8,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
+	"time"
 )
 
 func openBrowser(u string) error {
@@ -33,8 +34,10 @@ func main() {
 	noBrowser := flag.Bool("no-browser", false, "print the loopback URL without opening a browser")
 	port := flag.Int("port", 0, "local UI port; default chooses an available port")
 	ver := flag.Bool("version", false, "print version")
-	cmd := flag.String("command", "serve", "serve, prepare, verify, or resolve")
-	profile := flag.String("profile", "community", "profile ID for CLI commands")
+	cmd := flag.String("command", "serve", "serve, prepare, prepare-play, play, verify, recover-portable, or resolve")
+	profile := flag.String("profile", "baseline", "profile ID for CLI commands")
+	source := flag.String("source", "", "owned source path (blank discovers the canonical root baseline archive)")
+	fullscreen := flag.Bool("fullscreen", false, "fullscreen for this launch only")
 	flag.Parse()
 	if *ver {
 		fmt.Println(Version)
@@ -79,6 +82,46 @@ func main() {
 		switch *cmd {
 		case "serve":
 			e = serve(m, !*noBrowser, *port)
+		case "prepare-play":
+			var p Profile
+			p, e = m.loadProfile(*profile)
+			if e == nil {
+				var v any
+				v, e = m.prepareForPlay(p, *source)
+				if e == nil {
+					fmt.Println(encode(v))
+				}
+			}
+		case "recover-portable":
+			var v any
+			v, e = m.recoverPortableBaseline()
+			if e == nil {
+				fmt.Println(encode(v))
+			}
+		case "play":
+			var p Profile
+			p, e = m.loadProfile(*profile)
+			if *fullscreen {
+				p.Fullscreen = true
+			}
+			if e == nil {
+				var v any
+				v, e = m.launch(p)
+				if e == nil {
+					fmt.Println(encode(v))
+				}
+			}
+			if e == nil {
+				for {
+					m.mu.Lock()
+					running := m.running != nil
+					m.mu.Unlock()
+					if !running {
+						break
+					}
+					time.Sleep(100 * time.Millisecond)
+				}
+			}
 		case "prepare":
 			var p Profile
 			p, e = m.loadProfile(*profile)

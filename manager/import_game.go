@@ -263,23 +263,59 @@ func (m *Manager) prepareForPlay(p Profile, source string) (any, error) {
 				return nil, e
 			}
 		} else {
-			if _, e = m.importPayload("base", path); e != nil {
+			// The Prepare-for-play source field is an owned-game source, not a
+			// distribution payload slot. Content-detect and fingerprint recognized
+			// MOO2 ZIPs here so CD/manual/Steam archives work exactly like folders.
+			// The separate Packages & updates importer retains legacy payload import.
+			if _, e = m.importKnownZip(path); e != nil {
 				return nil, e
 			}
 		}
 	}
 	if _, _, _, e := m.payload("base"); e != nil {
 		choices := detectGameFolders()
-		if len(choices) != 1 {
-			return nil, errors.New("owned game source required: choose a detected game folder, paste its path, or import your recognized base.zip. The game is not downloaded or redistributed")
+		if m.Portable {
+			candidate, err := m.portableSource()
+			if err == nil {
+				if _, err = m.importKnownZip(candidate); err != nil {
+					return nil, err
+				}
+				choices = nil
+			} else if !os.IsNotExist(err) {
+				return nil, err
+			}
 		}
-		if _, e = m.importFolder(choices[0]); e != nil {
-			return nil, e
+		if _, _, _, err := m.payload("base"); err == nil {
+			choices = nil
+		} else {
+			if len(choices) != 1 {
+				return nil, errors.New("owned game source required: choose a detected game folder, paste its path, or import your recognized base.zip. The game is not downloaded or redistributed")
+			}
+			if _, e = m.importFolder(choices[0]); e != nil {
+				return nil, e
+			}
 		}
 	}
 	edition, e := m.currentEdition()
 	if e != nil {
 		return nil, e
+	}
+	// Upgrade pre-0.4.3 source receipts when a verified portable baseline ZIP is
+	// available. Earlier imports intentionally omitted RKERNEL.COM, which is fine
+	// for single-player but not for 1.40/1.50 Network Game. Re-importing records
+	// the complete known source without touching the owned archive.
+	if m.Portable && engineRank(p.Engine) >= 140 && !edition.Harness {
+		if candidate, pe := m.portableSource(); pe == nil {
+			if _, pe = m.importKnownZip(candidate); pe != nil {
+				return nil, pe
+			}
+			edition, e = m.currentEdition()
+			if e != nil {
+				return nil, e
+			}
+		} else if !os.IsNotExist(pe) {
+			return nil, pe
+		}
 	}
 	if _, e = expectedLineage(edition, p.Engine); e != nil {
 		return nil, e
@@ -296,7 +332,17 @@ func (m *Manager) prepareForPlay(p Profile, source string) (any, error) {
 			}
 		}
 	}
-	if len(m.runtimeCandidates()) == 0 {
+	if m.Portable && platform() == "windows/amd64" {
+		// Never substitute a globally installed emulator for the verified bundle.
+		if !exists(m.harnessRuntimePath()) {
+			if _, e := m.installRuntime(); e != nil {
+				return nil, fmt.Errorf("portable DOSBox runtime: %w", e)
+			}
+		}
+		if _, e := m.localHarnessRuntime(); e != nil {
+			return nil, e
+		}
+	} else if len(m.runtimeCandidates()) == 0 {
 		if _, e := m.installRuntime(); e != nil {
 			return nil, fmt.Errorf("DOSBox runtime: %w", e)
 		}
@@ -312,7 +358,7 @@ func (m *Manager) prepareForPlay(p Profile, source string) (any, error) {
 // snapshot has its own container hash, so verify its actual files against the
 // compiled baseline rather than trusting an arbitrary manifest/source hash.
 func verifyBaseIdentity(mf Manifest, game string) error {
-	if mf.Schema == 2 {
+	if mf.Schema == 2 || mf.Schema == 3 {
 		if !strings.HasPrefix(mf.SourceBaseKind, "known-edition-v2:") {
 			return errors.New("missing source edition")
 		}

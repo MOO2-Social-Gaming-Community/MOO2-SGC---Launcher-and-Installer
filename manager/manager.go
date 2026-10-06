@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"moo2manager/shared/layout"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -55,6 +56,7 @@ type Settings struct {
 }
 type Manager struct {
 	Root, Data     string
+	Portable       bool
 	AppRoot        string
 	mu             sync.Mutex
 	op             sync.Mutex
@@ -81,7 +83,11 @@ func newManager(root, data string) (*Manager, error) {
 			return nil, e
 		}
 	}
-	m := &Manager{Root: root, Data: data, job: Job{Message: "Ready. Select a profile, then Prepare environment."}}
+	portable, e := layout.IsPortable(root)
+	if e != nil {
+		return nil, e
+	}
+	m := &Manager{Root: root, Data: data, Portable: portable, job: Job{Message: "Ready. Prepare the portable baseline first; community patches remain optional."}}
 	for _, p := range defaultProfiles() {
 		f := filepath.Join(data, "profiles", p.ID+".json")
 		if _, e = os.Stat(f); os.IsNotExist(e) {
@@ -158,6 +164,9 @@ func (m *Manager) profiles() ([]Profile, error) {
 	return out, nil
 }
 func (m *Manager) activePath(id string) (string, string, error) {
+	if m.isPortableBaseline(id) {
+		return m.portableActive()
+	}
 	if !idPattern.MatchString(id) {
 		return "", "", errors.New("invalid profile ID")
 	}
@@ -201,6 +210,12 @@ func (m *Manager) payload(which string) (string, string, string, error) {
 	return "", "", "", fmt.Errorf("missing %s; import your local archive in Packages & updates, or retain the existing private payloads folder", name)
 }
 func (m *Manager) build(p Profile) (any, error) {
+	if m.isPortableBaseline(p.ID) && p.Engine != "1.40b23" {
+		return nil, errors.New("portable baseline is fixed at 1.40b23; choose or duplicate a different profile for another engine")
+	}
+	if m.Portable && exists(m.baselineJournal()) {
+		return nil, errors.New("recover the interrupted baseline transaction first")
+	}
 	r, e := resolve(p)
 	if e != nil {
 		return nil, e
@@ -256,7 +271,7 @@ func (m *Manager) build(p Profile) (any, error) {
 			return nil, e
 		}
 	}
-	// Full local data lives on the emulated C: drive, not the archive owner's H: path.
+	// The harness mounts the executable directory; the relative CD pointer stays portable.
 	if e = writeDefaultGameConfig(game); e != nil {
 		return nil, e
 	}
@@ -277,26 +292,27 @@ func (m *Manager) build(p Profile) (any, error) {
 	old, _, oe := m.activePath(p.ID)
 	if oe == nil {
 		var om Manifest
-		if e = readJSON(filepath.Join(old, "manifest.json"), &om); e != nil {
+		if e = readWorkspaceManifest(old, &om); e != nil {
 			return nil, e
 		}
 		// Never migrate personal state across engine versions automatically.
 		if om.Profile.Engine == p.Engine {
 			m.progress("Preserving this profile's saves and editable settings; retaining the previous generation…")
-			e = walkRegular(filepath.Join(old, "game"), func(n, src string) error {
-				if isUserFile(n) {
-					return copyFile(src, filepath.Join(game, filepath.FromSlash(n)))
-				}
-				return nil
-			})
+			// Old launcher defaults are NOT copied over the proven harness audio on
+			// first migration. Saves survive; schema-3 user audio stays editable.
+			e = preserveUserState(filepath.Join(old, "game"), game, om.Schema < 3)
 			if e != nil {
 				return nil, e
 			}
 		}
 	} else if !os.IsNotExist(oe) {
 		return nil, oe
+	} else if m.isPortableBaseline(p.ID) {
+		if e = m.preserveUnregisteredBaseline(game); e != nil {
+			return nil, e
+		}
 	}
-	manifest := Manifest{Schema: 2, Lineage: lineage, Manager: Version, Created: time.Now().UTC().Format(time.RFC3339Nano), Profile: p, Resolution: r, SourceBase: baseHash, Files: map[string]FileRecord{}}
+	manifest := Manifest{Schema: 3, Lineage: lineage, Manager: Version, Created: time.Now().UTC().Format(time.RFC3339Nano), Profile: p, Resolution: r, SourceBase: baseHash, Files: map[string]FileRecord{}}
 	manifest.SourceBaseKind = "known-edition-v2:" + edition.ID
 	if p.Engine == "1.50.26" {
 		manifest.SourcePatch = PatchHash
@@ -327,6 +343,28 @@ func (m *Manager) build(p Profile) (any, error) {
 	if !v.OK {
 		return nil, fmt.Errorf("staging verification failed: %v", v.Bad)
 	}
+	if m.isPortableBaseline(p.ID) {
+		// Write project-owned config before activation; an unwritable config must
+		// not replace a previously working game directory.
+		cfg, e := dosboxConfig(filepath.Join(m.Root, "game"), p)
+		if e != nil {
+			return nil, e
+		}
+		if e = os.MkdirAll(filepath.Join(m.Root, "config"), 0700); e != nil {
+			return nil, e
+		}
+		if e = atomicWrite(filepath.Join(m.Root, "config", "moo2.conf"), []byte(cfg)); e != nil {
+			return nil, e
+		}
+		result, e := m.commitPortableBaseline(stage, p, v)
+		if e != nil {
+			return nil, e
+		}
+		if e = m.saveProfile(p); e != nil {
+			return nil, e
+		}
+		return result, nil
+	}
 	generation := "g" + fmt.Sprint(time.Now().UnixNano())
 	dest := filepath.Join(parent, generation)
 	cfg, e := dosboxConfig(filepath.Join(dest, "game"), p)
@@ -355,10 +393,10 @@ func verifyDir(dir string) (VerifyResult, error) {
 	if e := noSymlinkAncestors(dir); e != nil {
 		return v, e
 	}
-	if e := readJSON(filepath.Join(dir, "manifest.json"), &mf); e != nil {
+	if e := readWorkspaceManifest(dir, &mf); e != nil {
 		return v, e
 	}
-	if (mf.Schema != 1 && mf.Schema != 2) || len(mf.Files) == 0 || len(mf.Files) > 10000 {
+	if (mf.Schema != 1 && mf.Schema != 2 && mf.Schema != 3) || len(mf.Files) == 0 || len(mf.Files) > 10000 {
 		return v, errors.New("unsupported or empty manifest")
 	}
 	resolution, e := resolve(mf.Profile)
@@ -408,7 +446,7 @@ func verifyDir(dir string) (VerifyResult, error) {
 			return nil
 		}
 		switch strings.ToLower(filepath.Ext(n)) {
-		case ".exe", ".com", ".dll", ".lbx", ".lua", ".cfg":
+		case ".exe", ".com", ".dll", ".lbx", ".lua", ".cfg", ".conf", ".bat":
 			v.Bad = append(v.Bad, n+" (unmanaged code/config/data)")
 		}
 		return nil
@@ -428,6 +466,15 @@ func verifyDir(dir string) (VerifyResult, error) {
 	}
 	if e = requireHash(filepath.Join(game, exe), want); e != nil {
 		v.Bad = append(v.Bad, exe+" (exact engine check)")
+	}
+	// 1.40b23 and 1.50 networking both require the LAN-fixed RKERNEL.COM.
+	// Older workspaces created before 0.4.5 may have launched single-player
+	// successfully while lacking this file; fail verification before MOO2 can
+	// crash in its Network Game path and direct the user to Repair.
+	if engineRank(mf.Profile.Engine) >= 140 {
+		if e = requireHash(filepath.Join(game, "RKERNEL.COM"), Kernel140Hash); e != nil {
+			v.Bad = append(v.Bad, "RKERNEL.COM (required 1.40b23/1.50 network kernel; Prepare / repair this profile)")
+		}
 	}
 	// Include active editable CFG contents in the multiplayer fingerprint; not display/network settings.
 	h := sha256.New()
@@ -450,6 +497,23 @@ func verifyDir(dir string) (VerifyResult, error) {
 		h.Write(b)
 		h.Write([]byte{0})
 	}
+	// Conservative compatibility identity covers the installed immutable game
+	// assets as well as selected CFGs. Different CD/store LBX variants must not
+	// look identical merely because their DOS executables match.
+	contentNames := []string{}
+	for n := range mf.Files {
+		ext := strings.ToLower(filepath.Ext(n))
+		if (ext == ".lbx" && !isUserFile(n)) || ext == ".com" || ext == ".lua" || n == exe {
+			contentNames = append(contentNames, n)
+		}
+	}
+	sort.Strings(contentNames)
+	for _, n := range contentNames {
+		h.Write([]byte(strings.ToUpper(n)))
+		h.Write([]byte{0})
+		h.Write([]byte(mf.Files[n].SHA256))
+		h.Write([]byte{0})
+	}
 	v.Fingerprint = hex.EncodeToString(h.Sum(nil))
 	sort.Strings(v.Bad)
 	sort.Strings(v.UserChanges)
@@ -466,6 +530,9 @@ func (m *Manager) verify(id string) (VerifyResult, error) {
 	return v, e
 }
 func (m *Manager) history(id string) ([]map[string]string, error) {
+	if m.isPortableBaseline(id) {
+		return m.portableHistory()
+	}
 	if !idPattern.MatchString(id) {
 		return nil, errors.New("invalid profile")
 	}
@@ -491,6 +558,9 @@ func (m *Manager) history(id string) ([]map[string]string, error) {
 	return out, nil
 }
 func (m *Manager) activate(id, generation string) (any, error) {
+	if m.isPortableBaseline(id) {
+		return m.activatePortable(generation)
+	}
 	if !idPattern.MatchString(id) || !idPattern.MatchString(generation) {
 		return nil, errors.New("invalid generation or profile")
 	}
@@ -503,7 +573,7 @@ func (m *Manager) activate(id, generation string) (any, error) {
 		return nil, fmt.Errorf("generation is corrupt: %v", v.Bad)
 	}
 	var mf Manifest
-	if e = readJSON(filepath.Join(dir, "manifest.json"), &mf); e != nil {
+	if e = readWorkspaceManifest(dir, &mf); e != nil {
 		return nil, e
 	}
 	if mf.Profile.ID != id {
@@ -520,7 +590,11 @@ func (m *Manager) removeEnvironment(id string) (any, error) {
 	if !idPattern.MatchString(id) {
 		return nil, errors.New("invalid profile")
 	}
-	e := os.Remove(filepath.Join(m.Data, "active", id+".json"))
+	p := filepath.Join(m.Data, "active", id+".json")
+	if m.isPortableBaseline(id) {
+		p = filepath.Join(m.Root, "state", "baseline-active.json")
+	}
+	e := os.Remove(p)
 	if e != nil {
 		return nil, e
 	}
@@ -541,7 +615,7 @@ func (m *Manager) exportDiagnostics(id string) (any, error) {
 		return nil, e
 	}
 	v, ve := m.verify(id)
-	report := map[string]any{"schema": 1, "manager": Version, "platform": platform(), "profile": p, "resolution": r, "verification": v, "runtime_candidates": m.runtimeCandidates(), "live_prsl": false, "new_chat": false, "saved_games_included": false, "timestamp": time.Now().UTC().Format(time.RFC3339)}
+	report := map[string]any{"schema": 1, "manager": Version, "platform": platform(), "profile": p, "resolution": r, "verification": v, "runtime_candidates": m.runtimeCandidates(), "live_prsl": false, "new_chat": false, "saved_games_included": false, "portable_root": m.Root, "portable": m.Portable, "harness_contract": "0.3.0 handoff / DOSBox Staging 0.83.0", "timestamp": time.Now().UTC().Format(time.RFC3339)}
 	if ve != nil {
 		report["verification_error"] = ve.Error()
 	}
@@ -568,6 +642,6 @@ func (m *Manager) state() (any, error) {
 	m.mu.Lock()
 	j, r, exit := m.job, m.runningProfile, m.lastExit
 	m.mu.Unlock()
-	return map[string]any{"version": Version, "platform": platform(), "profiles": ps, "catalog": catalog(), "active": active, "history": hist, "job": j, "running": r, "last_exit": exit, "data_path": m.Data, "runtime_candidates": m.runtimeCandidates(), "settings": m.getSettings(), "runtime_recipe": runtimeRecipeForPlatform(), "prsl_available": false, "chat_available": false, "distribution": m.distributionStatus(), "source": m.sourceStatus(), "effective_baseline": "1.40b23"}, nil
+	return map[string]any{"portable": m.Portable, "portable_root": m.Root, "portable_recovery_pending": m.Portable && exists(m.baselineJournal()), "default_profile": "baseline", "version": Version, "platform": platform(), "profiles": ps, "catalog": catalog(), "active": active, "history": hist, "job": j, "running": r, "last_exit": exit, "data_path": m.Data, "runtime_candidates": m.runtimeCandidates(), "settings": m.getSettings(), "runtime_recipe": runtimeRecipeForPlatform(), "network_services": networkServices(), "prsl_available": false, "chat_available": false, "distribution": m.distributionStatus(), "source": m.sourceStatus(), "effective_baseline": "1.40b23"}, nil
 }
 func encode(v any) string { b, _ := json.MarshalIndent(v, "", "  "); return string(b) }

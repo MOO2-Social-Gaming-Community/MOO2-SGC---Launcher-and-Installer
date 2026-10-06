@@ -158,7 +158,7 @@ func TestDOSBoxRoles(t *testing.T) {
 			if e != nil {
 				t.Fatal(e)
 			}
-			if !strings.Contains(s, "ORION150.EXE /skipintro") {
+			if role != "standalone" && !strings.Contains(s, "ORION150.EXE") {
 				t.Fatal(s)
 			}
 			if role == "host" && !strings.Contains(s, "IPXNET STARTSERVER 21300") {
@@ -176,7 +176,7 @@ func TestDOSBoxRoles(t *testing.T) {
 func TestOriginalLaunchExecutable(t *testing.T) {
 	p := defaultProfiles()[2]
 	s, e := dosboxConfig(t.TempDir(), p)
-	if e != nil || strings.Contains(s, "ORION150.EXE") || !strings.Contains(s, "ORION2.EXE /skipintro") {
+	if e != nil || strings.Contains(s, "ORION150.EXE") || gameEntrypoint(p) != "ORION2.EXE" {
 		t.Fatalf("%s %v", s, e)
 	}
 }
@@ -194,5 +194,49 @@ func TestUpstreamNumericVersions(t *testing.T) {
 func TestUpstreamFailureDoesNotGuess(t *testing.T) {
 	if _, e := parseUpstreamVersions("no release links"); e == nil {
 		t.Fatal("guessed version")
+	}
+}
+
+func TestDopefishRelayConfigForCreateAndJoin(t *testing.T) {
+	for _, role := range []string{"host", "join"} {
+		p := validProfile()
+		p.Role = role
+		p.NetworkService = "dopefish"
+		p.Host = "ignored.example"
+		p.Port = 21300
+		s, e := dosboxConfig(t.TempDir(), p)
+		if e != nil {
+			t.Fatal(e)
+		}
+		if !strings.Contains(s, "IPXNET CONNECT moo2.thedopefish.com 213") {
+			t.Fatal(s)
+		}
+		if strings.Contains(s, "IPXNET STARTSERVER") || strings.Contains(s, "ignored.example") {
+			t.Fatal(s)
+		}
+	}
+}
+
+func TestFutureSGCNetworkServiceIsReserved(t *testing.T) {
+	p := validProfile()
+	p.Role = "host"
+	p.NetworkService = "sgc"
+	if _, e := resolve(p); e == nil || !strings.Contains(e.Error(), "future matchmaking") {
+		t.Fatal(e)
+	}
+}
+
+func TestDirectJoinAllowsSafeHostname(t *testing.T) {
+	p := validProfile()
+	p.Role = "join"
+	p.NetworkService = "direct"
+	p.Host = "lan-host.example"
+	p.Port = 21300
+	if _, e := resolve(p); e != nil {
+		t.Fatal(e)
+	}
+	p.Host = "bad host & exit"
+	if _, e := resolve(p); e == nil {
+		t.Fatal("unsafe hostname accepted")
 	}
 }

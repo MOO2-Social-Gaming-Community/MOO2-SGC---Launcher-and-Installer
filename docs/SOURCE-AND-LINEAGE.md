@@ -1,3 +1,9 @@
+# Current 0.4.5 baseline policy
+
+The canonical source is now the user-verified CD-derived **1.40b23** archive. It is imported directly; the historical CD chain below remains a supported fallback, not the default fresh-session path. See [PORTABLE-HARNESS](PORTABLE-HARNESS.md) for alternate executable detection, RKERNEL normalization, fixed root and default profile. Optional 1.50.26 remains independent.
+
+---
+
 # Supported sources and installation lineage — 0.4.2
 
 ## Source classification is not a filename guess

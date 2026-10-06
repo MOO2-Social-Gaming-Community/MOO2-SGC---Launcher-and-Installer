@@ -185,6 +185,8 @@ func (s *localServer) action(w http.ResponseWriter, r *http.Request) {
 		}
 	case "game-import":
 		work = func() (any, error) { return s.manager.importFolder(a.SourcePath) }
+	case "portable-recover":
+		work = s.manager.recoverPortableBaseline
 	case "prepare":
 		work = func() (any, error) { return s.manager.build(a.Profile) }
 	case "save":

@@ -20,3 +20,7 @@ go.sum text eol=lf
 # Prebuilt release inputs are byte-exact; normalize neither metadata nor signatures.
 /release/*/** -text
 /manager/assets/base-files.json text eol=lf
+
+# Byte-exact validated harness configuration and source receipt inputs.
+*.conf text eol=lf
+/manager/assets/harness/** -text
