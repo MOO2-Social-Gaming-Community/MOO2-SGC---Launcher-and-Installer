@@ -327,7 +327,7 @@ func dosboxConfig(game string, p Profile) (string, error) {
 	// Networking is transport-specific while the in-game Create/Join role remains
 	// MOO2's responsibility. Direct sessions start/connect to a local IPX tunnel;
 	// relay services connect every participant to the same tunnel endpoint.
-	lines := []string{base, "[ipx]", "ipx=true", "[autoexec]", "@echo off", `mount c "` + game + `"`, "c:"}
+	lines := []string{base, "[ipx]", "ipx=true", "[autoexec]", "@echo off", `mount c "` + game + `"`, "c:", `cd \`}
 	switch effectiveNetworkService(p) {
 	case "direct":
 		if p.Role == "host" {
@@ -365,6 +365,14 @@ func (m *Manager) launch(p Profile) (any, error) {
 	if e != nil {
 		return nil, errors.New("prepare this profile before launching")
 	}
+	game := filepath.Join(dir, "game")
+	kernel := inspectNetworkKernel(game, p.Engine)
+	if e = atomicJSON(filepath.Join(m.Data, "logs", "last-network-preflight.json"), map[string]any{"launcher": m.applicationIdentity(), "profile": p.ID, "engine": p.Engine, "kernel": kernel}); e != nil {
+		return nil, e
+	}
+	if !kernel.OK {
+		return nil, fmt.Errorf("MOO2-SGC %s blocked launch: RKERNEL.COM is missing or invalid at %s (game directory: %s). Import the complete owned source or Network kernel ZIP, then Prepare / repair selected profile. No DOSBox process started", Version, kernel.KernelPath, game)
+	}
 	v, e := verifyDir(dir)
 	if e != nil {
 		return nil, e
@@ -393,7 +401,6 @@ func (m *Manager) launch(p Profile) (any, error) {
 			return nil, e
 		}
 	}
-	game := filepath.Join(dir, "game")
 	cfg, e := dosboxConfig(game, p)
 	if e != nil {
 		return nil, e
@@ -415,7 +422,16 @@ func (m *Manager) launch(p Profile) (any, error) {
 	}
 	args := dosboxArguments(cfgPath, game, p)
 	fmt.Fprintln(logfile, "MOO2-SGC", Version, "engine", p.Engine, "runtime", exe)
+	fmt.Fprintln(logfile, "Working directory:", game)
+	fmt.Fprintln(logfile, "Network service:", effectiveNetworkService(p), "role:", p.Role)
+	fmt.Fprintln(logfile, "Kernel preflight:", encode(kernel))
 	fmt.Fprintln(logfile, "Arguments:", encode(args))
+	executable, _ := os.Executable()
+	launchRecord := map[string]any{"launcher_version": Version, "launcher_executable": executable, "application_root": m.distributionRoot(), "data_root": m.Data, "profile": p.ID, "engine": p.Engine, "game_path": game, "working_directory": game, "game_executable": filepath.Join(game, gameEntrypoint(p)), "runtime": exe, "arguments": args, "network_service": effectiveNetworkService(p), "kernel": kernel, "log": logpath}
+	if e = atomicJSON(filepath.Join(m.Data, "logs", "last-launch.json"), launchRecord); e != nil {
+		logfile.Close()
+		return nil, e
+	}
 	cmd := exec.Command(exe, args...)
 	cmd.Dir = game
 	cmd.Stdout = logfile
@@ -447,7 +463,7 @@ func (m *Manager) launch(p Profile) (any, error) {
 			m.lastExit = "DOSBox exit: " + e.Error() + ". Inspect " + logpath
 		}
 	}()
-	return map[string]any{"pid": cmd.Process.Pid, "log": logpath, "arguments": args, "game_path": game, "configuration": cfg, "fingerprint": v.Fingerprint, "status": "DOSBox process started; game and IPX connection are not yet verified", "instructions": "In MOO2 choose Multiplayer / Network, then Start New Game or Join Game. Match engine and mod fingerprints on both machines."}, nil
+	return map[string]any{"pid": cmd.Process.Pid, "log": logpath, "arguments": args, "game_path": game, "configuration": cfg, "fingerprint": v.Fingerprint, "launcher_version": Version, "kernel": kernel, "working_directory": game, "network_service": effectiveNetworkService(p), "status": "DOSBox process started; game and IPX connection are not yet verified", "instructions": "In MOO2 choose Multiplayer / Network, then Start New Game or Join Game. Match engine and mod fingerprints on both machines."}, nil
 }
 func (m *Manager) refreshPatch() (any, error) {
 	dst := filepath.Join(m.Data, "cache", "patch-1.50.26.zip")

@@ -43,9 +43,6 @@ func normalizeHarnessGame(game string, s SourceEdition, target string) error {
 	if engineRank(target) < 140 {
 		return nil
 	}
-	if !s.Harness {
-		return errors.New("this older imported snapshot omitted RKERNEL.COM. Re-import your original CD/Steam/baseline ZIP or folder; it remains unchanged")
-	}
 	exe := filepath.Join(game, "ORION2.EXE")
 	if s.EngineFile != "" {
 		b, e := os.ReadFile(exe)
@@ -83,7 +80,7 @@ func normalizedBaseFiles(s SourceEdition, target string) []BaseFile {
 	for _, f := range expectedBaseFiles(s, target) {
 		records[f.Name] = f
 	}
-	if engineRank(target) >= 140 && s.Harness {
+	if engineRank(target) >= 140 {
 		records["RKERNEL.COM"] = BaseFile{"RKERNEL.COM", 31095, Kernel140Hash}
 		if s.EngineFile != "" || engineRank(s.Version) < 140 {
 			records["ORION131.EXE"] = BaseFile{"ORION131.EXE", 2612010, BaseEngineHash}

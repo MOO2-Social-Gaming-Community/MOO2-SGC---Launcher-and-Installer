@@ -18,8 +18,12 @@ func (m *Manager) launchStagedUpdater() error {
 		return e
 	}
 	root := m.distributionRoot()
-	if _, e = d.ReadOffline(trust, root, filepath.Join(root, "distribution", "pending")); e != nil {
+	v, e := d.ReadOffline(trust, root, filepath.Join(root, "distribution", "pending"))
+	if e != nil {
 		return fmt.Errorf("stage a valid signed launcher update first: %w", e)
+	}
+	if e = v.RequireLauncher(runtime.GOOS+"-"+runtime.GOARCH, Version); e != nil {
+		return e
 	}
 	installer := d.Installer{Root: root, Trust: trust}
 	cur, e := installer.Current()

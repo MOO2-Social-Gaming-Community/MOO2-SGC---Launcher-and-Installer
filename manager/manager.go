@@ -615,7 +615,9 @@ func (m *Manager) exportDiagnostics(id string) (any, error) {
 		return nil, e
 	}
 	v, ve := m.verify(id)
-	report := map[string]any{"schema": 1, "manager": Version, "platform": platform(), "profile": p, "resolution": r, "verification": v, "runtime_candidates": m.runtimeCandidates(), "live_prsl": false, "new_chat": false, "saved_games_included": false, "portable_root": m.Root, "portable": m.Portable, "harness_contract": "0.3.0 handoff / DOSBox Staging 0.83.0", "timestamp": time.Now().UTC().Format(time.RFC3339)}
+	var lastLaunch any
+	_ = readJSON(filepath.Join(m.Data, "logs", "last-launch.json"), &lastLaunch)
+	report := map[string]any{"schema": 1, "manager": Version, "last_launch": lastLaunch, "application": m.applicationIdentity(), "platform": platform(), "profile": p, "resolution": r, "verification": v, "runtime_candidates": m.runtimeCandidates(), "live_prsl": false, "new_chat": false, "saved_games_included": false, "portable_root": m.Root, "portable": m.Portable, "harness_contract": "0.3.0 handoff / DOSBox Staging 0.83.0", "timestamp": time.Now().UTC().Format(time.RFC3339)}
 	if ve != nil {
 		report["verification_error"] = ve.Error()
 	}
@@ -631,10 +633,12 @@ func (m *Manager) state() (any, error) {
 	}
 	active := map[string]string{}
 	hist := map[string]any{}
+	network := map[string]NetworkPreflight{}
 	for _, p := range ps {
-		_, g, e := m.activePath(p.ID)
+		dir, g, e := m.activePath(p.ID)
 		if e == nil {
 			active[p.ID] = g
+			network[p.ID] = inspectNetworkKernel(filepath.Join(dir, "game"), p.Engine)
 		}
 		h, _ := m.history(p.ID)
 		hist[p.ID] = h
@@ -642,6 +646,11 @@ func (m *Manager) state() (any, error) {
 	m.mu.Lock()
 	j, r, exit := m.job, m.runningProfile, m.lastExit
 	m.mu.Unlock()
-	return map[string]any{"portable": m.Portable, "portable_root": m.Root, "portable_recovery_pending": m.Portable && exists(m.baselineJournal()), "default_profile": "baseline", "version": Version, "platform": platform(), "profiles": ps, "catalog": catalog(), "active": active, "history": hist, "job": j, "running": r, "last_exit": exit, "data_path": m.Data, "runtime_candidates": m.runtimeCandidates(), "settings": m.getSettings(), "runtime_recipe": runtimeRecipeForPlatform(), "network_services": networkServices(), "prsl_available": false, "chat_available": false, "distribution": m.distributionStatus(), "source": m.sourceStatus(), "effective_baseline": "1.40b23"}, nil
+	return map[string]any{"application": m.applicationIdentity(), "network_preflight": network, "portable": m.Portable, "portable_root": m.Root, "portable_recovery_pending": m.Portable && exists(m.baselineJournal()), "default_profile": "baseline", "version": Version, "platform": platform(), "profiles": ps, "catalog": catalog(), "active": active, "history": hist, "job": j, "running": r, "last_exit": exit, "data_path": m.Data, "runtime_candidates": m.runtimeCandidates(), "settings": m.getSettings(), "runtime_recipe": runtimeRecipeForPlatform(), "network_services": networkServices(), "prsl_available": false, "chat_available": false, "distribution": m.distributionStatus(), "source": m.sourceStatus(), "effective_baseline": "1.40b23"}, nil
 }
 func encode(v any) string { b, _ := json.MarshalIndent(v, "", "  "); return string(b) }
+
+func (m *Manager) applicationIdentity() map[string]any {
+	exe, _ := os.Executable()
+	return map[string]any{"version": Version, "executable": exe, "pid": os.Getpid(), "root": m.distributionRoot(), "portable": m.Portable, "data": m.Data}
+}

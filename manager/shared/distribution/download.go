@@ -55,6 +55,9 @@ type Client struct {
 	Trust Trust
 	HTTP  *http.Client
 	Log   func(Failure)
+	// Local binary policy, never supplied by a downloaded manifest.
+	MinimumLauncherVersion string
+	LauncherPlatform       string
 	// Tests can inject a loopback HTTP transport; no CLI or manifest can enable this.
 	fixture bool
 }
@@ -89,6 +92,7 @@ func (c *Client) get(ctx context.Context, u string, limit int64) ([]byte, error)
 		return nil, e
 	}
 	req.Header.Set("Accept-Encoding", "identity")
+	req.Header.Set("Cache-Control", "no-cache")
 	r, e := c.HTTP.Do(req)
 	if e != nil {
 		return nil, e
@@ -131,6 +135,9 @@ func (c *Client) FetchManifest(ctx context.Context, prior TrustedState, now time
 		if e == nil {
 			var v VerifiedManifest
 			v, e = c.Trust.VerifyManifest(b, s, now, prior, true)
+			if e == nil {
+				e = v.RequireLauncher(c.LauncherPlatform, c.MinimumLauncherVersion)
+			}
 			if e == nil {
 				return v, nil
 			}

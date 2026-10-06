@@ -1,45 +1,35 @@
-# Start here — MOO2-SGC 0.4.5
+# MOO2-SGC 0.4.6 — start and repair
 
-## Two different destinations
+## Keep the working root
 
-**Repository ZIP → your GitHub Desktop clone.** Extract its contents into the clone, preserving `.git`; commit and push. Wait for Publish prepared release and a published `v0.4.5`. Do not extract the game/harness into the clone.
+Use `C:\Games\MOO2-SGC`. Keep a separate backup of the proven harness. The integration kit contains only project files, not commercial game data, DOSBox, or private signing keys. Leave Steam/GOG and the source ZIP unchanged.
 
-**Portable integration ZIP → `C:\Games\MOO2-SGC`.** This is an overlay containing only SGC code and signed launcher packages. Preserve a separate backup of the working handoff before applying it. The archive contains no enclosing directory; do not create `C:\Games\MOO2-SGC\MOO2-SGC` accidentally.
+## Recommended recovery from the 0.4.2 handoff problem
 
-## Required local inputs
+1. Quit MOO2 and use **Exit launcher** in every open SGC launcher. Closing a browser tab alone does not stop its local server. Do not delete locks while a process is running.
+2. Extract the **0.4.6 PORTABLE_INTEGRATION ZIP contents** into `C:\Games\MOO2-SGC`, overwriting only its matching project integration files. Do not extract it inside the Git repository, a versioned component folder, or a second nested MOO2-SGC folder.
+3. Run `START-MOO2-SGC.cmd` in that exact root, not an old Downloads executable or old Start-menu shortcut. It installs the signed offline 0.4.6 package, bypassing a stale GitHub latest pointer, then launches the verified installation.
+4. Confirm the console and page show **0.4.6**. The page displays the actual executable and application root. New setup will refuse to launch 0.4.2; it no longer treats an older signed release as an acceptable fallback.
+5. Select **Community — standard** (1.50.26). Under Prepare your owned game, supply `C:\Games\MOO2-SGC\Master of Orion 2 - v1_40b23.zip`. Click **Prepare game for play**. This explicitly refreshes any incomplete old import and reconstructs a separate current environment. Same-engine saves remain in the repaired profile and previous generation; baseline game/ stays independent.
+6. Confirm **Network kernel verified** and **Verify files** succeeds. The kernel path must be in the same managed game folder as ORION150.EXE.
+7. Test **Create network game → Direct / LAN** first. Launch and choose Multiplayer → Network in MOO2. Then test the third-party Dopefish service with both players using the same engine/ruleset/assets.
 
-Keep your `Master of Orion 2 - v1_40b23.zip` beside the new scripts. The uploaded `(3)` filename is also recognized when the archive bytes match; no repacking is needed. Keep the entire tested DOSBox distribution at `runtime\windows`, not just `dosbox.exe`.
+The baseline profile remains 1.40b23. Selecting Community is not an in-place upgrade of baseline game/ or Steam.
 
-Your existing `game\` is not deleted on startup. On explicit preparation it is backed up in full, and same-version saves are retained. Existing handoff preparation/launch scripts are not overwritten, but do not run them simultaneously with the manager. The new SGC path owns preparation and verification once adopted.
+## Standalone online setup / GitHub Desktop
 
-## First test
+Extract the repository ZIP contents into your cloned repository, preserving `.git`; commit and push. Wait for **Publish prepared release** to succeed and confirm `v0.4.6` is a published release. Run the standalone **MOO2-SGC-Setup-0.4.6.exe** afterward. It rejects older metadata and tries its pinned release endpoint. If the release is not published, it stops with a clear error rather than running 0.4.2. The offline kit above works before publication.
 
-1. Run **START-MOO2-SGC.cmd**. First launch uses the included signed offline application package. Confirm version **0.4.5** and portable root `C:\Games\MOO2-SGC` in the dashboard.
-2. Keep **Portable baseline — 1.40b23**, leave the source field blank, and click **Prepare game for play**. This reuses the local verified runtime, recognizes the root archive, stages a clean copy, normalizes it and preserves the previous game directory. It does not start the game or apply 1.50.26.
-3. Click **Launch MOO2**. Confirm Ver 1.40b23, 800×600 window, audio/input, new game, several turns, save, exit, restart and load that save. The original archive must remain unchanged.
-4. Once baseline acceptance passes, choose **Community — standard** and prepare 1.50.26 separately. Its game and saves live under `userdata\environments\community`, not over the baseline.
+Updating through an old AppData installation keeps that installation and data in AppData; it does not silently move saves to the portable root. Use the portable kit for the canonical root. The new page displays the distinction.
 
-The local browser tab is the launcher UI. Keep its console process open. Closing only the browser tab does not release the application lock; use **Exit launcher**. The command helpers below require the dashboard/game to be closed first.
+## Standalone archived network kernel
 
-## Optional command helpers
+The required filename is **RKERNEL.COM**, not RKERNEL.EXE. Normal preparation recovers it from the complete owned game source. A legacy incomplete snapshot can also be repaired by selecting **Packages & updates → Network kernel — owned RKERNEL.COM or rkernel.zip**, entering your owned archive/file path, and importing it. Then **Prepare / repair selected profile**.
 
-- `SGC-Prepare-Baseline.cmd`: prepare without a browser; accepts a source ZIP/folder dragged onto it, or blank discovers the canonical archive.
-- `SGC-Play-Baseline.cmd` and `SGC-Play-Fullscreen.cmd`: launch the installed, verified baseline with the current signed launcher.
-- `SGC-Verify-Baseline.cmd`: file verification only, not game execution.
-- `SGC-Recover-Baseline.cmd`: recover an interrupted baseline transaction. Failed candidate directories are retained, not erased.
+Only the two pinned historic hashes are accepted. The older 31,095-byte driver receives the exact three-byte known transformation; the result must equal the canonical SHA-256 `18e8781f8ce64516e60b2947b487e8999f7d940b25af971359c7e7dea0fe9d97`. Unknown inputs are refused. The active game is not changed by import alone. Do not rename random .EXE files or download an unverified replacement.
 
-Do not delete a lock merely because a command says another manager is open. Close the actual processes first. A stale lock after a crash is distinct from a pending game-directory transaction; recovery does not bypass process locks.
+## Diagnostics / limits
 
-## Updates and old installations
+Under the active application root: `logs\bootstrap.log`. Under its user-data folder: `logs\last-network-preflight.json`, `logs\last-launch.json`, and `logs\game-*.log`. Use **Export diagnostics** too. Logs now identify setup/launcher versions, paths, selected engine, network service, kernel hash and working directory. Do not share private signing material or an active dashboard token.
 
-Check signed release → Stage launcher update → Apply staged update and restart. These operations update the application, not the game engine/profile or runtime. Existing verified applications can launch offline. First-time offline installation still requires nonexpired authenticated metadata and the correct system clock.
-
-The same signing identity is retained. Keep your private key backup outside both the working root and repository. The Windows EXEs remain unsigned by Authenticode; do not disable security software or elevate to force a blocked test.
-
-An existing 0.4.2 AppData installation is not relocated by its updater. To use the new portable layout, use the integration kit in the new root. AppData saves/settings remain untouched and are not silently merged into this baseline. Older imported snapshots omitted RKERNEL.COM; a rebuild from those snapshots may request reimport of the original source. Existing schema-2 environments can still be verified.
-
-## Failure evidence
-
-Record the first exact error and whether MOO2's title screen actually appeared. Export diagnostics from the dashboard. Bootstrap log: `C:\Games\MOO2-SGC\logs\bootstrap.log`. Game process logs and diagnostic ZIPs: `C:\Games\MOO2-SGC\userdata\logs` (the UI returns exact paths).
-
-Do not post game data, saves, private signing material, or the active local-dashboard URL/token. Do not patch generated files to bypass verification. Keep the previous known-good harness available as your recovery reference.
+Package signatures remain separate from Windows Authenticode; these executables are not Authenticode-signed or macOS-notarized. Do not disable system protection to force a test. Linux file/update regressions are not evidence of real Windows/DOSBox multiplayer; the final in-game acceptance remains on the user's machines. Dopefish availability is not controlled or certified by SGC.

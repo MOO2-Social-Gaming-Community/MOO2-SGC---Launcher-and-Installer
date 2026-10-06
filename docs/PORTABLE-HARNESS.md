@@ -1,10 +1,10 @@
-# Portable harness integration contract — 0.4.5
+# Portable harness integration contract — 0.4.6
 
 ## Authority and scope
 
 Inputs are the user's `MOO2-SGC-Portable-Runtime-Handoff-2026-10-05(1).zip`, `MOO2-SGC-Portable-Harness-0.3.0-HANDOFF(1).zip`, and `Master of Orion 2 - v1_40b23(3).zip`. This contract preserves their terminology and tested settings. The handoff documents user-observed Windows gameplay; the supplied 0.3.0 hardening and this new manager integration are not independently certified by a Linux file test. User reports broader harness testing; repeat the final Windows acceptance against the new wrapper.
 
-The existing Go installer/updater remains the application architecture. Portable Harness 0.3.0-HANDOFF and Launcher 0.4.5 have independent versions. This integration translates its normalization and launch contract into native Go; it does not run the old destructive PowerShell refresh implementation.
+The existing Go installer/updater remains the application architecture. Portable Harness 0.3.0-HANDOFF and Launcher 0.4.6 have independent versions. This integration translates its normalization and launch contract into native Go; it does not run the old destructive PowerShell refresh implementation.
 
 ## Source and normalized target
 
@@ -45,7 +45,7 @@ runtime/windows/dosbox.exe
 
 Working directory is the game directory. No stale primary user config, autoexec mount, CPU-cycle override or `/skipintro` is added for standalone play. Extra game-local emulator configs are refused. Network mode alone adds its separate IPX autoexec; that path still needs multiplayer acceptance.
 
-Default profile preserves the supplied harness behavior (800×600 window, `fullscreen=off`, forced-borderless fullscreen when requested, `pause_when_inactive=off`, `mute_when_inactive=off`, OpenGL output, auto aspect, sharp shader, SB16 base220 IRQ5 DMA1 HDMA5) and adds the 0.4.5 presentation fix: `viewport = fit` plus `integer_scaling = off`. Those two rendering directives explicitly scale the 4:3 MOO2 image to the available 4:3 window area instead of allowing avoidable internal padding. Fullscreen still uses `aspect = auto`, so widescreen fullscreen preserves the game aspect ratio rather than stretching it. The supplied config began with a stray single-backslash line; integration removes that non-directive.
+Default profile preserves the supplied harness behavior (800×600 window, `fullscreen=off`, forced-borderless fullscreen when requested, `pause_when_inactive=off`, `mute_when_inactive=off`, OpenGL output, auto aspect, sharp shader, SB16 base220 IRQ5 DMA1 HDMA5) and adds the 0.4.6 presentation fix: `viewport = fit` plus `integer_scaling = off`. Those two rendering directives explicitly scale the 4:3 MOO2 image to the available 4:3 window area instead of allowing avoidable internal padding. Fullscreen still uses `aspect = auto`, so widescreen fullscreen preserves the game aspect ratio rather than stretching it. The supplied config began with a stray single-backslash line; integration removes that non-directive.
 
 DIG.INI uses SBLASTER.DIG and DMA_16_BIT=-1; MDI.INI uses SBPRO2.MDI; ORIONCD.INI contains exactly `.\` without a newline. Do not reintroduce the previous launcher's SB16.DIG/absolute CD defaults. These files match the handoff bytes. They remain editable after the initial normalized preparation; changed user audio settings are not silently certified as the original configuration.
 

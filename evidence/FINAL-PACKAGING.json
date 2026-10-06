@@ -1,0 +1,56 @@
+{
+  "version": "0.4.6",
+  "count": 12,
+  "checks": [
+    {
+      "test": "public source excludes owned game, driver, emulator, fonts and private-key files",
+      "result": "PASS"
+    },
+    {
+      "test": "all source/package files below normal Git size limit",
+      "result": "PASS"
+    },
+    {
+      "test": "repository ZIP opens and passes CRC",
+      "result": "PASS"
+    },
+    {
+      "test": "ZIP root is immediately GitHub Desktop compatible",
+      "result": "PASS"
+    },
+    {
+      "test": "extracted repository signature and source-fingerprint verification",
+      "result": "PASS"
+    },
+    {
+      "test": "standalone installer equals signed packaged helper",
+      "result": "PASS"
+    },
+    {
+      "test": "portable kit checksums validate",
+      "result": "PASS"
+    },
+    {
+      "test": "portable setup is the exact signed new helper",
+      "result": "PASS"
+    },
+    {
+      "test": "portable offline launcher package matches released package",
+      "result": "PASS"
+    },
+    {
+      "test": "portable CMD targets offline 0.4.6 without a newer-version downgrade",
+      "result": "PASS"
+    },
+    {
+      "test": "portable kit excludes user/runtime directories",
+      "result": "PASS"
+    },
+    {
+      "test": "public release version is exactly 0.4.6",
+      "result": "PASS"
+    }
+  ],
+  "live_remote_used": false,
+  "game_executed": false
+}

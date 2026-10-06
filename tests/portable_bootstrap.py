@@ -57,7 +57,7 @@ def main():
    run(setup,legacy,'--command','ensure-installed','--offline',str(release),'--no-launch')
    check('ensure-installed upgrades an older launcher',old_pointer!=(legacy/'components/launcher/current.json').read_bytes())
    run(old,legacy,'--offline',str(release),'--no-launch')
-   check('unchanged earlier bootstrap trusts 0.4.5 with same signing identity',old_pointer!=(legacy/'components/launcher/current.json').read_bytes())
+   check('unchanged earlier bootstrap trusts '+version+' with same signing identity',old_pointer!=(legacy/'components/launcher/current.json').read_bytes())
    check('old-root upgrade keeps portable opt-in boundary',not(legacy/'moo2-sgc-portable.json').exists())
    check('old-root upgrade preserves user data',sent.read_text()=='retain existing user data')
    run(setup,legacy,'--command','verify');check('new bootstrap verifies old-root upgraded installation',True)

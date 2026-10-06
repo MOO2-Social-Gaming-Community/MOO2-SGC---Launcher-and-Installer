@@ -7,7 +7,7 @@ if not exist "%SETUP%" (
   pause
   exit /b 1
 )
-"%SETUP%" --install-root "%ROOT%" --portable --command ensure-installed --offline "%ROOT%\distribution\offline-0.4.5" --no-launch
+"%SETUP%" --install-root "%ROOT%" --portable --command ensure-installed --offline "%ROOT%\distribution\offline-0.4.6" --no-launch
 if errorlevel 1 goto failed
 echo Preparing only the portable 1.40b23 baseline. Close the dashboard first.
 "%SETUP%" --install-root "%ROOT%" --portable --command launch-installed --launcher-command prepare-play --profile baseline --source "%~1"

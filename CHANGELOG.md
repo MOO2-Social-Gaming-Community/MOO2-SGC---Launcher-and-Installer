@@ -1,3 +1,14 @@
+# 0.4.6 — version-selection and multiplayer-kernel recovery
+
+- Reject a signed launcher release older than the running setup/launcher before accepting metadata or activating files. A stale GitHub latest endpoint falls through to the pinned v0.4.6 endpoint.
+- Re-verify the selected executable and run its version health check before handoff, including reused installations. Print setup version, launcher version, executable paths, and application root.
+- Release publication checks GitHub's latest pointer, repairs it for the verified current release when necessary, and never deliberately demotes a newer release.
+- Support exact-hash import/normalization of an owned RKERNEL.COM or rkernel.zip without distributing commercial driver bytes.
+- Rebuild old 0.4.2 source snapshots using a separately verified local kernel. All 1.40b23/1.50.26 builds must include the canonical driver in the exact executable directory.
+- Show per-profile kernel preflight and actual running launcher identity. Block launch on missing/altered kernel even in standalone mode, since players can select Network in-game.
+- Record game working directory, kernel path/hash, service, arguments, launcher identity, and runtime in diagnostics and launch logs.
+- Preserve baseline, source files, saves, signatures, full-screen/window settings, and Direct/Dopefish services. PRSL, Chat, and future SGC matchmaking remain disabled.
+
 # Changelog
 
 ## 0.4.5 — 2026-10-05

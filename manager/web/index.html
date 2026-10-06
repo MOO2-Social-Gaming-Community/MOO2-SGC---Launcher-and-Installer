@@ -4,6 +4,7 @@
 <header><div><span class="eyebrow">MASTER OF ORION II · MODULAR GAME MANAGER</span><h1>MOO2-SGC Launcher <span id="version" class="badge"></span></h1><p>One game. Separate environments. Your choice of mods.</p></div><button id="quit" class="quiet">Exit launcher</button></header>
 <main>
 <div class="notice"><strong>Portable baseline 1.40b23 is the default. Community 1.50.26 is optional. PRSL is not yet a playable mod.</strong> This build never injects the experimental turn hook. Game execution and Windows/macOS acceptance still require testing. The original in-game chat remains unchanged.</div>
+<p id="application-identity" class="path"></p>
 <div id="error" class="error hidden" role="alert"></div>
 <section class="panel"><div class="section-heading"><span class="step">00</span><h2>Prepare your owned game</h2></div>
 <p>Put your verified <strong>Master of Orion 2 - v1_40b23.zip</strong> in the portable root alongside the harness. Leave the source field blank to discover it. The default profile prepares <strong>game/</strong> at 1.40b23; optional community profiles live separately. Your source archive and Steam/GOG installation are not modified or uploaded.</p>
@@ -29,6 +30,7 @@
 <label class="inline"><input id="fullscreen" type="checkbox"> Start in fullscreen</label>
 <div class="actions"><button id="verify" class="quiet">Verify files</button><button id="launch" class="primary large">Launch MOO2</button></div>
 <p class="hint"><strong>Direct / LAN:</strong> one player starts the IPX tunnel and others connect to that address. <strong>moo2.thedopefish.com:</strong> every player connects to the same third-party public IPX service; then use Multiplayer → Network inside MOO2 to create or join the named game. Availability of that external service is not controlled by MOO2-SGC. MOO2-SGC Online is reserved for a future first-party matchmaking/relay service.</p>
+<p id="kernel-status" class="status"></p>
 <div id="running" class="hint"></div>
 </section>
 <aside>
@@ -36,9 +38,9 @@
 <label for="runtime-select">Detected DOSBox executables</label><select id="runtime-select"><option value="">None detected</option></select>
 <label for="runtime-path">Or paste the executable's full path</label><input id="runtime-path" placeholder="C:\…\DOSBOX\DOSBox.exe"><div class="actions"><button id="use-runtime" class="quiet">Use selected path</button><button id="install-runtime" class="primary">Download verified DOSBox</button></div><p id="runtime-requirement" class="hint"></p><p class="hint">Portable Windows does not substitute a global DOSBox installation. All 660 bundled runtime files are checked before launch. Other platforms can select an existing runtime; those configurations need separate acceptance testing.</p></section>
 <section class="panel"><div class="section-heading"><span class="step">B</span><h2>Packages & updates</h2></div><p>Game source and patch stay separate. Repair creates a fresh generation and preserves this profile's saves.</p><div class="actions"><button id="upstream-check" class="quiet">Check upstream releases</button><button id="patch-refresh" class="quiet">Refresh 1.50.26 package</button></div><p class="hint">Effective baseline: 1.40b23. Current supported fan patch: 1.50.26. New upstream versions are not installed before compatibility verification. The official upstream download above stays separate from SGC release hosting.</p>
-<label for="payload-kind">Import a local archive — never uploaded</label><select id="payload-kind"><option value="base">Owned game — manual baseline / Steam / CD ZIP</option><option value="patch">Community patch — 1.50.26 archive</option><option value="official131">Official prerequisite — English 1.31 ZIP</option></select>
+<label for="payload-kind">Import a local archive — never uploaded</label><select id="payload-kind"><option value="base">Owned game — manual baseline / Steam / CD ZIP</option><option value="patch">Community patch — 1.50.26 archive</option><option value="kernel">Network kernel — owned RKERNEL.COM or rkernel.zip</option><option value="official131">Official prerequisite — English 1.31 ZIP</option></select>
 <label for="payload-path">Archive's full local path</label><input id="payload-path" placeholder="C:\…\Master of Orion 2.zip"><button id="import-payload" class="quiet">Verify and import archive</button>
-<p class="hint">Game imports are recognized by verified contents, not by their ZIP filename. Original folders and saves stay untouched. The optional 1.31 ZIP import supports offline CD upgrades; Steam does not need this prerequisite.</p>
+<p class="hint">Game imports are recognized by verified contents, not by their ZIP filename. Original folders and saves stay untouched. The Network kernel import validates your owned file and applies only the documented known-hash correction; then use Prepare / repair to rebuild safely. The optional 1.31 ZIP import supports offline CD upgrades; Steam does not need this prerequisite.</p>
 <hr><h3>Launcher distribution</h3><div id="distribution-status" class="hint"></div>
 <label for="offline-release">Signed offline release folder (optional)</label><input id="offline-release" placeholder="C:\…\MOO2-SGC-kit\release">
 <div class="actions"><button id="launcher-check" class="quiet">Check signed release</button><button id="launcher-stage" class="quiet">Stage launcher update</button><button id="launcher-apply" class="quiet">Apply staged update and restart</button></div>

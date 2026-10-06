@@ -324,6 +324,11 @@ func (m *Manager) applyLineage(game string, s SourceEdition, target string) ([]L
 			return nil, e
 		}
 	}
+	if engineRank(target) >= 140 {
+		if e := m.ensureStageKernel(game); e != nil {
+			return nil, e
+		}
+	}
 	if e := normalizeHarnessGame(game, s, target); e != nil {
 		return nil, e
 	}

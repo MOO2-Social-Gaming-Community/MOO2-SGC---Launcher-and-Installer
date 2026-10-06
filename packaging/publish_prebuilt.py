@@ -55,6 +55,11 @@ def verify_local(root: pathlib.Path=ROOT) -> tuple[pathlib.Path,dict,list[pathli
         if not p.is_file() or p.name not in allowed:raise ValueError('unexpected release input: '+p.name)
     return release,project,files
 
+def version_tuple(tag:str) -> tuple[int,int,int]:
+    match=re.fullmatch(r'v?(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)',tag)
+    if not match: raise RuntimeError('Unexpected latest release version; inspect before changing it: '+tag)
+    return tuple(map(int,match.groups()))
+
 def execute_publish(repo:str,version:str,files:list[pathlib.Path],commit:str,run=subprocess.run)->str:
     tag='v'+version
     def call(*args,check=True):return run(['gh',*args],capture_output=True,text=True,check=check)
@@ -83,10 +88,27 @@ def execute_publish(repo:str,version:str,files:list[pathlib.Path],commit:str,run
             for p in missing:call('release','download',tag,'--repo',repo,'--pattern',p.name,'--dir',str(target))
         for p in files:
             if sha(target/p.name)!=sha(p):raise RuntimeError('Readback differs; leaving release draft: '+p.name)
-    if info['draft']:
-        call('release','edit',tag,'--repo',repo,'--draft=false','--prerelease=false','--latest')
-        return 'Published verified release '+tag
-    return 'Existing published release is byte-identical; no changes made'
+    was_draft=info['draft']
+    latest=call('api',f'repos/{repo}/releases/latest',check=False)
+    latest_tag=None
+    if latest.returncode:
+        if '404' not in latest.stderr and '404' not in latest.stdout: raise RuntimeError('Could not verify latest-release selection: '+latest.stderr)
+    else: latest_tag=json.loads(latest.stdout)['tag_name']
+    promote=latest_tag is None or version_tuple(latest_tag)<version_tuple(tag)
+    if was_draft:
+        args=['release','edit',tag,'--repo',repo,'--draft=false','--prerelease=false']
+        if promote: args+=['--latest']
+        else: args+=['--latest=false']
+        call(*args)
+    elif promote:
+        # Repair a stale GitHub latest pointer without re-uploading any bytes.
+        call('release','edit',tag,'--repo',repo,'--latest')
+    after=call('api',f'repos/{repo}/releases/latest')
+    if version_tuple(json.loads(after.stdout)['tag_name'])<version_tuple(tag):
+        raise RuntimeError('Release is published, but GitHub latest is still older; rerun publication after checking repository settings')
+    if was_draft: return 'Published verified release '+tag+'; latest pointer checked'
+    if promote: return 'Existing release is byte-identical; stale latest pointer repaired'
+    return 'Existing published release is byte-identical; no changes made' 
 
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('--execute',action='store_true');p.add_argument('--commit',default='');a=p.parse_args()

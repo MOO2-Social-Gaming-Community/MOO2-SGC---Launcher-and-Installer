@@ -3,6 +3,7 @@
 Uses a process test double, never DOSBox or MOO2. The source ZIP stays unchanged.
 """
 from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
 import argparse, hashlib, json, subprocess, tempfile, time, urllib.request
 p=argparse.ArgumentParser();p.add_argument('--baseline',required=True,type=Path);p.add_argument('--launcher',required=True,type=Path);p.add_argument('--output',required=True,type=Path);a=p.parse_args()
 checks=[]
@@ -35,7 +36,7 @@ with tempfile.TemporaryDirectory(prefix='sgc-zip-source-') as td:
     if not j['busy']:return j
     time.sleep(.03)
    raise TimeoutError(action)
-  st=api('state');check('launcher version',st['version']=='0.4.5',st['version'])
+  st=api('state');check('launcher version',st['version']==(ROOT/'VERSION').read_text().strip(),st['version'])
   profile=next(x for x in st['profiles'] if x['id']=='baseline')
   j=job('runtime-select',runtime_path=str(fake));check('test runtime selected',not j['error'],j['error'])
   j=job('prepare-play',profile=profile,source_path=str(a.baseline))
@@ -53,4 +54,4 @@ with tempfile.TemporaryDirectory(prefix='sgc-zip-source-') as td:
  finally:
   if proc.poll() is None:proc.terminate();proc.wait(timeout=15)
   log.close()
-a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps({'version':'0.4.5','checks':checks,'count':len(checks),'source_unchanged':sha(a.baseline)==before,'game_executed':False,'runtime':'test double'},indent=2)+'\n')
+a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps({'version':(ROOT/'VERSION').read_text().strip(),'checks':checks,'count':len(checks),'source_unchanged':sha(a.baseline)==before,'game_executed':False,'runtime':'test double'},indent=2)+'\n')

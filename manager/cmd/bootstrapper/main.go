@@ -15,7 +15,6 @@ import (
 	"os/exec"
 	"path/filepath"
 	"runtime"
-	"strconv"
 	"strings"
 	"time"
 )
@@ -57,6 +56,10 @@ func run() error {
 	if e = trust.Validate(); e != nil {
 		return e
 	}
+	fmt.Printf("MOO2-SGC Setup %s (minimum launcher %s)\n", buildconfig.Version, buildconfig.Version)
+	if path, err := os.Executable(); err == nil {
+		fmt.Println("Setup executable:", path)
+	}
 	if trust.Development {
 		fmt.Println("DEVELOPMENT TRUST: signed offline acceptance build, not an official production release.")
 	}
@@ -75,6 +78,7 @@ func run() error {
 	if e != nil {
 		return e
 	}
+	fmt.Println("Application root:", *root)
 	if *waitLock < 0 || *waitLock > 60 {
 		return fmt.Errorf("wait-lock must be between 0 and 60 seconds")
 	}
@@ -128,6 +132,15 @@ func run() error {
 		}
 	}
 	var entry string
+	minimum := buildconfig.Version
+	if cur, err := installer.Current(); err == nil {
+		if _, rec, err := installer.VerifyGeneration(cur.Current); err == nil {
+			fmt.Println("Existing signed launcher:", rec.Package.Version)
+			if d.VersionAtLeast(rec.Package.Version, minimum) {
+				minimum = rec.Package.Version
+			}
+		}
+	}
 	switch *command {
 	case "verify", "launch-installed":
 		p, e := installer.Current()
@@ -158,6 +171,8 @@ func run() error {
 		}
 		var v d.VerifiedManifest
 		client := d.NewClient(trust)
+		client.MinimumLauncherVersion = minimum
+		client.LauncherPlatform = runtime.GOOS + "-" + runtime.GOARCH
 		client.Log = func(f d.Failure) {
 			fmt.Fprintln(log, time.Now().UTC().Format(time.RFC3339), f.Provider, f.Kind, f.Message)
 			fmt.Println(f.Provider, f.Kind, f.Message)
@@ -169,6 +184,9 @@ func run() error {
 		}
 		if e != nil {
 			return fmt.Errorf("%w. The repository must be public and its Publish prepared release workflow must have completed. A source push alone is not a release. Check GitHub Actions, HTTPS access, and the system clock", e)
+		}
+		if e = v.RequireLauncher(runtime.GOOS+"-"+runtime.GOARCH, minimum); e != nil {
+			return fmt.Errorf("%w. Publish v%s with all release assets, or use its signed offline integration kit. An older launcher will not be started", e, minimum)
 		}
 		// Record newest authenticated metadata even if the subsequent transfer fails.
 		if e = d.Accept(*root, v); e != nil {
@@ -207,6 +225,26 @@ func run() error {
 	default:
 		return fmt.Errorf("unknown command %q", *command)
 	}
+	// Verify the selected executable again even when an intact generation was reused.
+	cur, e := installer.Current()
+	if e != nil {
+		return e
+	}
+	verifiedEntry, rec, e := installer.VerifyGeneration(cur.Current)
+	if e != nil {
+		return e
+	}
+	if *command != "rollback" && !d.VersionAtLeast(rec.Package.Version, minimum) {
+		return fmt.Errorf("installed launcher %s is older than required %s at %s; run Setup normally or use the matching offline kit. Refusing to launch an old generation", rec.Package.Version, minimum, *root)
+	}
+	if entry != verifiedEntry {
+		return errors.New("launcher selection changed during setup")
+	}
+	if e = health(ctx, entry, rec.Package.Version); e != nil {
+		return e
+	}
+	fmt.Printf("Launching/ready: launcher %s; setup %s; root %s\n", rec.Package.Version, buildconfig.Version, *root)
+	fmt.Fprintln(log, "verified launcher", rec.Package.Version, "entry", entry, "root", *root)
 	fmt.Fprintln(log, time.Now().UTC().Format(time.RFC3339), "success", *command)
 	if !*noLaunch && *command != "verify" && entry != "" && *launcherCommand == "serve" {
 		if err := installShortcut(*root, entry); err != nil {
@@ -270,27 +308,4 @@ var _ io.Writer = (*limitedWriter)(nil)
 
 // Releases use exactly major.minor.patch. Reject malformed values rather than
 // guessing how to compare an unknown version scheme.
-func versionAtLeast(have, want string) bool {
-	h, w := strings.Split(have, "."), strings.Split(want, ".")
-	if len(h) != 3 || len(w) != 3 {
-		return false
-	}
-	a, b := [3]int64{}, [3]int64{}
-	for i := 0; i < 3; i++ {
-		var err error
-		a[i], err = strconv.ParseInt(h[i], 10, 32)
-		if err != nil || a[i] < 0 {
-			return false
-		}
-		b[i], err = strconv.ParseInt(w[i], 10, 32)
-		if err != nil || b[i] < 0 {
-			return false
-		}
-	}
-	for i := 0; i < 3; i++ {
-		if a[i] != b[i] {
-			return a[i] > b[i]
-		}
-	}
-	return true
-}
+func versionAtLeast(have, want string) bool { return d.VersionAtLeast(have, want) }

@@ -36,11 +36,16 @@ func (m *Manager) distributionStatus() map[string]any {
 	} else {
 		r["state_error"] = e.Error()
 	}
+	r["minimum_launcher_version"] = Version
+	r["running_launcher_version"] = Version
 	r["self_update"] = "Explicit check/stage, then close launcher and run Setup --command apply-staged. No replacement during game play."
 	r["base_source"] = "Import a supported English CD 1.2, Steam DOS 1.40b23, or legacy DOS 1.31 folder/ZIP. No source is modified."
 	return r
 }
 func (m *Manager) importPayload(kind, source string) (any, error) {
+	if kind == "kernel" {
+		return m.importKernel(source)
+	}
 	if kind == "base" {
 		return m.importKnownZip(source)
 	}
@@ -91,6 +96,8 @@ func (m *Manager) launcherRelease(offline string, stage bool) (any, error) {
 		return nil, e
 	}
 	client := d.NewClient(trust)
+	client.MinimumLauncherVersion = Version
+	client.LauncherPlatform = runtime.GOOS + "-" + runtime.GOARCH
 	client.Log = func(f d.Failure) { m.progress(f.Provider + ": " + f.Kind + " — " + f.Message) }
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Minute)
 	defer cancel()
@@ -105,6 +112,9 @@ func (m *Manager) launcherRelease(offline string, stage bool) (any, error) {
 		v, e = client.FetchManifest(ctx, prior, time.Now())
 	}
 	if e != nil {
+		return nil, e
+	}
+	if e = v.RequireLauncher(runtime.GOOS+"-"+runtime.GOARCH, Version); e != nil {
 		return nil, e
 	}
 	if e = d.Accept(root, v); e != nil {

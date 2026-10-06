@@ -67,6 +67,7 @@ func main() {
 		fail(e)
 	}
 	m.AppRoot = *appRoot
+	fmt.Fprintln(os.Stderr, "MOO2-SGC Launcher", Version, "executable", exe, "application root", *appRoot, "game root", m.Root, "data", m.Data)
 	// An exclusive process lock prevents two managers from mutating one data directory.
 	lock := filepath.Join(m.Data, "manager.lock")
 	lf, e := os.OpenFile(lock, os.O_CREATE|os.O_EXCL|os.O_WRONLY, 0600)

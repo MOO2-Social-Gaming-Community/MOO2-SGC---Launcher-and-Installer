@@ -39,7 +39,7 @@ def main():
   h=PortableHarness(a.launcher,root,data)
   try:
    state=h.api('state');profiles={p['id']:p for p in state['profiles']}
-   check('portable layout and baseline default reported',state['portable'] and state['default_profile']=='baseline' and state['version']=='0.4.5')
+   check('portable layout and baseline default reported',state['portable'] and state['default_profile']=='baseline' and state['version']==(ROOT/'VERSION').read_text().strip())
    good(h,'runtime-select',runtime_path=str(fake))
    r=good(h,'prepare-play',profile=profiles['baseline'],source_path='')
    mf=json.loads((root/'state/baseline.manifest.json').read_text())
@@ -128,5 +128,5 @@ def main():
   cli=subprocess.run([str(a.launcher),'--root',str(root),'--data',str(data),'--command','verify'],capture_output=True,text=True,timeout=60)
   check('CLI defaults to portable baseline',cli.returncode==0 and json.loads(cli.stdout)['ok'])
  a.output.parent.mkdir(parents=True,exist_ok=True)
- a.output.write_text(json.dumps(dict(version='0.4.5',platform='linux-amd64',checks=checks,count=len(checks),fingerprints=identity,source_hashes=before,real_owned_files=True,game_executed=False,windows_executed=False,process_test='explicit test double; not DOSBox'),indent=2)+'\n')
+ a.output.write_text(json.dumps(dict(version=(ROOT/'VERSION').read_text().strip(),platform='linux-amd64',checks=checks,count=len(checks),fingerprints=identity,source_hashes=before,real_owned_files=True,game_executed=False,windows_executed=False,process_test='explicit test double; not DOSBox'),indent=2)+'\n')
 if __name__=='__main__':main()

@@ -1,23 +1,11 @@
-# 0.4.5 release identity
+# Release signing — 0.4.6
 
-Uses the existing moo2-sgc-release-1 public identity, feed moo2-sgc, channel stable, revision 43. No new private key is distributed. Prepared metadata expires 2027-01-03T23:55:32Z. Existing verified installations can still run offline; new installs/updates need fresh authenticated metadata after expiration. Never change signed JSON or use expired metadata as an activation authority.
+Uses the existing `moo2-sgc-release-1` public identity, feed `moo2-sgc`, channel `stable`, revision **46**. No replacement private key is distributed. The previously stored private backup remains the maintainer's signing backup; never commit it, even temporarily.
 
-# Signing and future versions
+Prepared metadata expires **2027-01-04T06:34:38Z**. Existing verified installations can run offline; new installation/update authorization needs fresh signed metadata after expiration. Never edit signed JSON or suppress signature/freshness failures.
 
-The 0.4.2 artifacts are already signed using the same identity as 0.4.1. The push-to-release workflow verifies and publishes these exact bytes using GitHub's built-in workflow token. It requires **no private signing key** for publishing this prepared update.
+The private signing key was kept outside the repository and public output while building these supplied packages. GitHub publication verifies and uploads already-signed artifacts; it does not need that key. Future builds must be signed by the owner-controlled identity, unless an explicit trust migration is performed.
 
-The existing project release-signing identity is retained; no new key was generated for 0.4.2. Its public key is in `manifests/trust.json` and is embedded in both binaries. A separate owner-only backup contains `moo2-sgc-release-1.key`. **Never put that backup or key in this repository, release assets, installation kits, issue attachments or chat logs.** Store it outside the repository in a secure private location. It is not Authenticode, a GitHub token, or a Cloudflare key.
+Ed25519 release signatures are not Windows Authenticode or macOS notarization. These Windows/Mac executables remain unsigned by those operating-system schemes. Do not disable system protection to force acceptance.
 
-For subsequent builds, keep the same public trust identity and supply the private key from outside the output/repository directory:
-
-```
-python packaging/build_release.py --out <EMPTY-OUTPUT> --trust manifests/trust.json --key <PRIVATE-OUTSIDE-REPO>/moo2-sgc-release-1.key --key-id moo2-sgc-release-1 --revision <INCREASED-INTEGER> --github-base https://github.com/MOO2-Social-Gaming-Community/MOO2-SGC---Launcher-and-Installer/releases/download/v<NEXT-VERSION>/ --days 90
-```
-
-First update `VERSION` and the compile-time version in `manager/shared/buildconfig/config.go` to matching three-part values. Refresh relevant source, tests and release notes; rebuild all artifacts and publish a new version rather than overwriting an old one. Prefer an up-to-date supported Go toolchain; the included binaries record the compiler available in the development environment.
-
-Signed metadata expires after 90 days. A valid signed renewal/new release with a larger revision is needed for new installs/updates after expiry. Previously installed, verified software can still launch offline. Do not disable expiry/signature checks to work around this. Changing metadata, URLs or ZIP contents requires re-signing.
-
-The current key was generated in the earlier 0.4.1 development session, not on the owner's physical machine. Before broader distribution, the owner may choose to generate a replacement locally and rebuild. Existing installers trust only embedded public keys; key rotation is not an automatic trust-on-first-use operation. Do not silently trust a downloaded replacement key.
-
-If the key is lost, old clients cannot authenticate newly signed packages under an unrelated key. Recovery requires a deliberately distributed new bootstrap with the new trust root. If the key is exposed, treat it as compromised and replace/rebuild through a trusted channel.
+See `DEPLOYMENT.md` and `UPGRADE-AND-KERNEL-0.4.6.md` for the separate local minimum-version policy. Explicit rollback is distinct from silent fallback to an older launcher.
