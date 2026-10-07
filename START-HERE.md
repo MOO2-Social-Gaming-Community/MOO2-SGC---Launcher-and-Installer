@@ -1,35 +1,29 @@
-# MOO2-SGC 0.4.6 — start and repair
+# MOO2-SGC 0.4.7 — start here
 
-## Keep the working root
+## Update the repository
 
-Use `C:\Games\MOO2-SGC`. Keep a separate backup of the proven harness. The integration kit contains only project files, not commercial game data, DOSBox, or private signing keys. Leave Steam/GOG and the source ZIP unchanged.
+Extract the repository ZIP contents into the existing GitHub Desktop clone; preserve `.git`. Commit and push the default branch. Wait for **Publish prepared release** to publish **v0.4.7**. Files in release/0.4.7 are already signed with the existing identity. Do not edit/repack them. Keep game archives and signing keys OUT of the repository.
 
-## Recommended recovery from the 0.4.2 handoff problem
+## Update your portable installation
 
-1. Quit MOO2 and use **Exit launcher** in every open SGC launcher. Closing a browser tab alone does not stop its local server. Do not delete locks while a process is running.
-2. Extract the **0.4.6 PORTABLE_INTEGRATION ZIP contents** into `C:\Games\MOO2-SGC`, overwriting only its matching project integration files. Do not extract it inside the Git repository, a versioned component folder, or a second nested MOO2-SGC folder.
-3. Run `START-MOO2-SGC.cmd` in that exact root, not an old Downloads executable or old Start-menu shortcut. It installs the signed offline 0.4.6 package, bypassing a stale GitHub latest pointer, then launches the verified installation.
-4. Confirm the console and page show **0.4.6**. The page displays the actual executable and application root. New setup will refuse to launch 0.4.2; it no longer treats an older signed release as an acceptable fallback.
-5. Select **Community — standard** (1.50.26). Under Prepare your owned game, supply `C:\Games\MOO2-SGC\Master of Orion 2 - v1_40b23.zip`. Click **Prepare game for play**. This explicitly refreshes any incomplete old import and reconstructs a separate current environment. Same-engine saves remain in the repaired profile and previous generation; baseline game/ stays independent.
-6. Confirm **Network kernel verified** and **Verify files** succeeds. The kernel path must be in the same managed game folder as ORION150.EXE.
-7. Test **Create network game → Direct / LAN** first. Launch and choose Multiplayer → Network in MOO2. Then test the third-party Dopefish service with both players using the same engine/ruleset/assets.
+Close the game. Use **Exit launcher**, not merely closing its browser tab. Back up the working harness.
 
-The baseline profile remains 1.40b23. Selecting Community is not an in-place upgrade of baseline game/ or Steam.
+Extract the portable integration ZIP into **C:\Games\MOO2-SGC**, not an extra nested folder. Keep the existing complete `runtime\windows` directory, owned base ZIP, game files and userdata. Run **START-MOO2-SGC.cmd** there. The bundled signed offline package installs/upgrades the application without depending on GitHub publication.
 
-## Standalone online setup / GitHub Desktop
+The standalone online Setup executable should be run only after the v0.4.7 Release is published. Replacing source files in GitHub is not a published software Release. The setup line about the **previously installed launcher** describes the old version, not the one being started; check **Launching/ready** and the UI's running identity.
 
-Extract the repository ZIP contents into your cloned repository, preserving `.git`; commit and push. Wait for **Publish prepared release** to succeed and confirm `v0.4.6` is a published release. Run the standalone **MOO2-SGC-Setup-0.4.6.exe** afterward. It rejects older metadata and tries its pinned release endpoint. If the release is not published, it stops with a clear error rather than running 0.4.2. The offline kit above works before publication.
+## First 0.4.7 network test
 
-Updating through an old AppData installation keeps that installation and data in AppData; it does not silently move saves to the portable root. Use the portable kit for the canonical root. The new page displays the distinction.
+Choose **Community — standard** explicitly to run **1.50.26**. The separate baseline is still 1.40b23 and remains the first-run default. This release remembers your chosen profile for subsequent reopen/restarts.
 
-## Standalone archived network kernel
+Choose **Create network game** (or Join on the second machine) and **moo2.thedopefish.com — public IPX**, then **Save profile**. The network-plan box should show **ORION150.EXE** and **IPXNET CONNECT moo2.thedopefish.com 213**. Both players use that same connection; create/join the named game inside MOO2.
 
-The required filename is **RKERNEL.COM**, not RKERNEL.EXE. Normal preparation recovers it from the complete owned game source. A legacy incomplete snapshot can also be repaired by selecting **Packages & updates → Network kernel — owned RKERNEL.COM or rkernel.zip**, entering your owned archive/file path, and importing it. Then **Prepare / repair selected profile**.
+Use **Check Dopefish connection (no game)** first. Read CONNECT/STATUS in its DOSBox window. Type **EXIT** to close it. Then prepare/verify the Community environment, confirm Network kernel verified, and launch. Diagnostic success does not certify multiplayer; retain the first failure's exact message.
 
-Only the two pinned historic hashes are accepted. The older 31,095-byte driver receives the exact three-byte known transformation; the result must equal the canonical SHA-256 `18e8781f8ce64516e60b2947b487e8999f7d940b25af971359c7e7dea0fe9d97`. Unknown inputs are refused. The active game is not changed by import alone. Do not rename random .EXE files or download an unverified replacement.
+The standalone **CHECK-DOPEFISH.cmd** runs the same diagnostic after the launcher is closed. It now uses signed setup/launcher locks and runtime checks, not a bare unverified runtime call.
 
-## Diagnostics / limits
+## Preserve the reference
 
-Under the active application root: `logs\bootstrap.log`. Under its user-data folder: `logs\last-network-preflight.json`, `logs\last-launch.json`, and `logs\game-*.log`. Use **Export diagnostics** too. Logs now identify setup/launcher versions, paths, selected engine, network service, kernel hash and working directory. Do not share private signing material or an active dashboard token.
+1.40b23 baseline, optional 1.50.26 and owned Steam/GOG installations remain distinct. PRSL, new Chat and SGC Online remain disabled. No public package contains commercial game data or the DOSBox runtime. Existing private signing-key backup is unchanged. Windows Authenticode/macOS notarization are not provided.
 
-Package signatures remain separate from Windows Authenticode; these executables are not Authenticode-signed or macOS-notarized. Do not disable system protection to force a test. Linux file/update regressions are not evidence of real Windows/DOSBox multiplayer; the final in-game acceptance remains on the user's machines. Dopefish availability is not controlled or certified by SGC.
+See `docs/NETWORK-AND-PROFILES-0.4.7.md` and `docs/TEST-REPORT.md` (or `sgc-docs/` in the portable kit). No Windows/game/live-Dopefish acceptance is claimed by this build.

@@ -1,9 +1,9 @@
 {
-  "version": "0.4.6",
-  "count": 24,
+  "version": "0.4.7",
+  "count": 34,
   "checks": [
     {
-      "test": "actual manager displays 0.4.6",
+      "test": "actual manager displays 0.4.7",
       "result": "PASS"
     },
     {
@@ -63,11 +63,19 @@
       "result": "PASS"
     },
     {
+      "test": "profile baseline has no misleading 1.50 Core selection",
+      "result": "PASS"
+    },
+    {
       "test": "profile cd-original resolves without 1.50 rules",
       "result": "PASS"
     },
     {
       "test": "profile cd-original cannot select community add-ons",
+      "result": "PASS"
+    },
+    {
+      "test": "profile cd-original has no misleading 1.50 Core selection",
       "result": "PASS"
     },
     {
@@ -79,7 +87,39 @@
       "result": "PASS"
     },
     {
+      "test": "profile original has no misleading 1.50 Core selection",
+      "result": "PASS"
+    },
+    {
       "test": "community rulesets re-enable when returning to current",
+      "result": "PASS"
+    },
+    {
+      "test": "network plan exposes actual selected game executable",
+      "result": "PASS"
+    },
+    {
+      "test": "displayed relay plan matches generated transport",
+      "result": "PASS"
+    },
+    {
+      "test": "diagnostic button cannot run without a runtime",
+      "result": "PASS"
+    },
+    {
+      "test": "profile change persists to manager rather than local-port browser storage",
+      "result": "PASS"
+    },
+    {
+      "test": "saved network choices retained",
+      "result": "PASS"
+    },
+    {
+      "test": "fresh page restores community instead of reverting to baseline",
+      "result": "PASS"
+    },
+    {
+      "test": "fresh page restores Dopefish host role",
       "result": "PASS"
     },
     {

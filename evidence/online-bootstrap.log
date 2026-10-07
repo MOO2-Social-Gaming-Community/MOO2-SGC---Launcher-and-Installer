@@ -11,6 +11,6 @@ PASS actual launcher checks online signed release
 PASS actual launcher stages online update without activation
 PASS signed update helper restarts a new real launcher session
 PASS restart preserved user data
-PASS restarted launcher reports 0.4.6
+PASS restarted launcher reports 0.4.7
 PASS restarted updater and launcher release locks
 TOTAL 15

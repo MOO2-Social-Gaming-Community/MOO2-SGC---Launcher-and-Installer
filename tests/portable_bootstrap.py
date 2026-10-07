@@ -48,6 +48,11 @@ def main():
   r=run(setup,root,'--command','launch-installed','--launcher-command','recover-portable','--no-browser');check('setup forwards native recovery command','no interrupted transaction' in r.stdout)
   r=run(setup,root,'--command','launch-installed','--launcher-command','verify',ok=False);check('verification cannot pretend an absent game is prepared',r.returncode!=0)
   check('locks released after failing CLI command',not(root/'installation.lock').exists() and not(root/'userdata/manager.lock').exists())
+  fake=t/'dosbox';fake.write_text('#!/bin/sh\necho "TEST DOUBLE ONLY: no DOSBox/game/network"\nsleep 0.1\n');fake.chmod(0o700)
+  (root/'userdata/settings.json').write_text(json.dumps({'runtime_path':str(fake)}))
+  r=run(setup,root,'--command','launch-installed','--launcher-command','check-dopefish','--no-browser')
+  check('signed setup forwards independent connection-check CLI',r.returncode==0 and '"game_started": false' in r.stdout and '"connection_verified": false' in r.stdout)
+  check('CLI diagnostic retains no game and releases all locks',not(root/'game').exists() and not(root/'installation.lock').exists() and not(root/'userdata/manager.lock').exists())
   if a.old_release:
    old=a.old_release/'MOO2-SGC-Setup-linux-amd64';old.chmod(0o755);legacy=t/'appdata-old'
    run(old,legacy,'--offline',str(a.old_release),'--no-launch')

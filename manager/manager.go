@@ -63,6 +63,8 @@ type Manager struct {
 	job            Job
 	running        *exec.Cmd
 	runningProfile string
+	runningKind    string
+	uiMu           sync.Mutex
 	lastExit       string
 }
 
@@ -143,7 +145,10 @@ func (m *Manager) saveProfile(p Profile) error {
 	if _, e := resolve(p); e != nil {
 		return e
 	}
-	return atomicJSON(filepath.Join(m.Data, "profiles", p.ID+".json"), p)
+	if e := atomicJSON(filepath.Join(m.Data, "profiles", p.ID+".json"), p); e != nil {
+		return e
+	}
+	return m.rememberProfile(p.ID)
 }
 func (m *Manager) profiles() ([]Profile, error) {
 	entries, e := os.ReadDir(filepath.Join(m.Data, "profiles"))
@@ -615,9 +620,11 @@ func (m *Manager) exportDiagnostics(id string) (any, error) {
 		return nil, e
 	}
 	v, ve := m.verify(id)
+	var lastDiagnostic any
+	_ = readJSON(filepath.Join(m.Data, "logs", "last-network-check.json"), &lastDiagnostic)
 	var lastLaunch any
 	_ = readJSON(filepath.Join(m.Data, "logs", "last-launch.json"), &lastLaunch)
-	report := map[string]any{"schema": 1, "manager": Version, "last_launch": lastLaunch, "application": m.applicationIdentity(), "platform": platform(), "profile": p, "resolution": r, "verification": v, "runtime_candidates": m.runtimeCandidates(), "live_prsl": false, "new_chat": false, "saved_games_included": false, "portable_root": m.Root, "portable": m.Portable, "harness_contract": "0.3.0 handoff / DOSBox Staging 0.83.0", "timestamp": time.Now().UTC().Format(time.RFC3339)}
+	report := map[string]any{"schema": 1, "manager": Version, "last_launch": lastLaunch, "last_network_check": lastDiagnostic, "application": m.applicationIdentity(), "platform": platform(), "profile": p, "resolution": r, "verification": v, "runtime_candidates": m.runtimeCandidates(), "live_prsl": false, "new_chat": false, "saved_games_included": false, "portable_root": m.Root, "portable": m.Portable, "harness_contract": "0.3.0 handoff / DOSBox Staging 0.83.0", "timestamp": time.Now().UTC().Format(time.RFC3339)}
 	if ve != nil {
 		report["verification_error"] = ve.Error()
 	}
@@ -644,9 +651,9 @@ func (m *Manager) state() (any, error) {
 		hist[p.ID] = h
 	}
 	m.mu.Lock()
-	j, r, exit := m.job, m.runningProfile, m.lastExit
+	j, r, kind, exit := m.job, m.runningProfile, m.runningKind, m.lastExit
 	m.mu.Unlock()
-	return map[string]any{"application": m.applicationIdentity(), "network_preflight": network, "portable": m.Portable, "portable_root": m.Root, "portable_recovery_pending": m.Portable && exists(m.baselineJournal()), "default_profile": "baseline", "version": Version, "platform": platform(), "profiles": ps, "catalog": catalog(), "active": active, "history": hist, "job": j, "running": r, "last_exit": exit, "data_path": m.Data, "runtime_candidates": m.runtimeCandidates(), "settings": m.getSettings(), "runtime_recipe": runtimeRecipeForPlatform(), "network_services": networkServices(), "prsl_available": false, "chat_available": false, "distribution": m.distributionStatus(), "source": m.sourceStatus(), "effective_baseline": "1.40b23"}, nil
+	return map[string]any{"application": m.applicationIdentity(), "network_preflight": network, "portable": m.Portable, "portable_root": m.Root, "portable_recovery_pending": m.Portable && exists(m.baselineJournal()), "default_profile": "baseline", "selected_profile_id": m.selectedProfileID(), "version": Version, "platform": platform(), "profiles": ps, "catalog": catalog(), "active": active, "history": hist, "job": j, "running": r, "running_kind": kind, "last_exit": exit, "data_path": m.Data, "runtime_candidates": m.runtimeCandidates(), "settings": m.getSettings(), "runtime_recipe": runtimeRecipeForPlatform(), "network_services": networkServices(), "prsl_available": false, "chat_available": false, "distribution": m.distributionStatus(), "source": m.sourceStatus(), "effective_baseline": "1.40b23"}, nil
 }
 func encode(v any) string { b, _ := json.MarshalIndent(v, "", "  "); return string(b) }
 

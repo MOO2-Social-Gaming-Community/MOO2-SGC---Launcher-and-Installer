@@ -1,6 +1,6 @@
 {
-  "version": "0.4.6",
-  "count": 18,
+  "version": "0.4.7",
+  "count": 20,
   "checks": [
     {
       "test": "signed portable bootstrap installs launcher",
@@ -55,11 +55,19 @@
       "result": "PASS"
     },
     {
+      "test": "signed setup forwards independent connection-check CLI",
+      "result": "PASS"
+    },
+    {
+      "test": "CLI diagnostic retains no game and releases all locks",
+      "result": "PASS"
+    },
+    {
       "test": "ensure-installed upgrades an older launcher",
       "result": "PASS"
     },
     {
-      "test": "unchanged earlier bootstrap trusts 0.4.6 with same signing identity",
+      "test": "unchanged earlier bootstrap trusts 0.4.7 with same signing identity",
       "result": "PASS"
     },
     {

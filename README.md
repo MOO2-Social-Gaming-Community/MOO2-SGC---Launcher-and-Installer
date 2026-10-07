@@ -1,53 +1,23 @@
-# MOO2-SGC Launcher and Installer — 0.4.6
+# Master of Orion II Social Gaming Community — Launcher & Installer
 
-**Portable baseline first. Optional community upgrades second.**
+**Version 0.4.7. In development and trusted-user testing; not a general multiplayer release.**
 
-This release integrates the supplied **Portable Harness 0.3.0-HANDOFF** into the existing signed installer, updater and modular environment manager. The owner has demonstrated the underlying 1.40b23 DOSBox path on Windows 11. The new manager integration still needs Windows acceptance; file checks and Linux process fixtures are not a gameplay certification.
+A small signed bootstrapper installs the environment manager. The manager imports an owned game without changing the original Steam/GOG/CD source, preserves an independent **1.40b23 baseline**, prepares the optional **1.50.26** fan-patch profile, manages supported rulesets and configures DOSBox for local, LAN or public-IPX play.
 
-## 0.4.6 fixes
+## 0.4.7 focus
 
-Setup will not install or launch 0.4.2 as the fallback for a new release. It rejects stale latest metadata, tries the version-specific endpoint, rechecks the actual executable, and displays exact version/root identity. The release publisher verifies the latest pointer.
+The launcher remembers the selected profile across restarts and changing local-browser ports. Historical engines no longer show a misleading 1.50 Core label. The network summary shows the exact selected game executable and transport command. **Check Dopefish connection (no game)** opens a separate CONNECT/STATUS diagnostic, with no mounted game and no fabricated success indicator. Existing kernel, signature, minimum-version and repair safeguards remain in place.
 
-The manager verifies RKERNEL.COM in the exact executable directory before every baseline/current launch. Complete source preparation supplies it automatically; an explicit owned RKERNEL.COM/rkernel.zip importer also supports staged repair of old incomplete snapshots. Source files stay untouched, and same-engine saved bytes survive repair. See [recovery instructions](START-HERE.md) and [investigation](docs/UPGRADE-AND-KERNEL-0.4.6.md).
+Portable Windows root: **C:\Games\MOO2-SGC**. See [START-HERE](START-HERE.md), [network and profile details](docs/NETWORK-AND-PROFILES-0.4.7.md), and [test report](docs/TEST-REPORT.md).
 
-## Canonical Windows working directory
+## Repository/publishing
 
-```text
-C:\Games\MOO2-SGC\
-    Master of Orion 2 - v1_40b23.zip   # private owner-supplied source
-    runtime\windows\dosbox.exe      # existing verified harness distribution
-    game\ORION2.EXE                  # normalized writable 1.40b23 baseline
-    config\moo2.conf                 # tested window/audio contract
-    state\                          # baseline receipts and transaction journal
-    backups\baseline\               # complete retained baseline snapshots
-    components\launcher\            # signed application generations
-    userdata\                       # profiles, cache, optional game environments
-```
+Extract the complete repository package directly into the GitHub Desktop clone, preserve `.git`, commit and push the default branch. The **Publish prepared release** workflow verifies and publishes the already-signed `release/0.4.7` assets. Do not edit signed packages or metadata. GitHub is primary software hosting; optional R2 failover is not provisioned in this release. Website availability is not a software requirement.
 
-Do not put this private working directory inside your GitHub clone. The public repository and release contain no commercial game data, emulator, fonts or private signing keys. The portable integration ZIP contains **project code only** and reuses the runtime from the owner's supplied harness.
+The prepared offline portable integration kit can be tested before publication. The standalone setup's online installation needs the published Release, not merely committed source. [GitHub upload guide](GITHUB-UPLOAD.md).
 
-The manually patched source is recognized by file hashes, not its name. It retains official 1.31 in `ORION2.EXE` and b23 in `Orion2v140.exe`. Preparation preserves 1.31 as `ORION131.EXE`, copies the verified b23 executable to the managed `ORION2.EXE`, and applies only the documented exact-hash RKERNEL LAN correction. The source ZIP is never modified.
+## Boundaries
 
-## First use
+No commercial MOO2 files, DOSBox runtime, RKERNEL binary, or private signing key belongs in this repository/public release. Import your licensed files locally. PRSL and the new Chat extension are independent, unavailable future components; the future SGC matchmaking/relay service remains disabled. Selecting a profile does not rewrite the baseline or activate a patch automatically.
 
-Keep a separate copy of your currently working harness. Extract the **0.4.6 portable integration ZIP** into `C:\Games\MOO2-SGC`, with no extra nested directory. It adds `START-MOO2-SGC.cmd` and separate `SGC-*.cmd` helpers; it does not replace the handoff's PowerShell preparation scripts or runtime.
-
-Keep the owned baseline ZIP in that same root and the complete original harness runtime in `runtime\windows`. Open **START-MOO2-SGC.cmd**. On first use, it installs the signed launcher from the kit's offline package. Subsequent starts verify and open the installed application without reinstalling an older release.
-
-The default profile is **Portable baseline — 1.40b23**. Leave the source input blank and select **Prepare game for play**. After verification, choose **Launch MOO2**. Baseline launch uses the original harness flags and direct program argument; the default is an 800×600 window that does not pause or mute when inactive.
-
-First Windows acceptance: title/version, sound/video/input, new game, several turns, save, exit, restart and reload. Then test repair/save preservation. Only afterward choose **Community — standard** to construct a separate 1.50.26 environment.
-
-## Optional versions and mods
-
-1.40b23 is the default runtime, not a hidden intermediate that is immediately overwritten by 1.50.26. The named portable baseline profile is fixed to b23. Duplicate it or select another profile to use a different engine or rule set. Historical CD 1.2 → 1.31 → b23 construction remains available, but is not repeated when importing the approved b23 source.
-
-Community 1.50.26 and its bundled rulesets/add-ons remain supported in independent environments. PRSL and the proposed Chat extension remain separately disabled. Selectable IPX transport includes: Direct/LAN or the third-party `moo2.thedopefish.com` public IPX service. A disabled MOO2-SGC Online entry reserves the future first-party matchmaking/relay boundary; no first-party lobby backend is deployed yet.
-
-## Publish
-
-Extract the complete **repository ZIP** directly into your existing clone, preserving `.git`. Commit and push with GitHub Desktop. The prepared files in `release/0.4.6/` are signed using the existing owner-controlled signing identity. The release workflow publishes `v0.4.6`; no new signing secret is required for these already-signed files. Never edit signed assets in place.
-
-The separate standalone setup now defaults to `C:\Games\MOO2-SGC` on Windows. Run it after the release is published. The offline integration kit can be tested before publication. An update initiated from an old `%APPDATA%` installation remains there: **0.4.6 does not silently move, delete, or merge old user data.**
-
-See [START-HERE](START-HERE.md), [portable design](docs/PORTABLE-HARNESS.md), [Windows acceptance](docs/TEST-CHECKLIST.md), [test report](docs/TEST-REPORT.md), and [release notes](docs/RELEASE-NOTES-0.4.6.md).
+Windows and Mac builds are compiled, not locally executed by the build environment. The connection checker must be observed on your machine; it is not proof that Dopefish is reachable until its DOSBox status actually reports a connection. Native code signing/notarization is distinct from the implemented package signatures and is not supplied.

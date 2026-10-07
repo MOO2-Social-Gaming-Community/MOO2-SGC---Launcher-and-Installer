@@ -4,7 +4,7 @@ import hashlib
 
 def source_index(root: Path) -> dict:
     paths = []
-    for directory in ('manager', 'packaging', 'tests', '.github/workflows'):
+    for directory in ('manager', 'packaging', 'tests', '.github/workflows', 'support'):
         for p in (root/directory).rglob('*'):
             if p.is_file() and 'evidence' not in p.parts and '__pycache__' not in p.parts:
                 if p.suffix in ('.go','.js','.css','.html','.json','.py','.sh','.yml','.yaml','.ini','.conf','.cmd') or p.name=='go.mod':

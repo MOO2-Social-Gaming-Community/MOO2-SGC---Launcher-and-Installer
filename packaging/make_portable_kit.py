@@ -15,7 +15,9 @@ def main():
  for n in ['manifest.json','manifest.sig',package]:entries['distribution/offline-'+version+'/'+n]=rel/n
  for f in (ROOT/'packaging/portable').iterdir():
   if f.is_file():entries[f.name]=f
- for n in ['PORTABLE-HARNESS.md','TEST-CHECKLIST.md','TEST-REPORT.md']:
+ for f in (ROOT/'support').rglob('*'):
+  if f.is_file():entries[f.relative_to(ROOT).as_posix()]=f
+ for n in ['PORTABLE-HARNESS.md','TEST-CHECKLIST.md','TEST-REPORT.md','NETWORK-AND-PROFILES-0.4.7.md']:
   entries['sgc-docs/'+n]=ROOT/'docs'/n
  entries['sgc-docs/THIRD-PARTY-NOTICES.md']=ROOT/'THIRD-PARTY-NOTICES.md'
  sums=[]

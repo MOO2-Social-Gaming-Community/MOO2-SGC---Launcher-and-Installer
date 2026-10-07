@@ -11,8 +11,10 @@ PASS launcher exits cleanly
 PASS setup forwards native recovery command
 PASS verification cannot pretend an absent game is prepared
 PASS locks released after failing CLI command
+PASS signed setup forwards independent connection-check CLI
+PASS CLI diagnostic retains no game and releases all locks
 PASS ensure-installed upgrades an older launcher
-PASS unchanged earlier bootstrap trusts 0.4.6 with same signing identity
+PASS unchanged earlier bootstrap trusts 0.4.7 with same signing identity
 PASS old-root upgrade keeps portable opt-in boundary
 PASS old-root upgrade preserves user data
 PASS new bootstrap verifies old-root upgraded installation

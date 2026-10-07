@@ -1,5 +1,5 @@
 {
-  "version": "0.4.6",
+  "version": "0.4.7",
   "count": 15,
   "checks": [
     {
@@ -68,7 +68,7 @@
       "detail": null
     },
     {
-      "test": "restarted launcher reports 0.4.6",
+      "test": "restarted launcher reports 0.4.7",
       "result": "PASS",
       "detail": null
     },

@@ -53,8 +53,36 @@ def main():
      page.select_option('#profiles',profile);page.wait_for_function(f"document.getElementById('resolution').textContent.includes('DOS {engine}')")
      check('profile '+profile+' resolves without 1.50 rules',page.input_value('#engine')==engine and page.locator('#core').is_disabled())
      check('profile '+profile+' cannot select community add-ons',page.locator('#mods input:not(:disabled)').count()==0)
+     check('profile '+profile+' has no misleading 1.50 Core selection',page.input_value('#core')=='' and page.locator('#core').inner_text()=='Not applicable — original '+engine+' rules')
     page.select_option('#profiles','community');page.wait_for_function("document.getElementById('core').disabled===false")
     check('community rulesets re-enable when returning to current',page.input_value('#core')=='150')
+    page.wait_for_function("document.getElementById('network-plan').textContent.includes('Selected game: 1.50.26')")
+    check('network plan exposes actual selected game executable','ORION150.EXE' in page.locator('#network-plan').inner_text())
+    page.select_option('#role','host');page.select_option('#network-service','dopefish')
+    page.wait_for_function("document.getElementById('network-plan').textContent.includes('IPXNET CONNECT moo2.thedopefish.com 213')")
+    check('displayed relay plan matches generated transport','STARTSERVER' not in page.locator('#network-plan').inner_text())
+    check('diagnostic button cannot run without a runtime',page.locator('#check-dopefish').is_disabled())
+    for _ in range(100):
+     if h.api('state')['selected_profile_id']=='community':break
+     page.wait_for_timeout(50)
+    check('profile change persists to manager rather than local-port browser storage',h.api('state')['selected_profile_id']=='community')
+    page.click('#save')
+    for _ in range(100):
+     st=h.api('state')
+     if not st['job']['busy'] and next(p for p in st['profiles'] if p['id']=='community')['network_service']=='dopefish':break
+     page.wait_for_timeout(50)
+    check('saved network choices retained',next(p for p in h.api('state')['profiles'] if p['id']=='community')['network_service']=='dopefish')
+    # Open a fresh page against the same actual API: no reuse of JS memory.
+    second=browser.new_page()
+    if a.offline_dom:
+     second.set_content('<html><body></body></html>');second.expose_function('fixtureTransport',transport)
+     second.evaluate("""() => {Object.defineProperty(window,'sessionStorage',{value:{getItem:()=> 'offline-fixture',setItem:()=>{}},configurable:true});window.fetch=async(url,opts={})=>{const r=await window.fixtureTransport(url.replace('/api/',''),opts.body?JSON.parse(opts.body):null);return {ok:r.ok,statusText:'fixture',json:async()=>r.body};};}""")
+     second.set_content(html);second.add_script_tag(content=(ROOT/'manager/web/app.js').read_text())
+    else:second.goto(h.url+'/#'+h.token)
+    second.wait_for_function("document.getElementById('version').textContent==='"+version+"' && document.getElementById('engine').value==='1.50.26'")
+    check('fresh page restores community instead of reverting to baseline',second.input_value('#profiles')=='community')
+    check('fresh page restores Dopefish host role',second.input_value('#role')=='host' and second.input_value('#network-service')=='dopefish')
+    second.close()
     check('official prerequisite local import available',page.locator('#payload-kind option[value="official131"]').count()==1)
     check('source status communicates effective baseline','1.40b23' in page.locator('#source-status').inner_text())
     page.select_option('#profiles','baseline');page.wait_for_function("document.getElementById('engine').value==='1.40b23'")

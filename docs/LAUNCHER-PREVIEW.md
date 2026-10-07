@@ -1,3 +1,3 @@
-# Launcher preview
+# Launcher preview — 0.4.7
 
-LAUNCHER-PREVIEW.png shows the final 0.4.5 signed Linux manager through an explicit offline browser-transport fixture connected to the actual local API. It demonstrates layout and default baseline selection, not Windows execution, successful game preparation or gameplay.
+Rendered Chromium screenshot using the final signed Linux manager API via the explicit transport fixture. Not a Windows/runtime/game acceptance screenshot.

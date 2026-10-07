@@ -36,7 +36,7 @@ func run() error {
 	version := flag.Bool("version", false, "print setup version")
 	status := flag.Bool("trust-status", false, "print embedded non-secret trust configuration")
 	portable := flag.Bool("portable", false, "use the portable ROOT/game and ROOT/runtime layout")
-	launcherCommand := flag.String("launcher-command", "serve", "serve, prepare-play, play, verify, recover-portable")
+	launcherCommand := flag.String("launcher-command", "serve", "serve, prepare-play, play, verify, recover-portable, check-dopefish")
 	profile := flag.String("profile", "baseline", "profile passed to the installed launcher")
 	source := flag.String("source", "", "owned local source passed to preparation")
 	fullscreen := flag.Bool("fullscreen", false, "fullscreen for a direct play command")
@@ -98,7 +98,7 @@ func run() error {
 		}
 	}
 	switch *launcherCommand {
-	case "serve", "prepare-play", "play", "verify", "recover-portable":
+	case "serve", "prepare-play", "play", "verify", "recover-portable", "check-dopefish":
 	default:
 		release()
 		return errors.New("unsupported launcher command")
@@ -135,7 +135,7 @@ func run() error {
 	minimum := buildconfig.Version
 	if cur, err := installer.Current(); err == nil {
 		if _, rec, err := installer.VerifyGeneration(cur.Current); err == nil {
-			fmt.Println("Existing signed launcher:", rec.Package.Version)
+			fmt.Println("Previously installed launcher (not the launch target):", rec.Package.Version)
 			if d.VersionAtLeast(rec.Package.Version, minimum) {
 				minimum = rec.Package.Version
 			}

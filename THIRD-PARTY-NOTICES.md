@@ -1,4 +1,4 @@
-# Third-party notices — MOO2-SGC 0.4.5
+# Third-party notices — MOO2-SGC 0.4.7
 
 Public packages contain no full commercial Master of Orion II game data/executables, original game archives, saved games, DOSBox runtime, private signing keys or credentials. Sources remain owner-provided local dependencies.
 

@@ -11,7 +11,7 @@ PASS clean launcher shutdown
 PASS all operation locks released
 {
   "platform": "linux-amd64",
-  "version": "0.4.6",
+  "version": "0.4.7",
   "checks": [
     {
       "test": "version has exactly three components",

@@ -328,21 +328,11 @@ func dosboxConfig(game string, p Profile) (string, error) {
 	// MOO2's responsibility. Direct sessions start/connect to a local IPX tunnel;
 	// relay services connect every participant to the same tunnel endpoint.
 	lines := []string{base, "[ipx]", "ipx=true", "[autoexec]", "@echo off", `mount c "` + game + `"`, "c:", `cd \`}
-	switch effectiveNetworkService(p) {
-	case "direct":
-		if p.Role == "host" {
-			lines = append(lines, fmt.Sprintf("IPXNET STARTSERVER %d", p.Port))
-		} else {
-			lines = append(lines, fmt.Sprintf("IPXNET CONNECT %s %d", p.Host, p.Port))
-		}
-	case "dopefish":
-		// The long-running community endpoint uses the historical DOSBox IPX
-		// default UDP port 213. Host and Join both connect as IPX clients; the
-		// player then creates or joins the named network game inside MOO2.
-		lines = append(lines, "IPXNET CONNECT moo2.thedopefish.com 213")
-	default:
-		return "", errors.New("unsupported network service")
+	command, e := networkCommand(p)
+	if e != nil {
+		return "", e
 	}
+	lines = append(lines, command)
 	lines = append(lines, gameEntrypoint(p), "exit", "")
 	return strings.Join(lines, "\n"), nil
 }
@@ -427,8 +417,12 @@ func (m *Manager) launch(p Profile) (any, error) {
 	fmt.Fprintln(logfile, "Kernel preflight:", encode(kernel))
 	fmt.Fprintln(logfile, "Arguments:", encode(args))
 	executable, _ := os.Executable()
-	launchRecord := map[string]any{"launcher_version": Version, "launcher_executable": executable, "application_root": m.distributionRoot(), "data_root": m.Data, "profile": p.ID, "engine": p.Engine, "game_path": game, "working_directory": game, "game_executable": filepath.Join(game, gameEntrypoint(p)), "runtime": exe, "arguments": args, "network_service": effectiveNetworkService(p), "kernel": kernel, "log": logpath}
+	launchRecord := map[string]any{"launcher_version": Version, "launcher_executable": executable, "application_root": m.distributionRoot(), "data_root": m.Data, "profile": p.ID, "engine": p.Engine, "game_path": game, "working_directory": game, "game_executable": filepath.Join(game, gameEntrypoint(p)), "runtime": exe, "arguments": args, "network_service": effectiveNetworkService(p), "network": networkPlan(p), "config_path": cfgPath, "kernel": kernel, "log": logpath}
 	if e = atomicJSON(filepath.Join(m.Data, "logs", "last-launch.json"), launchRecord); e != nil {
+		logfile.Close()
+		return nil, e
+	}
+	if e = m.rememberProfile(p.ID); e != nil {
 		logfile.Close()
 		return nil, e
 	}
@@ -449,6 +443,7 @@ func (m *Manager) launch(p Profile) (any, error) {
 	}
 	m.running = cmd
 	m.runningProfile = p.ID
+	m.runningKind = "game"
 	m.lastExit = ""
 	m.mu.Unlock()
 	go func() {
@@ -458,6 +453,7 @@ func (m *Manager) launch(p Profile) (any, error) {
 		defer m.mu.Unlock()
 		m.running = nil
 		m.runningProfile = ""
+		m.runningKind = ""
 		m.lastExit = "DOSBox exited normally. Game success must be confirmed in-game."
 		if e != nil {
 			m.lastExit = "DOSBox exit: " + e.Error() + ". Inspect " + logpath

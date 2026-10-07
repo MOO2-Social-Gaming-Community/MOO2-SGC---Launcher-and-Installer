@@ -1,56 +1,51 @@
 {
-  "version": "0.4.6",
-  "count": 12,
+  "version": "0.4.7",
+  "count": 11,
   "checks": [
     {
-      "test": "public source excludes owned game, driver, emulator, fonts and private-key files",
+      "test": "version/revision pinned to 0.4.7/47",
       "result": "PASS"
     },
     {
-      "test": "all source/package files below normal Git size limit",
+      "test": "signing public identity unchanged",
       "result": "PASS"
     },
     {
-      "test": "repository ZIP opens and passes CRC",
+      "test": "portable kit CRC passes",
       "result": "PASS"
     },
     {
-      "test": "ZIP root is immediately GitHub Desktop compatible",
+      "test": "integration kit contains signed local launcher and helper",
       "result": "PASS"
     },
     {
-      "test": "extracted repository signature and source-fingerprint verification",
+      "test": "all portable kit checksums verified",
       "result": "PASS"
     },
     {
-      "test": "standalone installer equals signed packaged helper",
+      "test": "portable diagnostic uses verified signed CLI",
       "result": "PASS"
     },
     {
-      "test": "portable kit checksums validate",
+      "test": "portable helper references only current offline release",
       "result": "PASS"
     },
     {
-      "test": "portable setup is the exact signed new helper",
+      "test": "portable diagnostic reference equals embedded resource",
       "result": "PASS"
     },
     {
-      "test": "portable offline launcher package matches released package",
+      "test": "kit contains no game/runtime/key/font payload",
       "result": "PASS"
     },
     {
-      "test": "portable CMD targets offline 0.4.6 without a newer-version downgrade",
+      "test": "standalone setup equals kit setup",
       "result": "PASS"
     },
     {
-      "test": "portable kit excludes user/runtime directories",
-      "result": "PASS"
-    },
-    {
-      "test": "public release version is exactly 0.4.6",
+      "test": "public windows setup matches signed package identity",
       "result": "PASS"
     }
   ],
-  "live_remote_used": false,
-  "game_executed": false
+  "signed_file_verification": true
 }

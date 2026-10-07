@@ -99,6 +99,19 @@ func (s *localServer) handler(w http.ResponseWriter, r *http.Request) {
 			jsonResponse(w, 200, v)
 		case "/api/addresses":
 			jsonResponse(w, 200, localAddresses())
+		case "/api/selection":
+			var sel struct {
+				ID string `json:"id"`
+			}
+			if e := readBody(w, r, &sel); e != nil {
+				jsonResponse(w, 400, map[string]string{"error": e.Error()})
+				return
+			}
+			if e := s.manager.rememberProfile(sel.ID); e != nil {
+				jsonResponse(w, 400, map[string]string{"error": e.Error()})
+				return
+			}
+			jsonResponse(w, 200, map[string]string{"selected_profile_id": sel.ID})
 		case "/api/resolve":
 			var p Profile
 			if e := readBody(w, r, &p); e != nil {
@@ -177,6 +190,8 @@ func (s *localServer) action(w http.ResponseWriter, r *http.Request) {
 	}
 	var work func() (any, error)
 	switch a.Action {
+	case "check-dopefish":
+		work = s.manager.checkDopefish
 	case "prepare-play":
 		work = func() (any, error) { return s.manager.prepareForPlay(a.Profile, a.SourcePath) }
 	case "game-detect":

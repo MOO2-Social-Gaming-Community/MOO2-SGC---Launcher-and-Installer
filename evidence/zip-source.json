@@ -1,10 +1,10 @@
 {
-  "version": "0.4.6",
+  "version": "0.4.7",
   "checks": [
     {
       "test": "launcher version",
       "result": "PASS",
-      "detail": "0.4.6"
+      "detail": "0.4.7"
     },
     {
       "test": "test runtime selected",
@@ -20,7 +20,7 @@
       "test": "baseline activated",
       "result": "PASS",
       "detail": {
-        "baseline": "g1791268543911564209"
+        "baseline": "g1791342330955713042"
       }
     },
     {
@@ -62,7 +62,7 @@
           "bad": [],
           "user_changes": [],
           "fingerprint": "48593d42842adbf460f34e58dc4b13f067a3498fcd4010f315559441281a22a5",
-          "generation": "g1791268543911564209"
+          "generation": "g1791342330955713042"
         }
       }
     }

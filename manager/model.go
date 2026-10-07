@@ -20,7 +20,7 @@ const PatchHash = "0ac9151e9cf752ec34b6db998d8b390f48e492d8443e8f1658112b93c7f6a
 const EngineHash = "2db296e052419250d21866f7c23ac2978a33b3c05b451a9516f06599b91c3f5c"
 const BaseEngineHash = "4e11be14217b4aafa1839f333bf5eba037f98b0c44e9e4752c96c464c260419f"
 
-//go:embed assets/*.json assets/harness/* web/*
+//go:embed assets/*.json assets/harness/* assets/diagnostics/* web/*
 var resources embed.FS
 
 type Mod struct {
@@ -47,12 +47,13 @@ type Profile struct {
 	Port           int      `json:"port"`
 }
 type Resolution struct {
-	Requested   Profile  `json:"profile"`
-	Mods        []Mod    `json:"mods"`
-	Automatic   []string `json:"automatic"`
-	Fingerprint string   `json:"fingerprint"`
-	Config      string   `json:"config"`
-	Warnings    []string `json:"warnings"`
+	Requested   Profile     `json:"profile"`
+	Mods        []Mod       `json:"mods"`
+	Automatic   []string    `json:"automatic"`
+	Fingerprint string      `json:"fingerprint"`
+	Config      string      `json:"config"`
+	Warnings    []string    `json:"warnings"`
+	Network     NetworkPlan `json:"network"`
 }
 
 type NetworkServiceInfo struct {
@@ -67,7 +68,7 @@ type NetworkServiceInfo struct {
 func networkServices() []NetworkServiceInfo {
 	return []NetworkServiceInfo{
 		{ID: "direct", Name: "Direct / LAN", Description: "Host a DOSBox IPX tunnel locally, or join a host by address. LAN needs no router forwarding; internet hosting normally does.", Available: true},
-		{ID: "dopefish", Name: "moo2.thedopefish.com", Description: "Legacy third-party public DOSBox IPX rendezvous service. Everyone connects to the same service; create or join the MOO2 game inside MOO2.", Host: "moo2.thedopefish.com", Port: 213, Available: true},
+		{ID: "dopefish", Name: "moo2.thedopefish.com", Description: "Legacy third-party public DOSBox IPX rendezvous service. Everyone connects to the same service; create or join the MOO2 game inside MOO2.", Host: DopefishHost, Port: DopefishPort, Available: true},
 		{ID: "sgc", Name: "MOO2-SGC Online", Description: "Reserved for the future MOO2-SGC matchmaking / relay service.", Available: false},
 	}
 }
@@ -256,6 +257,7 @@ func resolve(p Profile) (Resolution, error) {
 	b, _ := json.Marshal(identity)
 	sum := sha256.Sum256(b)
 	r.Fingerprint = hex.EncodeToString(sum[:])
+	r.Network = networkPlan(p)
 	r.Warnings = append(r.Warnings, "Structural configuration checks only: no gameplay or cross-platform multiplayer certification.", "Loaded MOO2 saves restore saved gameplay configuration; start a new game to test newly selected rules.")
 	return r, nil
 }

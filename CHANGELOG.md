@@ -1,3 +1,13 @@
+# 0.4.7
+
+- Remember the selected profile in userdata/ui-selection.json across launcher restarts and changing localhost ports. First-run default stays baseline 1.40b23; no automatic game upgrade.
+- Historical engines show a real not-applicable Core selection rather than a disabled 1.50 standard label. Community remains independently selectable.
+- Show the effective network command, endpoint, selected engine and executable before launch, from the same resolver used to generate config.
+- Integrate an explicit Dopefish CONNECT/STATUS diagnostic into the launcher and locked CLI. It uses the verified runtime, mounts no game and records last-network-check.json. Process startup is NOT reported as connection success.
+- Bundle CHECK-DOPEFISH.cmd in the portable kit; route it through the signed installer/launcher so existing runtime and process-lock protections apply.
+- Clarify setup's previous-version line. Preserve 0.4.6 minimum-version floor, pinned fallback, kernel preflight and source isolation.
+- PRSL, new Chat and future SGC Online remain disabled. No balance or native game changes.
+
 # 0.4.6 — version-selection and multiplayer-kernel recovery
 
 - Reject a signed launcher release older than the running setup/launcher before accepting metadata or activating files. A stale GitHub latest endpoint falls through to the pinned v0.4.6 endpoint.

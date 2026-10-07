@@ -1,5 +1,5 @@
 {
-  "version": "0.4.6",
+  "version": "0.4.7",
   "count": 15,
   "checks": [
     {
@@ -8,12 +8,12 @@
       "detail": {
         "old_console": [
           "Verifying launcher 0.4.2 (5616450 bytes)\u2026",
-          "Launcher installed and verified: /tmp/sgc-stale-release-q0v_0qhy/existing/components/launcher/versions/g-ef082f5fb9d95c9a-ee8b119787357511/files/moo2-sgc-launcher"
+          "Launcher installed and verified: /tmp/sgc-stale-release-zlkqk4ml/existing/components/launcher/versions/g-ef082f5fb9d95c9a-9b864026003ebcd1/files/moo2-sgc-launcher"
         ]
       }
     },
     {
-      "test": "new setup skips stale latest and installs 0.4.6",
+      "test": "new setup skips stale latest and installs 0.4.7",
       "result": "PASS",
       "detail": null
     },
@@ -68,7 +68,7 @@
       "detail": null
     },
     {
-      "test": "actual post-upgrade launcher API reports 0.4.6",
+      "test": "actual post-upgrade launcher API reports 0.4.7",
       "result": "PASS",
       "detail": null
     },

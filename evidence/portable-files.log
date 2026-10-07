@@ -1,0 +1,50 @@
+PASS portable layout and baseline default reported
+PASS canonical root archive automatically recognized as manual b23
+PASS root game is actual directory, not link
+PASS only b23 baseline lineage is used
+PASS b23 is canonical executable
+PASS official 1.31 retained separately
+PASS manual patch output retained and matches active engine
+PASS known kernel transformed to exact LAN-fixed hash
+PASS original archive byte-for-byte untouched
+PASS existing harness save retained
+PASS unregistered original directory fully backed up
+PASS exact supplied harness DIG.INI
+PASS exact supplied harness MDI.INI
+PASS exact supplied harness ORIONCD.INI
+PASS baseline configuration is exact handoff config
+PASS no 1.31 or community download required for baseline
+PASS preparation does not start process
+PASS full baseline verifies
+PASS import excludes archived saves, wrappers and unselected assets
+PASS same-engine repair retains save and custom audio
+PASS prepared baseline snapshots visible for rollback
+PASS rollback copies previous generation, does not merge later saves
+PASS rollback retains snapshot rather than moving it away
+PASS kernel corruption blocks launch
+PASS repair restores kernel and preserves save
+PASS unexpected game-local emulator config refused
+PASS real launcher builds exact direct-program argv
+PASS test-double scope and game working directory captured
+PASS launcher process lifecycle completes without stale lock
+PASS fullscreen is optional launch override
+PASS community game has own generation outside baseline
+PASS community exact 1.50 executable
+PASS community carries exact LAN-fixed RKERNEL
+PASS dopefish relay config connects instead of starting local server
+PASS optional patch does not change baseline files
+PASS optional community profile does not inherit baseline save
+PASS root baseline cannot be silently switched to another engine
+PASS Steam matching engine does not imply identical data fingerprint
+PASS historical CD lineage retained: 1.2
+PASS historical CD lineage retained: 1.31
+PASS historical CD lineage retained: 1.40b23
+PASS historical chain normalizes kernel: 1.40b23
+PASS historical CD lineage retained: 1.50.26
+PASS historical chain normalizes kernel: 1.50.26
+PASS PRSL and chat remain unavailable
+PASS deactivation retains actual game and saves
+PASS deactivated root can be reconstructed without losing save
+PASS supplied fixture archives unchanged
+PASS application and user-data locks released
+PASS CLI defaults to portable baseline
